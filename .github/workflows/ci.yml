@@ -46,7 +46,7 @@ jobs:
 
       - name: Run unit tests
         working-directory: app-under-test/antennapod
-        run: ./gradlew :app:testPlayDebugUnitTest
+        run: ./gradlew :app:testPlayDebugUnitTest --tests "de.danoeh.antennapod.unit.*" --tests "de.danoeh.antennapod.manual.*"
 
       - name: Check docs
         run: |

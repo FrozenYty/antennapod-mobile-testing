@@ -93,25 +93,28 @@ docs: update test plan with SQLite integration examples
 **Always update docs first, then commit.** Code without updated docs is incomplete.
 
 ```bash
-# 1. Verify your tests compile
+# 1. Pull latest to avoid push conflicts
+git pull --rebase
+
+# 2. Verify your tests compile
 ./gradlew :app:compilePlayDebugAndroidTestSources   # instrumented tests
 ./gradlew :app:compilePlayDebugUnitTestSources       # unit tests
 
-# 2. Update these docs BEFORE staging any code
+# 3. Update these docs BEFORE staging any code
 #    - PROGRESS.md          ← update TC status, screenshots, remaining actions
 #    - test-cases.md        ← append specs for new TCs
 #    - manual-test-result.md← add result rows if you ran manual tests
 #    - test-summary-report.md← update counters
 #    (If you skip this step, the commit is NOT complete.)
 
-# 3. Check what you're about to commit
+# 4. Check what you're about to commit
 git status
 git diff --stat
 
-# 4. If you touched unexpected files, unstage them
+# 5. If you touched unexpected files, unstage them
 git reset HEAD <file>
 
-# 5. Never use git add -A or git add . — stage files individually
+# 6. Never use git add -A or git add . — stage files individually
 git add path/to/your/test.kt
 git add path/to/your/docs.md
 ```

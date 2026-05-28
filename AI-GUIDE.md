@@ -98,6 +98,10 @@ git push
 ```
 Push triggers CI on main. If CI passes, your changes are live.
 
+> **Note**: CI only validates compilation + unit tests + doc checks. It does NOT run instrumented tests
+> (Espresso / UIAutomator / Integration) because GitHub Actions has no Android emulator. You MUST run
+> those locally on your device before pushing.
+
 ### Red Flags
 
 | Level | Rule |

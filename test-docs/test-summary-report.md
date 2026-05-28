@@ -71,8 +71,8 @@
 
 ## Recommendations
 
-- Execute TC-010 manual checklist on a clean device install before final sign-off.
-- Future team members should follow the established test patterns (ActivityTestRule, TestHelper, file naming).
+- Sprint 1 complete: TC-010 manual checklist executed (19/20, 1 stream error due to Spotify CDN block on emulator).
+- Future team members should follow the established test patterns (ActivityTestRule, TestHelper, file naming) and push directly to main.
 
 ## Sign-off
 

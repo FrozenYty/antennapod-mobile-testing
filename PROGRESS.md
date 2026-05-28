@@ -68,6 +68,8 @@ manual/TC010_FirstLaunchUserFlowTest.kt
 
 | Date | What |
 |------|------|
+| 05-28 | Branch+auto-merge CI caused repeated merge conflicts → switched to branchless workflow (push directly to main) |
+| 05-28 | CI runs pre-existing AntennaPod unit tests → added `--tests` filter to only run our packages |
 | 05-28 | `ActivityScenarioRule` broken on MuMu → use `ActivityTestRule(false, false)` |
 | 05-28 | `bottom_navigation_addfeed` not in default visible items → test `bottom_navigation_more` instead |
 | 05-28 | Screenshots deleted on test APK uninstall → save to `/storage/emulated/0/Download/screenshots/` |
