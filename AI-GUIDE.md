@@ -112,7 +112,7 @@ Then open a PR on GitHub. The PR template (`.github/pull_request_template.md`) l
 
 ```bash
 # Required
-export JAVA_HOME=<path-to-jdk-17>
+export JAVA_HOME=<path-to-jdk-21>
 export ANDROID_HOME=<path-to-android-sdk>
 
 # Verify device is connected

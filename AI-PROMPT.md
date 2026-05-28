@@ -60,7 +60,7 @@ For EACH TC in my range:
 ## Environment
 
 ```bash
-export JAVA_HOME=<path-to-jdk-17>
+export JAVA_HOME=<path-to-jdk-21>
 export ANDROID_HOME=<path-to-android-sdk>
 adb devices
 ```
