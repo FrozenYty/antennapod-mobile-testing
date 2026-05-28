@@ -22,19 +22,31 @@ cd antennapod-mobile-testing
 git checkout -b your-name/your-module
 ```
 
-Once you push your branch, everything is automatic:
+Once you push, everything is automatic:
 
 ```
 git push -u origin <your-name>/<your-module>
      │
-     ▼  CI Compile Check (.github/workflows/ci.yml)
+     ▼  CI compiles + runs unit tests
      │
-     ▼  Auto PR & Merge (.github/workflows/auto-pr-merge.yml)
+     ▼  Auto PR → squash merge → delete branch
      │
-     ▼  Branch deleted, changes merged into main
+     ▼  Only main remains
 ```
 
-**End result: only `main` branch exists.** No manual PR creation or merge needed.
+### Working in Multiple Batches
+
+After your first batch is merged, your remote branch is gone. To start the next batch:
+
+```bash
+git checkout main
+git pull                              # get latest main with your merged changes
+git checkout -b <same-branch-name>    # re-create the same branch from main
+# ... code, test, commit ...
+git push -u origin <same-branch-name> # triggers CI + auto-merge again
+```
+
+Each push creates a new PR, merges, and cleans up. Your branch name stays the same across all batches — no need to invent new names.
 
 ## Commit Rules
 
