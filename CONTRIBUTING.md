@@ -22,6 +22,20 @@ cd antennapod-mobile-testing
 git checkout -b tc/your-name/TC011-020
 ```
 
+Once you push your branch, everything is automatic:
+
+```
+git push -u origin tc/<your-name>/<TC-range>
+     │
+     ▼  CI Compile Check (.github/workflows/ci.yml)
+     │
+     ▼  Auto PR & Merge (.github/workflows/auto-pr-merge.yml)
+     │
+     ▼  Branch deleted, changes merged into main
+```
+
+**End result: only `main` branch exists.** No manual PR creation or merge needed.
+
 ## Commit Rules
 
 ### Commit Strategy: Incremental Batches
@@ -160,14 +174,13 @@ test-docs/test-summary-report.md
 - **Don't modify app source**: `app-under-test/antennapod/app/src/main/` is read-only. Tests only go in `androidTest/` or `test/`.
 - **Test dependencies OK**: Adding test-only deps to `libs.versions.toml` or `build.gradle` is allowed. Explain the reason in your PR description.
 
-## Pull Request Process
+## Pull Request Process (Automated)
 
 1. Push your branch: `git push -u origin tc/your-name/TC011-020`
-2. Create a PR on GitHub from your branch to `main`
-3. PR title: `<Module Name> — <Your Name>` (e.g., "Subscription & Playback — Jane Smith")
-4. PR description: list each TC-ID with status (Passed / Partial / Failed)
-5. **At least one other team member must review before merge**
-6. Squash-merge into `main` (use GitHub's "Squash and merge" button)
+2. CI runs automatically (compile + unit tests)
+3. PR is created and squash-merged into `main` automatically
+4. The feature branch is deleted after merge
+5. Nothing else needed — you're done
 
 ## What NOT to Do
 
