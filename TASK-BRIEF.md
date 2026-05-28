@@ -56,6 +56,7 @@ cd app-under-test/antennapod
 ### 5. Document
 | File | What |
 |------|------|
+| `PROGRESS.md` | Update your TC status after each batch |
 | `test-docs/test-cases.md` | Append your TC specs (copy format from existing) |
 | `test-results/manual-test-result.md` | Add your rows, update Summary |
 | `test-docs/test-summary-report.md` | Add key findings, update counters |
@@ -72,11 +73,12 @@ EOF
 )"
 ```
 
-### 7. Push & PR
+### 7. Push
 ```bash
 git push -u origin <your-name>/<your-module>
 ```
-Open a PR. Template loads automatically. **Get a review before merging.**
+Push triggers CI automatically. If CI passes, PR is auto-created and squash-merged.
+Your branch is deleted. Only `main` remains.
 
 ## Key Rules
 
