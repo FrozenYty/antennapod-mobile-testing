@@ -93,8 +93,8 @@ EOF
 
 ### 7. Push & PR
 ```bash
-git checkout -b tc/<your-name>/<TC-range>
-git push -u origin tc/<your-name>/<TC-range>
+git checkout -b <your-name>/<your-module>
+git push -u origin <your-name>/<your-module>
 ```
 Then open a PR on GitHub. The PR template (`.github/pull_request_template.md`) loads automatically — fill in all sections.
 

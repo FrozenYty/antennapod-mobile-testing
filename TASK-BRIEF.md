@@ -62,7 +62,7 @@ cd app-under-test/antennapod
 
 ### 6. Commit
 ```bash
-git checkout -b tc/<your-name>/<TC-range>
+git checkout -b <your-name>/<your-module>
 git add path/to/your/test.kt test-docs/test-cases.md
 git commit -m "$(cat <<'EOF'
 <type>: <short description>
@@ -74,7 +74,7 @@ EOF
 
 ### 7. Push & PR
 ```bash
-git push -u origin tc/<your-name>/<TC-range>
+git push -u origin <your-name>/<your-module>
 ```
 Open a PR. Template loads automatically. **Get a review before merging.**
 

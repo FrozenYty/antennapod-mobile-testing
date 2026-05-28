@@ -63,7 +63,7 @@
 
 ### Remaining Actions
 
-- [ ] **Git commit & PR**: Create branch `tc/tianyu-yao/TC001-010`, commit all files, push, open PR
+- [x] **Git**: Branch `tianyu-yao/core-foundation` created, committed, pushed
 - [ ] TC-010 steps 6-8, 10-14: re-test on a device with network access
 
 ---

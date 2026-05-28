@@ -15,17 +15,17 @@ cd antennapod-mobile-testing
 | Rule | Detail |
 |------|--------|
 | **Never commit directly to `main`** | All work happens on feature branches |
-| Branch naming | `tc/<your-name>/<TC-range>` — e.g., `tc/jane-smith/TC011-020` |
-| One branch per person per module | Don't spread your work across multiple branches |
+| Branch naming | `<your-name>/<your-module>` — e.g., `jane-smith/subscription-discovery` |
+| One branch per person | All your work goes on one branch |
 
 ```bash
-git checkout -b tc/your-name/TC011-020
+git checkout -b your-name/your-module
 ```
 
 Once you push your branch, everything is automatic:
 
 ```
-git push -u origin tc/<your-name>/<TC-range>
+git push -u origin <your-name>/<your-module>
      │
      ▼  CI Compile Check (.github/workflows/ci.yml)
      │
@@ -176,11 +176,10 @@ test-docs/test-summary-report.md
 
 ## Pull Request Process (Automated)
 
-1. Push your branch: `git push -u origin tc/your-name/TC011-020`
-2. CI runs automatically (compile + unit tests)
-3. PR is created and squash-merged into `main` automatically
-4. The feature branch is deleted after merge
-5. Nothing else needed — you're done
+1. Push: `git push -u origin <your-name>/<your-module>`
+2. CI runs (compile + unit tests)
+3. PR auto-created, squash-merged into `main`, branch deleted
+4. Done. Only `main` remains.
 
 ## What NOT to Do
 

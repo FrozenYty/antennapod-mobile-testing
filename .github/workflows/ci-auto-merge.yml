@@ -1,10 +1,12 @@
-name: CI Compile Check
+name: CI + Auto Merge
 
 on:
-  pull_request:
-    branches: [main]
   push:
-    branches: [main]
+    branches-ignore: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -12,7 +14,6 @@ env:
 jobs:
   compile:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,16 +32,37 @@ jobs:
       - name: Cache Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Compile instrumented test sources
+      - name: Compile instrumented tests
         working-directory: app-under-test/antennapod
         run: |
           chmod +x gradlew
           ./gradlew :app:compilePlayDebugAndroidTestSources
 
-      - name: Compile unit test sources
+      - name: Compile unit tests
         working-directory: app-under-test/antennapod
         run: ./gradlew :app:compilePlayDebugUnitTestSources
 
       - name: Run unit tests
         working-directory: app-under-test/antennapod
         run: ./gradlew :app:testPlayDebugUnitTest
+
+  merge:
+    needs: compile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto PR and merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -e
+          BRANCH="${{ github.ref_name }}"
+          echo "Creating PR for $BRANCH ..."
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "$BRANCH" \
+            --body "Automated PR. CI passed."
+          echo "Merging into main ..."
+          gh pr merge "$BRANCH" --squash --delete-branch
+          echo "Done. Branch deleted."

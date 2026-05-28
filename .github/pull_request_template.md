@@ -22,7 +22,7 @@
 - [ ] If `build.gradle` or `libs.versions.toml` changed, PR description explains why
 - [ ] No changes to app source code in `src/main/`
 - [ ] `@author` tag added to every test class
-- [ ] Branch follows naming convention: `tc/<name>/<TC-range>`
+- [ ] Branch follows naming convention: `<name>/<module>`
 
 ## Reviewer Notes
 

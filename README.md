@@ -13,8 +13,8 @@ This repository contains the test documentation, manual test results, bug report
 1. Read [CONTRIBUTING.md](CONTRIBUTING.md) — commit rules, branch naming, PR process
 2. Read [test-docs/test-case-plan.md](test-docs/test-case-plan.md) — find your assigned TC range
 3. Read [AI-GUIDE.md](AI-GUIDE.md) — patterns, pitfalls, complete workflow
-4. Create your branch: `git checkout -b tc/<your-name>/<TC-range>`
-5. Write tests, compile, run, document, commit, push, open PR
+4. Create your branch: `git checkout -b <your-name>/<your-module>` (e.g., `tianyu-yao/core-foundation`)
+5. Write tests, compile, run, document, commit, push — auto PR and merge
 
 > **For AI assistants**: Feed [AI-PROMPT.md](AI-PROMPT.md) + [AI-GUIDE.md](AI-GUIDE.md) into your context before writing any code.
 
