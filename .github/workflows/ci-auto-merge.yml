@@ -93,6 +93,9 @@ jobs:
           BRANCH="${{ github.ref_name }}"
           TITLE=$(git log -1 --format=%s)
 
+          git config user.name "CI Bot"
+          git config user.email "ci@localhost"
+
           git fetch origin main
           git checkout -B main origin/main
           git merge --squash "$BRANCH"
