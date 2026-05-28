@@ -20,22 +20,31 @@ jobs:
       - name: Create PR and auto-merge
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
+          set -e
           BRANCH="${{ github.ref_name }}"
           echo "Branch: $BRANCH"
 
-          # Create PR (idempotent — won't duplicate if already exists)
-          gh pr create \
+          # Skip if this is the main branch (shouldn't happen, but safe)
+          if [ "$BRANCH" = "main" ]; then
+            echo "On main branch, nothing to do."
+            exit 0
+          fi
+
+          # Create PR
+          echo "Creating PR for $BRANCH ..."
+          PR_URL=$(gh pr create \
             --base main \
             --head "$BRANCH" \
             --title "Auto PR: $BRANCH" \
-            --body "Automated PR from branch \`$BRANCH\`." \
-            --label "auto-merge" \
-            2>/dev/null || echo "PR may already exist, continuing..."
+            --body "Automated PR from branch \`$BRANCH\`.")
 
-          # Wait a moment for PR to be fully created
-          sleep 5
+          echo "PR created: $PR_URL"
+          sleep 3
 
-          # Squash-merge into main (no review required, no merge commit)
-          gh pr merge "$BRANCH" --squash --delete-branch --admin \
-            2>&1 || echo "Merge may have failed (check branch protection settings)"
+          # Squash-merge
+          echo "Merging $BRANCH into main..."
+          gh pr merge "$BRANCH" --squash --delete-branch
+
+          echo "Done. Branch deleted, changes merged into main."
