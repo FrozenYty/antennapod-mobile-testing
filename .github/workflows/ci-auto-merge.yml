@@ -64,17 +64,6 @@ jobs:
           BRANCH="${{ github.ref_name }}"
           TITLE=$(git log -1 --format=%s)
 
-          # Fetch main and rebase to avoid merge conflicts
-          git fetch origin main
-          git rebase origin/main || {
-            echo "Rebase conflict. This should not happen if you started from latest main."
-            echo "Resolve manually: git checkout $BRANCH && git rebase origin/main"
-            exit 1
-          }
-
-          # Force-push rebased branch
-          git push origin "$BRANCH" --force
-
           # Check if PR already exists for this branch
           EXISTING=$(gh pr list --head "$BRANCH" --state open --json number -q '.[0].number' 2>/dev/null || echo "")
 
