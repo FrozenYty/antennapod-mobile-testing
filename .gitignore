@@ -1,0 +1,22 @@
+# Gradle
+.gradle/
+build/
+*/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Android / IDE
+local.properties
+.idea/
+*.iml
+.vscode/
+*.apk
+*.aab
+*.jks
+*.keystore
+
+# OS generated files
+.DS_Store
+Thumbs.db
+*.log
+
+# Test artifacts (screenshots are test evidence — commit intentionally)
