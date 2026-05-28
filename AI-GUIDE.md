@@ -168,27 +168,36 @@ automation/
 
 ## Key App Architecture
 
-AntennaPod uses a bottom-navigation + drawer structure in `MainActivity`:
+AntennaPod uses a customizable bottom-navigation bar (`R.id.bottomNavigationView`) plus
+drawer layout (`R.id.drawer_layout`) in `MainActivity` (`de.danoeh.antennapod.activity.MainActivity`).
 
-| Tab | Role | Key Classes |
-|-----|------|------------|
-| Home | `HomeFragment` | Welcome / recent episodes |
-| Queue | `QueueFragment` | Episodes queued for playback |
-| Subscriptions | `SubscriptionFragment` | Subscribed podcast feeds |
-| Discovery | `DiscoveryFragment` | Browse and search podcasts |
+Bottom nav IDs (from `res/values/ids.xml`): `bottom_navigation_home`, `bottom_navigation_queue`,
+`bottom_navigation_inbox`, `bottom_navigation_episodes`, `bottom_navigation_subscriptions`,
+`bottom_navigation_downloads`, `bottom_navigation_favorites`, `bottom_navigation_addfeed`, etc.
 
-Key activities beyond MainActivity:
+Key fragments and their packages:
 
-| Activity | Role |
-|----------|------|
-| `PreferenceActivity` | App settings |
-| `OpmlImportActivity` | Import OPML subscriptions |
-| `OnlineFeedViewActivity` | Preview feed before subscribing |
-| `VideoplayerActivity` | Video podcast playback |
+| Fragment | Location |
+|----------|----------|
+| `HomeFragment` | `de.danoeh.antennapod.ui.screen.home` |
+| `QueueFragment` | `de.danoeh.antennapod.ui.screen.queue` |
+| `SubscriptionFragment` | `de.danoeh.antennapod.ui.screen.subscriptions` |
+| `DiscoveryFragment` | `:ui:discovery` module — `de.danoeh.antennapod.ui.discovery` |
 
-Database: raw SQLite via `PodDBAdapter` (extends `SQLiteOpenHelper`). Key tables: Feeds, FeedItems, FeedMedia.
+Key activities:
 
-Player: `AudioPlayerFragment` (persistent bottom sheet) with Media3/ExoPlayer backend.
+| Activity | Package |
+|----------|---------|
+| `MainActivity` | `de.danoeh.antennapod.activity` |
+| `PreferenceActivity` | `de.danoeh.antennapod.ui.screen.preferences` |
+| `OpmlImportActivity` | `de.danoeh.antennapod.activity` |
+| `OnlineFeedViewActivity` | `de.danoeh.antennapod.ui.screen.onlinefeedview` |
+
+Database: raw SQLite via `PodDBAdapter` (`:storage:database` module). Key tables: Feeds, FeedItems, FeedMedia.
+
+Core data model (`:model` module): `de.danoeh.antennapod.model.feed.Feed`, `FeedItem`, `FeedMedia`.
+
+Player: persistent player sheet with Media3/ExoPlayer backend (`:playback:service`).
 
 ## Test Writing Patterns
 
