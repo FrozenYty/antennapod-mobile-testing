@@ -1,7 +1,9 @@
 name: Auto PR & Merge
 
 on:
-  push:
+  workflow_run:
+    workflows: ["CI Compile Check"]
+    types: [completed]
     branches: ['tc/**']
 
 permissions:
@@ -17,20 +19,22 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Check CI result
+        run: |
+          if [ "${{ github.event.workflow_run.conclusion }}" != "success" ]; then
+            echo "CI did not pass (conclusion: ${{ github.event.workflow_run.conclusion }}). Aborting merge."
+            exit 1
+          fi
+          echo "CI passed. Proceeding with auto-merge."
+
       - name: Create PR and auto-merge
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
           set -e
-          BRANCH="${{ github.ref_name }}"
+          BRANCH="${{ github.event.workflow_run.head_branch }}"
           echo "Branch: $BRANCH"
-
-          # Skip if this is the main branch (shouldn't happen, but safe)
-          if [ "$BRANCH" = "main" ]; then
-            echo "On main branch, nothing to do."
-            exit 0
-          fi
 
           # Create PR
           echo "Creating PR for $BRANCH ..."
