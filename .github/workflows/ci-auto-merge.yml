@@ -50,6 +50,9 @@ jobs:
     needs: compile
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Auto PR and merge
         env:
           GH_TOKEN: ${{ github.token }}
@@ -57,12 +60,23 @@ jobs:
         run: |
           set -e
           BRANCH="${{ github.ref_name }}"
-          echo "Creating PR for $BRANCH ..."
-          gh pr create \
-            --base main \
-            --head "$BRANCH" \
-            --title "$BRANCH" \
-            --body "Automated PR. CI passed."
+          TITLE=$(git log -1 --format=%s)
+
+          # Check if PR already exists for this branch
+          EXISTING=$(gh pr list --head "$BRANCH" --state open --json number -q '.[0].number' 2>/dev/null || echo "")
+
+          if [ -n "$EXISTING" ]; then
+            echo "PR #$EXISTING already exists for $BRANCH, using it."
+          else
+            echo "Creating PR for $BRANCH ..."
+            echo "Title: $TITLE"
+            gh pr create \
+              --base main \
+              --head "$BRANCH" \
+              --title "$TITLE" \
+              --body "Automated PR from \`$BRANCH\`. CI passed."
+          fi
+
           echo "Merging into main ..."
           gh pr merge "$BRANCH" --squash --delete-branch
           echo "Done. Branch deleted."

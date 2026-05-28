@@ -40,6 +40,7 @@ For EACH TC in my range:
 
 ## Hard Rules
 
+- **ALWAYS update docs BEFORE committing** — especially `PROGRESS.md`. A commit without updated docs is incomplete.
 - NEVER modify `app/src/main/` — app source is read-only
 - NEVER use `git add -A` or `git add .` — stage files individually
 - NEVER create new directories — all folders are pre-created

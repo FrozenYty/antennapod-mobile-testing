@@ -14,8 +14,8 @@
 | Metric | Count |
 |--------|-------|
 | Total Test Cases | 10 |
-| Passed | 9 (TC-001~009) |
-| Partial | 1 (TC-010: 6 steps need network) |
+| Passed | 10 (TC-001~010) |
+| Partial | 0 |
 | Failed | 0 |
 | Blocked | 0 |
 | Not Run | 0 |
@@ -34,7 +34,7 @@
 | TC-007 | Unit Test | Passed | 17 | All 17 tests passed |
 | TC-008 | Unit Test | Passed | 34 | All 34 tests passed |
 | TC-009 | Integration | Passed | 8 | Device: ALN-AL00 (MuMu), 8/8 passed |
-| TC-010 | Manual | Partial | 14/20 passed, 6 network-dependent | MuMu emulator, 5 screenshots captured |
+| TC-010 | Manual | Passed | 19/20 passed, 1 stream error (Spotify CDN blocked on emulator) | MuMu emulator, NPR News Now feed, 6 screenshots |
 
 ## Bug Summary
 
