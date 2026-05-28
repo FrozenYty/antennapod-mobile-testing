@@ -24,6 +24,23 @@ git checkout -b tc/your-name/TC011-020
 
 ## Commit Rules
 
+### Commit Strategy: Incremental Batches
+
+**Commit in small batches, not all 10 TCs at once.** Follow the DevOps principle: code a little, verify, commit. Repeat.
+
+| Batch Size | Example |
+|------------|---------|
+| 2-3 TCs | TC-001 + TC-002 (both Espresso basics) |
+| 1 TC | If it spans multiple files or introduces new infrastructure |
+
+**Per batch**: code all TCs in the batch → compile → run → update docs → commit. Then move to the next batch.
+
+**Why**:
+- Small commits are easy to review and revert if something breaks
+- `PROGRESS.md` stays up-to-date as you go
+- If the AI session gets interrupted, `git log` tells the next session exactly where you left off
+- Avoids the "10 TCs + 11 screenshots + 8 doc files" megacommit that is hard to audit
+
 ### Commit Message Format
 
 ```
@@ -76,6 +93,8 @@ git reset HEAD <file>
 git add path/to/your/test.kt
 git add path/to/your/docs.md
 ```
+
+**Before `git add`-ing a screenshot**: visually compare it against ALL existing screenshots in `screenshots/`. Delete any duplicate (same UI state = same screen). Read `screenshots/README.md` for the full policy.
 
 ## File Organization
 
@@ -134,6 +153,7 @@ test-docs/test-summary-report.md
 ## Code Quality
 
 - **Language**: English only — code, comments, docs, commit messages
+- **Name format**: Given Name first, Family Name last. Example: `Tianyu Yao`, `Jane Smith`. Never write family name first. This applies to `@author` tags, commit messages, branch names, and all documentation.
 - **Attribution**: Every test class must have `@author Your English Name` in its KDoc
 - **No dead code**: Remove unused imports before committing
 - **No commented-out code**: Delete it, don't comment it out

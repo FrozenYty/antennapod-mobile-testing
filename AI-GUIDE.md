@@ -20,11 +20,12 @@ Before writing any code, open these files in order:
 
 | # | File | Why |
 |---|------|-----|
-| 1 | `CONTRIBUTING.md` | Branch naming, commit format, PR rules, what NOT to do |
-| 2 | `test-docs/test-case-plan.md` | Find your TC-ID range, module, and required testing methods |
-| 3 | `test-docs/test-cases.md` | See existing TC specs for format reference |
-| 4 | `app/.../utils/TestHelper.kt` | Understand shared utilities before using them |
-| 5 | Reference examples (see patterns below) | Copy the pattern matching your testing method |
+| **1** | **`PROGRESS.md`** | **Current task status, what's done, what's pending. Read this first.** |
+| 2 | `CONTRIBUTING.md` | Branch naming, commit format, PR rules, what NOT to do |
+| 3 | `test-docs/test-case-plan.md` | Find your TC-ID range, module, and required testing methods |
+| 4 | `test-docs/test-cases.md` | See existing TC specs for format reference |
+| 5 | `app/.../utils/TestHelper.kt` | Understand shared utilities before using them |
+| 6 | Reference examples (see patterns below) | Copy the pattern matching your testing method |
 
 Then scan the relevant app source files for your feature.
 
@@ -67,6 +68,7 @@ Update these files with your results. Follow the existing format — don't inven
 
 | File | What to update |
 |------|---------------|
+| `PROGRESS.md` | Update your TC status rows and remaining actions |
 | `test-docs/test-cases.md` | Append your TC specs |
 | `test-results/manual-test-result.md` | Add your rows to the Results table. Update Summary counters |
 | `test-docs/test-summary-report.md` | Add key findings for your tests. Update the counters |
@@ -209,10 +211,11 @@ package de.danoeh.antennapod.espresso
 @RunWith(AndroidJUnit4::class)
 class TCXXX_TitleTest {
     @get:Rule
-    val activityRule = ActivityScenarioRule(MainActivity::class.java)
+    val activityRule = ActivityTestRule(MainActivity::class.java, false, false)
 
     @Test
     fun descriptiveName_expectedBehavior() {
+        activityRule.launchActivity(Intent(Intent.ACTION_MAIN))
         onView(withId(R.id.some_view)).check(matches(isDisplayed()))
     }
 }
@@ -256,26 +259,51 @@ class XXXTest {
     @Before
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        adapter = PodDBAdapter(context)
-        adapter.open()  // creates DB in memory or on disk
+        PodDBAdapter.init(context)
+        adapter = PodDBAdapter.getInstance()
     }
 
     @After
-    fun tearDown() { adapter.close() }
+    fun tearDown() { PodDBAdapter.tearDownTests() }
 
     @Test
     fun dbQuery_condition_expectedBehavior() {
-        val cursor = adapter.someQuery()
-        assertTrue(cursor.moveToFirst())
+        val values = ContentValues().apply {
+            put(PodDBAdapter.KEY_TITLE, "Test Feed")
+            put(PodDBAdapter.KEY_DOWNLOAD_URL, "https://example.com/feed.xml")
+        }
+        adapter.insertTestData(PodDBAdapter.TABLE_NAME_FEEDS, values)
+
+        val cursor = adapter.allFeedsCursor
+        // NOTE: use PodDBAdapter.SELECT_KEY_FEED_ID ("feed_id"), not KEY_ID ("id")
+        val feedId = cursor.getLong(cursor.getColumnIndexOrThrow(PodDBAdapter.SELECT_KEY_FEED_ID))
+        assertTrue(cursor.count > 0)
+        cursor.close()
     }
 }
 ```
 
 ## Capturing Screenshots
 
-Screenhots are test evidence. Store them in `screenshots/` at the project root.
+Screenshots are test evidence. Store them in `screenshots/` at the project root.
+
+Read `screenshots/README.md` **before you capture any screenshots**. The rule is: **Better none than junk.**
 
 Quality over quantity — capture only meaningful UI states, not every test step.
+
+### Mandatory Screenshot Review Before Commit
+
+Before `git add`-ing any new screenshot:
+
+1. Compare the new screenshot against ALL existing screenshots in `screenshots/`
+2. If the new screenshot shows the same UI state as an existing one, **delete the new one immediately**
+3. If you cannot explain the screenshot's value in one sentence, **delete it**
+4. Only commit screenshots that represent a **unique UI state** not yet captured
+
+Common duplicates to watch for:
+- Same tab/screen from a different TC (e.g., queue page from TC-003 and queue page from TC-004)
+- Home screen captured multiple times across different tests
+- Transient states (loading spinners, empty screens without context)
 
 ### Recommended: TestHelper.saveScreenshot()
 
@@ -283,14 +311,14 @@ Quality over quantity — capture only meaningful UI states, not every test step
 TestHelper.saveScreenshot("tc001-launch-home")
 ```
 
-Uses `UiAutomation.takeScreenshot()` internally. Pull files after test run:
+Uses `UiAutomation.takeScreenshot()` internally. Screenshots are saved to `Download/screenshots/` on the device so they survive test APK uninstall. Pull files after test run:
 
 ```bash
-# On Linux/macOS:
-adb pull /sdcard/Android/data/de.danoeh.antennapod.debug/files/screenshots/ ./screenshots/
+# Pull all screenshots after test run:
+MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./screenshots/
 
-# On Windows (Git Bash):
-MSYS2_ARG_CONV_EXCL="*" adb pull /sdcard/Android/data/de.danoeh.antennapod.debug/files/screenshots/ ./screenshots/
+# Remove test-generated screenshots from device:
+adb shell rm -rf /storage/emulated/0/Download/screenshots/
 ```
 
 ### When to capture
@@ -320,14 +348,85 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /sdcard/Android/data/de.danoeh.antennapod.debug
 1. **Animations Cause Espresso Failures**
    → Always disable the three animation scales on the test device before running Espresso tests.
 
-2. **MainActivity Bottom Nav**
-   → Use `onView(withId(R.id.bottom_navigation))` or click nav items by ID. The app uses both bottom nav and a side drawer.
+2. **Bottom Nav ID is `bottomNavigationView`, not `bottom_navigation`**
+   → The bottom navigation bar View ID is `R.id.bottomNavigationView`. The individual nav item IDs (e.g. `bottom_navigation_home`, `bottom_navigation_queue`) are defined in `res/values/ids.xml` and used as menu item IDs. The nav bar itself is at `main.xml:57`.
 
-3. **PodDBAdapter Requires Manual open()/close()**
-   → Unlike Room, `PodDBAdapter` does not auto-manage connections. Call `adapter.open()` in `@Before` and `adapter.close()` in `@After`.
+3. **Bottom Nav Items Are Dynamic**
+   → `BottomNavigation.buildMenu()` populates the bar from `UserPreferences.getVisibleDrawerItemOrder()`. Only the first `maxItems - 1` items appear directly; the rest go into a "More" overflow popup. On first launch, visible items are typically Home, Subscriptions, Queue, Inbox + More. Items like `addfeed`, `downloads`, `favorites` may be hidden in the More popup.
 
-4. **Network Calls in Tests**
-   → AntennaPod fetches podcast feeds over the network. Use local test data or mock HTTP responses for reproducible tests.
+4. **PodDBAdapter Uses Singleton Pattern**
+   → Unlike Room DAOs, `PodDBAdapter` is a singleton: call `PodDBAdapter.init(context)` once, then `PodDBAdapter.getInstance()`. Clean up with `PodDBAdapter.tearDownTests()`. The `open()` and `close()` methods are no-ops — do not rely on them.
 
-5. **Flaky Tests After App Data Clear**
-   → `pm clear de.danoeh.antennapod.debug` resets the app. The first test run after may fail because of first-launch state. Run tests twice if needed.
+5. **PodDBAdapter Cursor Column Names Differ from Table Column Names**
+   → Cursors returned by `getAllFeedsCursor()` use `SELECT_KEY_FEED_ID` ("feed_id"), not `KEY_ID` ("id"). Similarly, `getItemsOfFeedCursor()` returns `SELECT_KEY_ITEM_ID` ("item_id") and `SELECT_KEY_MEDIA_ID` ("media_id"). Always use the `SELECT_KEY_*` constants when reading from cursors.
+
+6. **SortOrder Is an Enum, Not a Class**
+   → `SortOrder` values are enum constants (e.g. `SortOrder.DATE_NEW_OLD`), not constructable. For Feed's `setSortOrder()`, only values with `INTRA_FEED` scope are accepted — values with `INTER_FEED` scope throw `IllegalArgumentException`.
+
+7. **MuMu Emulator Requires `ActivityTestRule`**
+   → On MuMu emulator (reported as "ALN-AL00", Android 12), `ActivityScenarioRule` / `ActivityScenario.launch()` fails with "Activity never becomes requested state [RESUMED]". Use `ActivityTestRule(MainActivity::class.java, false, false)` + `launchActivity(Intent(Intent.ACTION_MAIN))` instead.
+
+8. **Screenshots Must Survive Test Cleanup**
+   → `connectedAndroidTest` uninstalls the test APK after running, which deletes the app's private external storage. Save screenshots to `Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS)` so they persist across test runs and uninstalls. Pull with:
+   ```bash
+   MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./screenshots/
+   ```
+
+9. **Network Calls in Tests**
+   → AntennaPod fetches podcast feeds over the network. For reproducible tests, subscription and playback TCs should either use pre-loaded test data via `PodDBAdapter.insertTestData()`, or mock HTTP responses. Tests that navigate to subscription/playback UI can still verify tab navigation without network content.
+
+10. **Flaky Tests After App Data Clear**
+    → `pm clear de.danoeh.antennapod.debug` resets the app. The first test run after may fail because of first-launch state. Run tests twice if needed. On emulators, prefer `./gradlew :app:installPlayDebug` to reinstall rather than clearing data.
+
+---
+
+## Lessons from Sprint 1 (TC-001~010) — Read Before Starting Your Sprint
+
+These are issues the team lead hit during the first sprint. Review them before you write any code.
+
+### Screenshot Discipline
+
+This was the #1 quality issue. Read `screenshots/README.md` carefully. Specific rules from experience:
+
+- **Before `git add`-ing any new screenshot, visually diff it against ALL existing screenshots in the directory.** We ended up with 11 screenshots from which only 5 were unique. The other 6 were duplicates of the same UI state with different file names.
+- **Screenshot placement matters.** Put `TestHelper.saveScreenshot()` AFTER the navigation action (e.g. `perform(click())`), not before. Otherwise you capture the previous screen.
+- **The first screenshot per unique UI state is the one that stays.** If TC-003 already captured `tc003-queue.png`, do NOT capture another queue screenshot for TC-004.
+
+### Test Adaptation for Network/Content Constraints
+
+Some TC titles in the plan assume network access or pre-existing app content (subscribed feeds, downloaded episodes). When these are unavailable on your test device:
+
+- **It's OK to adapt the test** — the test plan says titles are flexible. Focus on what you CAN verify with your method.
+- **Document the adaptation** in `test-cases.md` under an "Adaptation" note for your TC.
+- **Examples from Sprint 1**: TC-002 "Subscribe to Podcast" became bottom nav + More menu verification. TC-003 "Play Episode" became tab navigation verification. TC-006 "OPML Import" became UIAutomator view detection verification.
+
+### build.gradle Changes
+
+The team lead already added the `kotlin-android` plugin and `uiautomator` test dependency. You should NOT need to modify `build.gradle` or `libs.versions.toml` further. If your test requires a new library, discuss with the team lead first.
+
+### TestHelper Is Already Created
+
+`TestHelper.kt` lives in `utils/` and provides `saveScreenshot(name)`. Do NOT create your own screenshot utility — use this one. Its save path is `/storage/emulated/0/Download/screenshots/` (public Downloads, survives test APK uninstall).
+
+### Pattern to Follow for Espresso Tests
+
+```kotlin
+@RunWith(AndroidJUnit4::class)
+class TCXXX_XxxTest {
+
+    @get:Rule
+    val activityRule = ActivityTestRule(MainActivity::class.java, false, false)
+
+    @Test
+    fun descriptiveName_expectedBehavior() {
+        activityRule.launchActivity(Intent(Intent.ACTION_MAIN))
+        // optional: TestHelper.saveScreenshot("tcxxx-description") — only if unique state
+        onView(withId(R.id.some_view)).check(matches(isDisplayed()))
+    }
+}
+```
+
+Key differences from the template in the earlier section:
+- Uses `ActivityTestRule(false, false)` NOT `ActivityScenarioRule` (MuMu emulator compatibility)
+- Uses `activityRule.launchActivity(Intent(Intent.ACTION_MAIN))` NOT `ActivityScenario.launch()`
+- Screenshot call is AFTER key actions, not before
