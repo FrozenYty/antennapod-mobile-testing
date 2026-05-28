@@ -16,7 +16,7 @@ I need to complete my assigned test cases for the AntennaPod mobile testing cour
 
 Read these files in order:
 
-1. `CONTRIBUTING.md` — branch naming `<name>/<module>`, commit format `type: description + Author: Name`, file organization, what NOT to do
+1. `CONTRIBUTING.md` — commit format `type: description + Author: Name`, file organization, what NOT to do
 2. `AI-GUIDE.md` — complete workflow (Plan → Code → Compile → Run → Document → Commit → Push), code patterns, pitfalls
 3. `test-docs/test-case-plan.md` — find my member section and exact TC list with methods
 4. `test-docs/test-cases.md` — existing TC specs (copy the table format for my new TCs)
@@ -35,8 +35,8 @@ For EACH TC in my range:
    - `test-docs/test-cases.md` — append my TC specs
    - `test-results/manual-test-result.md` — add result rows
    - `test-docs/test-summary-report.md` — add key findings
-6. **Commit** — one commit per logical batch, format: `<type>: <description>\n\nAuthor: <Name>`
-7. **Push** — branch `<my-name>/<my-module>`, push triggers CI → squash-merge → delete branch
+6. **Commit** — `git pull` first, then one commit per logical batch, format: `<type>: <description>\n\nAuthor: <Name>`
+7. **Push** — `git push` directly to main. CI compiles + runs unit tests + doc checks on push.
 
 ## Hard Rules
 

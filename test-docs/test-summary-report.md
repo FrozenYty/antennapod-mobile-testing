@@ -67,7 +67,7 @@
 | TC007_FeedEntityTest | JUnit | Unit | Passed |
 | TC008_FeedItemFeedMediaTest | JUnit | Unit | Passed |
 | TC009_PodDBAdapterSchemaTest | Integration | Instrumented | Passed |
-| TC010_FirstLaunchUserFlow | Manual | Manual | Ready |
+| TC010_FirstLaunchUserFlowTest | Manual | Manual | Passed |
 
 ## Recommendations
 

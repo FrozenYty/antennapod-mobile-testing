@@ -1,16 +1,19 @@
-name: CI Compile Check
+name: CI
 
 on:
-  pull_request:
-    branches: [main]
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  compile:
+  check:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,16 +34,45 @@ jobs:
       - name: Cache Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Compile instrumented test sources
+      - name: Compile instrumented tests
         working-directory: app-under-test/antennapod
         run: |
           chmod +x gradlew
           ./gradlew :app:compilePlayDebugAndroidTestSources
 
-      - name: Compile unit test sources
+      - name: Compile unit tests
         working-directory: app-under-test/antennapod
         run: ./gradlew :app:compilePlayDebugUnitTestSources
 
       - name: Run unit tests
         working-directory: app-under-test/antennapod
         run: ./gradlew :app:testPlayDebugUnitTest
+
+      - name: Check docs
+        run: |
+          OUR_TEST_DIR="app-under-test/antennapod/app/src"
+          OUR_PKG="de/danoeh/antennapod"
+
+          echo "--- @author in our test .kt files ---"
+          MISSING=$(grep -rL "@author" --include="*.kt" \
+            "$OUR_TEST_DIR/androidTest/java/$OUR_PKG/" \
+            "$OUR_TEST_DIR/test/java/$OUR_PKG/" 2>/dev/null || true)
+          if [ -n "$MISSING" ]; then
+            echo "ERROR: Test files missing @author:"
+            echo "$MISSING"
+            exit 1
+          fi
+          echo "OK: all test files have @author."
+
+          echo "--- Test file naming: TC<NNN>_*Test.kt ---"
+          BAD_NAME=$(find "$OUR_TEST_DIR" -name "*.kt" \
+            ! -name "TestHelper.kt" \
+            ! -name "TC[0-9][0-9][0-9]_*Test.kt" || true)
+          if [ -n "$BAD_NAME" ]; then
+            echo "ERROR: Files not matching TC<NNN>_NameTest.kt:"
+            echo "$BAD_NAME"
+            exit 1
+          fi
+          echo "OK: all test files follow naming convention."
+
+          echo "All doc checks passed."

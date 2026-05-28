@@ -21,7 +21,7 @@ Before writing any code, open these files in order:
 | # | File | Why |
 |---|------|-----|
 | **1** | **`PROGRESS.md`** | **Current task status, what's done, what's pending. Read this first.** |
-| 2 | `CONTRIBUTING.md` | Branch naming, commit format, auto deploy, what NOT to do |
+| 2 | `CONTRIBUTING.md` | Commit format, file organization, what NOT to do |
 | 3 | `test-docs/test-case-plan.md` | Find your TC-ID range, module, and required testing methods |
 | 4 | `test-docs/test-cases.md` | See existing TC specs for format reference |
 | 5 | `app/.../utils/TestHelper.kt` | Understand shared utilities before using them |
@@ -77,6 +77,7 @@ Update these files with your results. Follow the existing format — don't inven
 ```bash
 # NEVER use git add -A or git add .
 # Stage only your files individually:
+git pull
 git add path/to/your/test.kt
 git add test-docs/test-cases.md
 
@@ -93,10 +94,9 @@ EOF
 
 ### 7. Push
 ```bash
-git checkout -b <your-name>/<your-module>
-git push -u origin <your-name>/<your-module>
+git push
 ```
-Push triggers CI. If CI passes, changes are squash-merged into main and branch is deleted.
+Push triggers CI on main. If CI passes, your changes are live.
 
 ### Red Flags
 
@@ -105,6 +105,7 @@ Push triggers CI. If CI passes, changes are squash-merged into main and branch i
 | Hard no | Changing `app/src/main/` — never modify app source code |
 | Hard no | Committing generated files (`.class`, `.dex`, build outputs) |
 | Hard no | Using `git add -A` — stage files individually |
+| Remember | `git pull` before committing to avoid push conflicts |
 | Needs note | Modifying `build.gradle` or `libs.versions.toml` — explain why in commit message |
 | Needs fix | Compilation fails — fix before committing |
 | Needs fix | Tests fail consistently — don't force-commit, investigate first |
@@ -388,7 +389,7 @@ These are issues the team lead hit during the first sprint. Review them before y
 
 This was the #1 quality issue. Read `screenshots/README.md` carefully. Specific rules from experience:
 
-- **Before `git add`-ing any new screenshot, visually diff it against ALL existing screenshots in the directory.** We ended up with 11 screenshots from which only 5 were unique. The other 6 were duplicates of the same UI state with different file names.
+- **Before `git add`-ing any new screenshot, visually diff it against ALL existing screenshots in the directory.** We ended up with 11 initial screenshots from which only 5 were unique. After cleanup and selective additions from manual testing, the final count is 9 unique screenshots — each representing a distinct UI state.
 - **Screenshot placement matters.** Put `TestHelper.saveScreenshot()` AFTER the navigation action (e.g. `perform(click())`), not before. Otherwise you capture the previous screen.
 - **The first screenshot per unique UI state is the one that stays.** If TC-003 already captured `tc003-queue.png`, do NOT capture another queue screenshot for TC-004.
 

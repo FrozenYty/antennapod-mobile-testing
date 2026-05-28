@@ -10,14 +10,13 @@
 | Field | Value |
 |-------|-------|
 | **Working for** | Tianyu Yao |
-| **Branch** | `tianyu-yao/core-foundation` |
 | **Module** | Core Foundation |
 | **Device** | MuMu emulator (ALN-AL00, Android 12, 127.0.0.1:7555) |
 | **Last updated** | 2026-05-28 |
 
 ## Right Now
 
-Sprint 1 complete. All TCs pass. CI auto-deploy working. Waiting for final merge to main.
+Sprint 1 complete. All TCs pass. CI passing on main.
 
 ```
 Status: IDLE — ready for Sprint 2
@@ -27,8 +26,7 @@ Status: IDLE — ready for Sprint 2
 
 ```bash
 # When starting Sprint 2 (Member 2):
-git checkout main && git pull
-git checkout -b <member-name>/subscription-discovery
+git pull
 # Read TASK-BRIEF.md → CONTRIBUTING.md → AI-GUIDE.md
 # Start with TC-011
 ```
@@ -46,8 +44,8 @@ git checkout -b <member-name>/subscription-discovery
 - [x] TC-007 `unit/TC007_FeedEntityTest.kt` — 17/17
 - [x] TC-008 `unit/TC008_FeedItemFeedMediaTest.kt` — 34/34
 - [x] TC-009 `integration/TC009_PodDBAdapterSchemaTest.kt` — 8/8
-- [x] TC-010 `manual/TC010_FirstLaunchUserFlow.kt` — 19/20
-- [x] CI auto-deploy: compile → unit test → doc check → squash-merge
+- [x] TC-010 `manual/TC010_FirstLaunchUserFlowTest.kt` — 19/20
+- [x] CI: compile → unit test → doc check on push to main
 - [x] Docs synced, no stale refs, 9 screenshots
 
 ## Files Created (this sprint)
@@ -63,7 +61,7 @@ uiautomator/TC006_OpmlImportTest.kt
 unit/TC007_FeedEntityTest.kt
 unit/TC008_FeedItemFeedMediaTest.kt
 integration/TC009_PodDBAdapterSchemaTest.kt
-manual/TC010_FirstLaunchUserFlow.kt
+manual/TC010_FirstLaunchUserFlowTest.kt
 ```
 
 ## Blockers & Decisions
@@ -104,12 +102,12 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 
 ## Sprint Overview
 
-| Sprint | Member | Module | Branch | Status |
-|--------|--------|--------|--------|--------|
-| 1 | Tianyu Yao | Core Foundation | `tianyu-yao/core-foundation` | Done |
-| 2 | Member 2 | Subscription & Discovery | `<name>/subscription-discovery` | — |
-| 3 | Member 3 | Playback & Downloads | `<name>/playback-downloads` | — |
-| 4 | Member 4 | Settings & System | `<name>/settings-system` | — |
+| Sprint | Member | Module | Status |
+|--------|--------|--------|--------|
+| 1 | Tianyu Yao | Core Foundation | Done |
+| 2 | Member 2 | Subscription & Discovery | — |
+| 3 | Member 3 | Playback & Downloads | — |
+| 4 | Member 4 | Settings & System | — |
 
 ### Sprint 2 Task Board
 - [ ] TC-011 Browse Discovery (Espresso)

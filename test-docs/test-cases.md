@@ -145,7 +145,7 @@
 
 ### TC-010: First-Launch User Flow
 
-**File**: `manual/TC010_FirstLaunchUserFlow.kt`
+**File**: `manual/TC010_FirstLaunchUserFlowTest.kt`
 
 20-step manual checklist covering:
 - App launch and initial UI

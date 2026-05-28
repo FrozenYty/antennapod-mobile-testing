@@ -63,7 +63,7 @@ cd app-under-test/antennapod
 
 ### 6. Commit
 ```bash
-git checkout -b <your-name>/<your-module>
+git pull
 git add path/to/your/test.kt test-docs/test-cases.md
 git commit -m "$(cat <<'EOF'
 <type>: <short description>
@@ -75,9 +75,9 @@ EOF
 
 ### 7. Push
 ```bash
-git push -u origin <your-name>/<your-module>
+git push
 ```
-Push triggers CI. If CI passes, changes are squash-merged into main and branch deleted.
+Push triggers CI. If CI passes, your changes are live on main.
 
 ## Key Rules
 

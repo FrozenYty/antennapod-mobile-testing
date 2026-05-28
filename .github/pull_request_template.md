@@ -16,7 +16,7 @@
 
 ## Checklist
 
-- [ ] Tests compile: `./gradlew :app:compileAppDebugAndroidTestSources` passes
+- [ ] Tests compile: `./gradlew :app:compilePlayDebugAndroidTestSources` passes
 - [ ] Tests run on emulator or device (if Espresso/UIAutomator)
 - [ ] Test docs updated (`test-cases.md`, `manual-test-result.md`)
 - [ ] If `build.gradle` or `libs.versions.toml` changed, PR description explains why

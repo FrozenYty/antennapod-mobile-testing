@@ -10,11 +10,10 @@ This repository contains the test documentation, manual test results, bug report
 
 ## Getting Started
 
-1. Read [CONTRIBUTING.md](CONTRIBUTING.md) — commit rules, branch naming, auto deploy
+1. Read [CONTRIBUTING.md](CONTRIBUTING.md) — commit rules, workflow, CI checks
 2. Read [test-docs/test-case-plan.md](test-docs/test-case-plan.md) — find your assigned TC range
 3. Read [AI-GUIDE.md](AI-GUIDE.md) — patterns, pitfalls, complete workflow
-4. Create your branch: `git checkout -b <your-name>/<your-module>` (e.g., `tianyu-yao/core-foundation`)
-5. Write tests, compile, run, document, commit, push — auto deploy to main
+4. `git pull` to get latest, then write tests, compile, run, document, commit, push to main
 
 > **For AI assistants**: Feed [AI-PROMPT.md](AI-PROMPT.md) + [AI-GUIDE.md](AI-GUIDE.md) into your context before writing any code.
 

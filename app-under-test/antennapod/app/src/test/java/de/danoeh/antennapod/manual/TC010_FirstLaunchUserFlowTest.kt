@@ -9,7 +9,7 @@ package de.danoeh.antennapod.manual
  *
  * @author Tianyu Yao
  */
-object TC010_FirstLaunchUserFlow {
+object TC010_FirstLaunchUserFlowTest {
 
     /**
      * ## Prerequisites

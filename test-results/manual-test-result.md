@@ -20,13 +20,13 @@
 | TC-010 | 3. Tap "Home" nav item | Pass | Home screen content displayed |
 | TC-010 | 4. Tap "Subscriptions" | Pass | Empty subscriptions screen (`tc003-subscriptions.png`) |
 | TC-010 | 5. Tap "Add Feed" (via More menu) | Pass | More menu shows Add podcast, Settings (`tc010-step5-more-menu.png`) |
-| TC-010 | 6. Enter podcast RSS URL | Pass | `https://feeds.npr.org/500005/podcast.xml` entered (`tc010-step5-addfeed.png`) |
+| TC-010 | 6. Enter podcast RSS URL | Pass | `https://feeds.npr.org/500005/podcast.xml` entered |
 | TC-010 | 7. Tap Add Podcast / search button | Pass | Search submitted, feed found: NPR News Now |
 | TC-010 | 8. Tap Subscribe on result | Pass | Subscribed successfully (`tc010-step8-subscribed.png`) |
 | TC-010 | 9. Tap Subscriptions nav | Pass | NPR News Now appears in subscription list |
-| TC-010 | 10. Tap subscribed feed | Pass | Feed detail page opens (`tc010-step10-feed.png`) |
+| TC-010 | 10. Tap subscribed feed | Pass | Feed detail page opens |
 | TC-010 | 11. Tap an episode | Pass | Episode detail with stream/download buttons (`tc010-step11-episode.png`) |
-| TC-010 | 12. Tap Play on episode | Pass | Stream attempted (`tc010-step12-playing.png`) |
+| TC-010 | 12. Tap Play on episode | Pass | Stream attempted |
 | TC-010 | 13. Tap mini-player | Pass | Mini-player visible at screen bottom (`tc010-step13-miniplayer.png`) |
 | TC-010 | 14. Tap pause | Partial | Stream failed: NPR redirects to Spotify CDN, blocked on emulator (`tc010-step14-error.png`). App handled error gracefully with dialog. |
 | TC-010 | 15. Swipe down / back | Pass | Back navigation works correctly |

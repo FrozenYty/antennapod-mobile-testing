@@ -14,18 +14,18 @@ The script handles: disable animations → install app → run tests.
 
 ## CI/CD (GitHub Actions)
 
-Push to any branch except `main` triggers:
+Every push to `main` triggers:
 
 ```
-ci-auto-merge.yml
+ci.yml
      │
      ▼ compile instrumented tests
      ▼ compile unit tests
      ▼ run unit tests
-     ▼ squash merge into main → delete branch
+     ▼ doc checks (@author, naming)
 ```
 
-See `CONTRIBUTING.md` for the full workflow.
+If any check fails, fix the issue and push again.
 
 ## Manual Commands
 

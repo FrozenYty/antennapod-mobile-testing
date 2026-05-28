@@ -10,46 +10,30 @@ git clone <repo-url>
 cd antennapod-mobile-testing
 ```
 
-## Branch Rules
+## Workflow
 
-| Rule | Detail |
-|------|--------|
-| **Never commit directly to `main`** | All work happens on feature branches |
-| Branch naming | `<your-name>/<your-module>` — e.g., `jane-smith/subscription-discovery` |
-| One branch per person | All your work goes on one branch |
+All work happens directly on `main`. No feature branches, no PRs, no merge conflicts.
 
 ```bash
-git checkout -b your-name/your-module
+# 1. Pull latest
+git pull
+
+# 2. Code, compile, run, document
+
+# 3. Commit and push directly to main
+git add path/to/your/test.kt path/to/docs.md
+git commit -m "$(cat <<'EOF'
+<type>: <short description>
+
+Author: <Your English Name>
+EOF
+)"
+git push
 ```
 
-Once you push, everything is automatic:
-
-```
-git push -u origin <your-name>/<your-module>
-     │
-     ▼  CI compiles + runs unit tests
-     │
-     ▼  Squash-merge into main, delete branch
-     │
-     ▼  Only main remains
-```
-
-### Working in Multiple Batches
-
-After your first batch is merged, your remote branch is gone. To start the next batch:
-
-```bash
-git checkout main
-git pull                              # get latest main with your merged changes
-git checkout -b <same-branch-name>    # re-create the same branch from main
-# ... code, test, commit ...
-git push -u origin <same-branch-name> # triggers CI + auto-deploy again
-```
-
-Each push squash-merges into main and cleans up. Your branch name stays the same across all batches.
-# resolve conflicts, then:
-git push --force
-```
+**Why no branches?** Each member owns a non-overlapping TC range. Shared files
+(`PROGRESS.md`, `test-cases.md`) only grow — members append to their own section.
+Direct-to-main avoids merge conflicts that plagued the earlier branch+auto-merge setup.
 
 ## Commit Rules
 
@@ -110,8 +94,8 @@ docs: update test plan with SQLite integration examples
 
 ```bash
 # 1. Verify your tests compile
-./gradlew :app:compileAppDebugAndroidTestSources   # instrumented tests
-./gradlew :app:compileAppDebugUnitTestSources       # unit tests
+./gradlew :app:compilePlayDebugAndroidTestSources   # instrumented tests
+./gradlew :app:compilePlayDebugUnitTestSources       # unit tests
 
 # 2. Update these docs BEFORE staging any code
 #    - PROGRESS.md          ← update TC status, screenshots, remaining actions
@@ -192,7 +176,7 @@ test-docs/test-summary-report.md
 ## Code Quality
 
 - **Language**: English only — code, comments, docs, commit messages
-- **Name format**: Given Name first, Family Name last. Example: `Tianyu Yao`, `Jane Smith`. Never write family name first. This applies to `@author` tags, commit messages, branch names, and all documentation.
+- **Name format**: Given Name first, Family Name last. Example: `Tianyu Yao`, `Jane Smith`. Never write family name first. This applies to `@author` tags, commit messages, and all documentation.
 - **Attribution**: Every test class must have `@author Your English Name` in its KDoc
 - **No dead code**: Remove unused imports before committing
 - **No commented-out code**: Delete it, don't comment it out
@@ -200,7 +184,7 @@ test-docs/test-summary-report.md
 
 ## CI Checks
 
-Every push to a feature branch runs these checks before merging:
+Every push to `main` triggers these checks:
 
 | Check | What it verifies |
 |-------|-----------------|
@@ -209,22 +193,12 @@ Every push to a feature branch runs these checks before merging:
 | Run unit tests | `./gradlew :app:testPlayDebugUnitTest` |
 | @author tags | All `.kt` test files have `@author Your Name` in KDoc |
 | Test file naming | Files follow `TC<NNN>_ShortTitleTest.kt` (TestHelper.kt exempt) |
-| No stale references | No old `tc/` branch naming left in docs |
 
-If any check fails, the merge is blocked. Fix the issue and push again.
-- **Test dependencies OK**: Adding test-only deps to `libs.versions.toml` or `build.gradle` is allowed. Document the reason in your commit message.
-
-## Auto Deploy (Automated)
-
-1. Push: `git push -u origin <your-name>/<your-module>`
-2. CI compiles + runs unit tests
-3. Squash-merged into `main`, branch deleted
-4. Done. Only `main` remains.
+If any check fails, fix the issue and push again.
 
 ## What NOT to Do
 
 - Don't `git push --force` to `main`
-- Don't commit directly to `main` (always use a feature branch)
 - Don't modify other people's test files without asking
 - Don't change `settings.gradle` without team discussion
 - Test-only changes to `build.gradle` or `libs.versions.toml` are OK — document the reason in commit
