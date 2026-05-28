@@ -15,14 +15,57 @@ cd antennapod-mobile-testing
 | Rule | Detail |
 |------|--------|
 | **Never commit directly to `main`** | All work happens on feature branches |
-| Branch naming | `tc/<your-name>/<TC-range>` — e.g., `tc/jane-smith/TC011-020` |
-| One branch per person per module | Don't spread your work across multiple branches |
+| Branch naming | `<your-name>/<your-module>` — e.g., `jane-smith/subscription-discovery` |
+| One branch per person | All your work goes on one branch |
 
 ```bash
-git checkout -b tc/your-name/TC011-020
+git checkout -b your-name/your-module
 ```
 
+Once you push, everything is automatic:
+
+```
+git push -u origin <your-name>/<your-module>
+     │
+     ▼  CI compiles + runs unit tests
+     │
+     ▼  Auto PR → squash merge → delete branch
+     │
+     ▼  Only main remains
+```
+
+### Working in Multiple Batches
+
+After your first batch is merged, your remote branch is gone. To start the next batch:
+
+```bash
+git checkout main
+git pull                              # get latest main with your merged changes
+git checkout -b <same-branch-name>    # re-create the same branch from main
+# ... code, test, commit ...
+git push -u origin <same-branch-name> # triggers CI + auto-merge again
+```
+
+Each push creates a new PR, merges, and cleans up. Your branch name stays the same across all batches — no need to invent new names.
+
 ## Commit Rules
+
+### Commit Strategy: Incremental Batches
+
+**Commit in small batches, not all 10 TCs at once.** Follow the DevOps principle: code a little, verify, commit. Repeat.
+
+| Batch Size | Example |
+|------------|---------|
+| 2-3 TCs | TC-001 + TC-002 (both Espresso basics) |
+| 1 TC | If it spans multiple files or introduces new infrastructure |
+
+**Per batch**: code all TCs in the batch → compile → run → update docs → commit. Then move to the next batch.
+
+**Why**:
+- Small commits are easy to review and revert if something breaks
+- `PROGRESS.md` stays up-to-date as you go
+- If the AI session gets interrupted, `git log` tells the next session exactly where you left off
+- Avoids the "10 TCs + 11 screenshots + 8 doc files" megacommit that is hard to audit
 
 ### Commit Message Format
 
@@ -76,6 +119,8 @@ git reset HEAD <file>
 git add path/to/your/test.kt
 git add path/to/your/docs.md
 ```
+
+**Before `git add`-ing a screenshot**: visually compare it against ALL existing screenshots in `screenshots/`. Delete any duplicate (same UI state = same screen). Read `screenshots/README.md` for the full policy.
 
 ## File Organization
 
@@ -134,20 +179,19 @@ test-docs/test-summary-report.md
 ## Code Quality
 
 - **Language**: English only — code, comments, docs, commit messages
+- **Name format**: Given Name first, Family Name last. Example: `Tianyu Yao`, `Jane Smith`. Never write family name first. This applies to `@author` tags, commit messages, branch names, and all documentation.
 - **Attribution**: Every test class must have `@author Your English Name` in its KDoc
 - **No dead code**: Remove unused imports before committing
 - **No commented-out code**: Delete it, don't comment it out
 - **Don't modify app source**: `app-under-test/antennapod/app/src/main/` is read-only. Tests only go in `androidTest/` or `test/`.
 - **Test dependencies OK**: Adding test-only deps to `libs.versions.toml` or `build.gradle` is allowed. Explain the reason in your PR description.
 
-## Pull Request Process
+## Pull Request Process (Automated)
 
-1. Push your branch: `git push -u origin tc/your-name/TC011-020`
-2. Create a PR on GitHub from your branch to `main`
-3. PR title: `<Module Name> — <Your Name>` (e.g., "Subscription & Playback — Jane Smith")
-4. PR description: list each TC-ID with status (Passed / Partial / Failed)
-5. **At least one other team member must review before merge**
-6. Squash-merge into `main` (use GitHub's "Squash and merge" button)
+1. Push: `git push -u origin <your-name>/<your-module>`
+2. CI runs (compile + unit tests)
+3. PR auto-created, squash-merged into `main`, branch deleted
+4. Done. Only `main` remains.
 
 ## What NOT to Do
 

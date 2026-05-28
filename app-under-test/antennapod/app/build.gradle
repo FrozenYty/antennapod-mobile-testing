@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.triplet.play) apply false
 }
 apply from: "../common.gradle"
@@ -132,6 +133,7 @@ dependencies {
     androidTestImplementation libs.androidx.test.runner
     androidTestImplementation libs.androidx.test.rules
     androidTestImplementation libs.androidx.test.ext.junit
+    androidTestImplementation libs.uiautomator
 }
 
 if (project.hasProperty("antennaPodPlayPublisherCredentials")) {
