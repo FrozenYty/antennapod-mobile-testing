@@ -1,6 +1,6 @@
 # Contributing to AntennaPod Mobile Testing
 
-> **Read this before making any commits or pull requests.**
+> **Read this before making any commits.**
 > AI assistants: feed this file into your context before writing code.
 
 ## First-Time Setup
@@ -29,7 +29,7 @@ git push -u origin <your-name>/<your-module>
      │
      ▼  CI compiles + runs unit tests
      │
-     ▼  Auto PR → squash merge → delete branch
+     ▼  Squash-merge into main, delete branch
      │
      ▼  Only main remains
 ```
@@ -43,15 +43,10 @@ git checkout main
 git pull                              # get latest main with your merged changes
 git checkout -b <same-branch-name>    # re-create the same branch from main
 # ... code, test, commit ...
-git push -u origin <same-branch-name> # triggers CI + auto-merge again
+git push -u origin <same-branch-name> # triggers CI + auto-deploy again
 ```
 
-Each push creates a new PR, merges, and cleans up. Your branch name stays the same across all batches.
-
-**If auto-merge fails**: your branch diverged from main. Fix:
-```bash
-git checkout main && git pull
-git checkout <your-branch> && git rebase main
+Each push squash-merges into main and cleans up. Your branch name stays the same across all batches.
 # resolve conflicts, then:
 git push --force
 ```
@@ -202,22 +197,22 @@ test-docs/test-summary-report.md
 - **No dead code**: Remove unused imports before committing
 - **No commented-out code**: Delete it, don't comment it out
 - **Don't modify app source**: `app-under-test/antennapod/app/src/main/` is read-only. Tests only go in `androidTest/` or `test/`.
-- **Test dependencies OK**: Adding test-only deps to `libs.versions.toml` or `build.gradle` is allowed. Explain the reason in your PR description.
+- **Test dependencies OK**: Adding test-only deps to `libs.versions.toml` or `build.gradle` is allowed. Document the reason in your commit message.
 
-## Pull Request Process (Automated)
+## Auto Deploy (Automated)
 
 1. Push: `git push -u origin <your-name>/<your-module>`
-2. CI runs (compile + unit tests)
-3. PR auto-created, squash-merged into `main`, branch deleted
+2. CI compiles + runs unit tests
+3. Squash-merged into `main`, branch deleted
 4. Done. Only `main` remains.
 
 ## What NOT to Do
 
 - Don't `git push --force` to `main`
-- Don't commit directly to `main` (always use a branch + PR)
+- Don't commit directly to `main` (always use a feature branch)
 - Don't modify other people's test files without asking
 - Don't change `settings.gradle` without team discussion
-- Test-only changes to `build.gradle` or `libs.versions.toml` are OK — just document the reason in PR
+- Test-only changes to `build.gradle` or `libs.versions.toml` are OK — document the reason in commit
 - Don't commit generated files (build outputs, `.class`, `.dex`)
 - Don't change the test method distribution in `test-case-plan.md` — add new cases instead
 - Don't modify the AntennaPod app source code in `src/main/`
