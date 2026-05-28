@@ -46,7 +46,15 @@ git checkout -b <same-branch-name>    # re-create the same branch from main
 git push -u origin <same-branch-name> # triggers CI + auto-merge again
 ```
 
-Each push creates a new PR, merges, and cleans up. Your branch name stays the same across all batches — no need to invent new names.
+Each push creates a new PR, merges, and cleans up. Your branch name stays the same across all batches.
+
+**If auto-merge fails**: your branch diverged from main. Fix:
+```bash
+git checkout main && git pull
+git checkout <your-branch> && git rebase main
+# resolve conflicts, then:
+git push --force
+```
 
 ## Commit Rules
 
