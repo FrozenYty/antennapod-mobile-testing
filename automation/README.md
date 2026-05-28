@@ -22,10 +22,10 @@ ci-auto-merge.yml
      ▼ compile instrumented tests
      ▼ compile unit tests
      ▼ run unit tests
-     ▼ create PR → squash merge → delete branch
+     ▼ squash merge into main → delete branch
 ```
 
-No manual PR creation needed. See `CONTRIBUTING.md` for the full workflow.
+See `CONTRIBUTING.md` for the full workflow.
 
 ## Manual Commands
 

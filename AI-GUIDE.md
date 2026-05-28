@@ -21,7 +21,7 @@ Before writing any code, open these files in order:
 | # | File | Why |
 |---|------|-----|
 | **1** | **`PROGRESS.md`** | **Current task status, what's done, what's pending. Read this first.** |
-| 2 | `CONTRIBUTING.md` | Branch naming, commit format, PR rules, what NOT to do |
+| 2 | `CONTRIBUTING.md` | Branch naming, commit format, auto deploy, what NOT to do |
 | 3 | `test-docs/test-case-plan.md` | Find your TC-ID range, module, and required testing methods |
 | 4 | `test-docs/test-cases.md` | See existing TC specs for format reference |
 | 5 | `app/.../utils/TestHelper.kt` | Understand shared utilities before using them |
@@ -91,12 +91,12 @@ EOF
 
 **Commit types**: `test` (new test), `fix` (bug fix), `docs` (documentation only)
 
-### 7. Push & PR
+### 7. Push
 ```bash
 git checkout -b <your-name>/<your-module>
 git push -u origin <your-name>/<your-module>
 ```
-Then open a PR on GitHub. The PR template (`.github/pull_request_template.md`) loads automatically — fill in all sections.
+Push triggers CI. If CI passes, changes are squash-merged into main and branch is deleted.
 
 ### Red Flags
 
@@ -105,7 +105,7 @@ Then open a PR on GitHub. The PR template (`.github/pull_request_template.md`) l
 | Hard no | Changing `app/src/main/` — never modify app source code |
 | Hard no | Committing generated files (`.class`, `.dex`, build outputs) |
 | Hard no | Using `git add -A` — stage files individually |
-| Needs PR note | Modifying `build.gradle` or `libs.versions.toml` — explain why in PR description |
+| Needs note | Modifying `build.gradle` or `libs.versions.toml` — explain why in commit message |
 | Needs fix | Compilation fails — fix before committing |
 | Needs fix | Tests fail consistently — don't force-commit, investigate first |
 | Always OK | Adding test files, updating docs, adding test-only dependencies |

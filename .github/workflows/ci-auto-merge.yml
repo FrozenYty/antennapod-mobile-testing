@@ -1,4 +1,4 @@
-name: CI + Auto Merge
+name: CI + Auto Deploy
 
 on:
   push:
@@ -55,30 +55,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Auto PR and merge
+      - name: Squash and push to main
         env:
           GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
         run: |
           set -e
           BRANCH="${{ github.ref_name }}"
           TITLE=$(git log -1 --format=%s)
 
-          # Check if PR already exists for this branch
-          EXISTING=$(gh pr list --head "$BRANCH" --state open --json number -q '.[0].number' 2>/dev/null || echo "")
+          git fetch origin main
+          git checkout -B main origin/main
+          git merge --squash "$BRANCH"
+          git commit -m "$TITLE" -m "Squashed from \`$BRANCH\`. CI passed."
+          git push origin main
 
-          if [ -n "$EXISTING" ]; then
-            echo "PR #$EXISTING already exists for $BRANCH, using it."
-          else
-            echo "Creating PR for $BRANCH ..."
-            echo "Title: $TITLE"
-            gh pr create \
-              --base main \
-              --head "$BRANCH" \
-              --title "$TITLE" \
-              --body "Automated PR from \`$BRANCH\`. CI passed."
-          fi
-
-          echo "Merging into main ..."
-          gh pr merge "$BRANCH" --squash --delete-branch
-          echo "Done. Branch deleted."
+          # Clean up remote branch
+          git push origin --delete "$BRANCH" 2>/dev/null || true
+          echo "Done. Merged into main, branch deleted."

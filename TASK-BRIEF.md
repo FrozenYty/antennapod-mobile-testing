@@ -26,7 +26,7 @@ method distribution should stay consistent.
 ## Workflow
 
 ```
-Plan → Code → Compile → Run → Document → Commit → PR
+Plan → Code → Compile → Run → Document → Commit → Push
 ```
 
 ### 1. Plan
@@ -77,8 +77,7 @@ EOF
 ```bash
 git push -u origin <your-name>/<your-module>
 ```
-Push triggers CI automatically. If CI passes, PR is auto-created and squash-merged.
-Your branch is deleted. Only `main` remains.
+Push triggers CI. If CI passes, changes are squash-merged into main and branch deleted.
 
 ## Key Rules
 
