@@ -46,6 +46,39 @@ jobs:
         working-directory: app-under-test/antennapod
         run: ./gradlew :app:testPlayDebugUnitTest
 
+      - name: Check docs
+        run: |
+          TEST_DIR="app-under-test/antennapod/app/src"
+
+          echo "--- @author in test files ---"
+          MISSING=$(grep -rL "@author" "$TEST_DIR/androidTest/" "$TEST_DIR/test/" 2>/dev/null || true)
+          if [ -n "$MISSING" ]; then
+            echo "ERROR: Test files missing @author:"
+            echo "$MISSING"
+            exit 1
+          fi
+          echo "OK: all test files have @author."
+
+          echo "--- Test file naming: TC<NNN>_*Test.kt ---"
+          BAD_NAME=$(find "$TEST_DIR" -name "*.kt" ! -name "TestHelper.kt" ! -name "TC[0-9][0-9][0-9]_*Test.kt" || true)
+          if [ -n "$BAD_NAME" ]; then
+            echo "ERROR: Files not matching TC<NNN>_NameTest.kt:"
+            echo "$BAD_NAME"
+            exit 1
+          fi
+          echo "OK: all test files follow naming convention."
+
+          echo "--- No stale tc/* branch refs in docs ---"
+          STALE=$(grep -rn "tc/" --include="*.md" *.md test-docs/ test-results/ automation/ 2>/dev/null | grep -v "app-under-test" || true)
+          if [ -n "$STALE" ]; then
+            echo "ERROR: Stale 'tc/' branch references in docs:"
+            echo "$STALE"
+            exit 1
+          fi
+          echo "OK: no stale branch references."
+
+          echo "All doc checks passed."
+
   merge:
     needs: compile
     runs-on: ubuntu-latest
