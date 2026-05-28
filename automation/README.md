@@ -1,8 +1,57 @@
 # Automation
 
-Test runner and scripts for the AntennaPod Mobile Testing project.
+Test runner script and CI workflow for the AntennaPod Mobile Testing project.
 
-> **Language**: All code, comments, and documentation in **English**.
+## Quick Run
+
+```bash
+./automation/run-tests.sh                              # all instrumented tests
+./automation/run-tests.sh TC001_AppLaunchTest          # single class
+./automation/run-tests.sh "de.danoeh.antennapod.espresso.*"  # all Espresso
+```
+
+The script handles: disable animations → install app → run tests.
+
+## CI/CD (GitHub Actions)
+
+Push to any branch except `main` triggers:
+
+```
+ci-auto-merge.yml
+     │
+     ▼ compile instrumented tests
+     ▼ compile unit tests
+     ▼ run unit tests
+     ▼ create PR → squash merge → delete branch
+```
+
+No manual PR creation needed. See `CONTRIBUTING.md` for the full workflow.
+
+## Manual Commands
+
+### Compile
+```bash
+cd app-under-test/antennapod
+./gradlew :app:compilePlayDebugAndroidTestSources   # instrumented
+./gradlew :app:compilePlayDebugUnitTestSources       # unit
+```
+
+### Run Specific Test
+```bash
+./gradlew :app:connectedPlayDebugAndroidTest \
+    -Pandroid.testInstrumentationRunnerArguments.class=de.danoeh.antennapod.espresso.TC001_AppLaunchTest
+```
+
+### Run All Unit Tests
+```bash
+./gradlew :app:testPlayDebugUnitTest
+```
+
+### Pull Screenshots After Test Run
+```bash
+MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./screenshots/
+adb shell rm -rf /storage/emulated/0/Download/screenshots/
+```
 
 ## Test Source Locations
 
@@ -18,32 +67,3 @@ app-under-test/antennapod/app/src/
     ├── unit/              ← JUnit unit tests
     └── manual/            ← Manually executed test code
 ```
-
-## Running Tests
-
-### Compile
-```bash
-cd app-under-test/antennapod
-./gradlew :app:compilePlayDebugAndroidTestSources   # instrumented
-./gradlew :app:compilePlayDebugUnitTestSources       # unit
-```
-
-### Specific Instrumented Test Class
-```bash
-./gradlew :app:connectedPlayDebugAndroidTest \
-    -Pandroid.testInstrumentationRunnerArguments.class=de.danoeh.antennapod.espresso.TC001_AppLaunchTest
-```
-
-### All Unit Tests
-```bash
-./gradlew :app:testPlayDebugUnitTest
-```
-
-## Test Environment
-
-| Item | Value |
-|------|-------|
-| Build | `./gradlew :app:assemblePlayDebug :app:assemblePlayDebugAndroidTest` |
-| Test Runner | `androidx.test.runner.AndroidJUnitRunner` |
-| Min SDK | 23 |
-| Target SDK | (from app/build.gradle) |
