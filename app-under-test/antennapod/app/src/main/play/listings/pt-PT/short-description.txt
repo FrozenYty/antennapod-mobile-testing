@@ -1,0 +1,1 @@
+Gestor e leitor de podcasts simples, flexível e de código aberto
