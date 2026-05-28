@@ -197,6 +197,21 @@ test-docs/test-summary-report.md
 - **No dead code**: Remove unused imports before committing
 - **No commented-out code**: Delete it, don't comment it out
 - **Don't modify app source**: `app-under-test/antennapod/app/src/main/` is read-only. Tests only go in `androidTest/` or `test/`.
+
+## CI Checks
+
+Every push to a feature branch runs these checks before merging:
+
+| Check | What it verifies |
+|-------|-----------------|
+| Compile instrumented tests | `./gradlew :app:compilePlayDebugAndroidTestSources` |
+| Compile unit tests | `./gradlew :app:compilePlayDebugUnitTestSources` |
+| Run unit tests | `./gradlew :app:testPlayDebugUnitTest` |
+| @author tags | All `.kt` test files have `@author Your Name` in KDoc |
+| Test file naming | Files follow `TC<NNN>_ShortTitleTest.kt` (TestHelper.kt exempt) |
+| No stale references | No old `tc/` branch naming left in docs |
+
+If any check fails, the merge is blocked. Fix the issue and push again.
 - **Test dependencies OK**: Adding test-only deps to `libs.versions.toml` or `build.gradle` is allowed. Document the reason in your commit message.
 
 ## Auto Deploy (Automated)
