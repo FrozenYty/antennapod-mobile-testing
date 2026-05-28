@@ -27,6 +27,7 @@ antennapod-mobile-testing/
 ├── AI-PROMPT.md
 ├── CONTRIBUTING.md
 ├── AI-GUIDE.md
+├── PROGRESS.md
 ├── .gitignore
 ├── .gitattributes
 ├── .github/                     # CI workflow & PR template

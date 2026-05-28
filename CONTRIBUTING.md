@@ -158,6 +158,7 @@ test-docs/test-cases.md
 bug-reports/bug-XXX.md        # XXX = next available number
 
 # Update these with your results:
+PROGRESS.md
 test-results/manual-test-result.md
 test-docs/test-summary-report.md
 ```
