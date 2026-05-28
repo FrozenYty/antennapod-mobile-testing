@@ -35,12 +35,12 @@ jobs:
         working-directory: app-under-test/antennapod
         run: |
           chmod +x gradlew
-          ./gradlew :app:compileAppDebugAndroidTestSources
+          ./gradlew :app:compilePlayDebugAndroidTestSources
 
       - name: Compile unit test sources
         working-directory: app-under-test/antennapod
-        run: ./gradlew :app:compileAppDebugUnitTestSources
+        run: ./gradlew :app:compilePlayDebugUnitTestSources
 
       - name: Run unit tests
         working-directory: app-under-test/antennapod
-        run: ./gradlew :app:testAppDebugUnitTest
+        run: ./gradlew :app:testPlayDebugUnitTest
