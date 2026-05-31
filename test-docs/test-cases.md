@@ -166,8 +166,8 @@
 | TC-014 | UIAutomator | Share Feed URL to External App | Medium | Compiled | Pending device run |
 | TC-015 | UIAutomator | Feed Refresh & Pull-to-Update | Medium | Compiled | Pending device run |
 | TC-016 | Unit Test (JUnit) | Feed URL Parsing & Normalization | High | Passed | 24/24 passed |
-| TC-017 | Unit Test (JUnit) | Subscription Sort & Filter Logic | Low | — | — |
-| TC-018 | Integration (SQLite) | Feed & FeedItem DAO Query Correctness | Medium | — | — |
+| TC-017 | Unit Test (JUnit) | Subscription Sort & Filter Logic | Low | Passed | 23/23 passed |
+| TC-018 | Integration (SQLite) | Feed & FeedItem DAO Query Correctness | Medium | Compiled | Pending device run |
 | TC-019 | Performance | Feed Parsing Speed Benchmark | Medium | — | — |
 | TC-020 | Manual / Exploratory | Discovery Page Usability | Low | — | — |
 
@@ -239,3 +239,29 @@
 - SubscribeOnAndroid prefix removal
 - Case-insensitive protocol matching
 - urlEquals: same URLs, different hosts, trailing slash, case-insensitive host
+
+### TC-017: Subscription Sort & Filter Logic
+
+**File**: `unit/TC017_SortFilterLogicTest.kt`
+**Runner**: `@RunWith(RobolectricTestRunner::class)` — required because `SortOrder.fromCodeString()` and `SubscriptionsFilter` use `android.text.TextUtils`.
+
+**Tests** (23):
+- FeedOrder: fromOrdinal(id) round-trip, Java ordinal positions
+- SortOrder: scope validation (INTRA_FEED vs INTER_FEED), fromCodeString/toCodeString
+- FeedItemFilter: PLAYED matches played item, UNPLAYED matches unplayed, NEW matches new items, QUEUED matches tagged items, IS_FAVORITE matches favorited items, HAS_MEDIA matches items with media
+- SubscriptionsFilter: string constructor, isEnabled, getValues serialization
+
+### TC-018: Feed & FeedItem DAO Query Correctness
+
+**File**: `integration/TC018_FeedItemDaoTest.kt`
+**Adaptation**: Requires device/emulator for instrumented test run. Follows TC-009 pattern with PodDBAdapter.
+
+**Tests** (8):
+- `feedsTable_insertWithAllFields_shouldRetrieveCorrectly`
+- `feedsTable_updateState_shouldPersist`
+- `feedsTable_setCustomTitle_shouldPersist`
+- `feedsTable_insertMultiple_shouldHaveUniqueIds`
+- `feedItemsTable_insertMultiple_shouldBeRetrievable`
+- `feedItemsTable_queryWithSortOrder_shouldReturnOrderedResults`
+- `feedItemsTable_itemsByFeedId_shouldOnlyReturnThatFeedsItems`
+- `feedItemsTable_queueInsert_shouldCreateQueueEntry`

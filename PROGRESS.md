@@ -53,6 +53,8 @@ export ANDROID_SERIAL=127.0.0.1:7555
 - [x] TC-014 `uiautomator/TC014_ShareFeedUrlTest.kt` — compiled, pending device run
 - [x] TC-015 `uiautomator/TC015_FeedRefreshTest.kt` — compiled, pending device run
 - [x] TC-016 `unit/TC016_FeedUrlParsingTest.kt` — 24/24 passed
+- [x] TC-017 `unit/TC017_SortFilterLogicTest.kt` — 23/23 passed
+- [x] TC-018 `integration/TC018_FeedItemDaoTest.kt` — compiled, pending device run
 
 ## Files Created (this sprint)
 
@@ -124,8 +126,8 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 - [x] TC-014 Share Feed URL (UIAutomator) — compiled, pending device run
 - [x] TC-015 Feed Refresh (UIAutomator) — compiled, pending device run
 - [x] TC-016 Feed URL Parsing (Unit) — 24/24 passed
-- [ ] TC-017 Sort & Filter Logic (Unit)
-- [ ] TC-018 Feed & FeedItem DAO (Integration)
+- [x] TC-017 Sort & Filter Logic (Unit) — 23/23 passed
+- [x] TC-018 Feed & FeedItem DAO (Integration) — compiled, pending device run
 - [ ] TC-019 Feed Parsing Speed (Performance)
 - [ ] TC-020 Discovery Usability (Manual)
 
