@@ -299,6 +299,7 @@
 | TC-032 | Espresso | Storage & Network Preferences | Medium | Compiled | Pending device run |
 | TC-033 | UIAutomator | Runtime Permission Handling | High | Compiled | Pending device run |
 | TC-034 | UIAutomator | Notification Channel Settings | Medium | Compiled | Pending device run |
+| TC-035 | Unit Test (JUnit) | User Preferences Read / Write Logic | Medium | Passed | 8/8 passed |
 
 ### TC-031: Theme & Display Settings
 
@@ -338,3 +339,18 @@
 - `createChannels_shouldRegisterPlaybackAndDownloadChannels` — playback, downloading, and refresh channels are registered
 - `createChannels_shouldRegisterErrorAndNewsGroups` — error and news notification channel groups are registered
 - `appNotificationSettings_shouldOpenSystemNotificationScreen` — Android app notification settings opens through UIAutomator
+
+### TC-035: User Preferences Read / Write Logic
+
+**File**: `unit/TC035_UserPreferencesTest.kt`
+**Runner**: `@RunWith(RobolectricTestRunner::class)` — required because UserPreferences depends on Android Context, resources, and SharedPreferences.
+
+**Tests** (8):
+- `themePreference_setLightDarkSystem_shouldRoundTrip` — theme values persist and read back correctly
+- `playbackPreferences_setSpeedAndSkipSilence_shouldPersist` — playback speed and skip silence values persist
+- `feedRefreshInterval_setZero_shouldDisableAutoUpdate` — update interval zero disables auto update
+- `mobileDataPreferences_toggleFeedRefreshAndImages_shouldPersist` — mobile network toggles persist independently
+- `notificationButtons_setCustomButtons_shouldPersist` — notification button selection persists
+- `defaultPage_setQueueFragment_shouldPersist` — default page setting persists
+- `bottomNavigation_setDisabledAndEnabled_shouldPersist` — bottom navigation toggle persists
+- `proxyConfig_setHttpProxy_shouldRoundTrip` — proxy configuration persists and reads back correctly

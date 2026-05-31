@@ -148,9 +148,10 @@
 | Metric | Count |
 |--------|-------|
 | Total Test Cases | 10 |
+| Unit Tests Passed | 1 (TC-035: 8/8) |
 | Compiled | 4 (TC-031~034) |
 | Failed | 0 |
-| Pass Rate | Instrumented tests pending device run |
+| Pass Rate | 100% for executed unit tests; instrumented tests pending device run |
 
 ### Detailed Status
 
@@ -160,6 +161,7 @@
 | TC-032 | Espresso | Compiled | 4 | Pending device run |
 | TC-033 | UIAutomator | Compiled | 3 | Pending device run |
 | TC-034 | UIAutomator | Compiled | 3 | Pending device run |
+| TC-035 | Unit Test | Passed | 8 | Robolectric runner, all 8 passed |
 
 ### Key Findings
 
@@ -167,3 +169,4 @@
 - **Espresso**: TC-032 verifies Downloads settings, including data folder, feed refresh, and proxy entry points.
 - **UIAutomator**: TC-033 verifies the notification runtime permission declaration and opens Android package settings for permission management.
 - **UIAutomator**: TC-034 verifies notification channel creation and opens Android app notification settings.
+- **Unit Tests**: TC-035 validates UserPreferences read/write behavior for theme, playback, network, notification, default page, bottom navigation, and proxy settings.
