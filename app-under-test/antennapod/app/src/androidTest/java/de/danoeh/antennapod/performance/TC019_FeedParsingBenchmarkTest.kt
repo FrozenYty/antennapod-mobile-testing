@@ -28,7 +28,7 @@ import org.junit.runner.RunWith
  * @author Jianheng Sun
  */
 @RunWith(AndroidJUnit4::class)
-class TC019_FeedParsingBenchmark {
+class TC019_FeedParsingBenchmarkTest {
 
     private lateinit var adapter: PodDBAdapter
     private lateinit var context: Context

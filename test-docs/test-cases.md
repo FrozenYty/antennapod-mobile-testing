@@ -268,7 +268,7 @@
 
 ### TC-019: Feed Parsing Speed Benchmark
 
-**File**: `performance/TC019_FeedParsingBenchmark.kt`
+**File**: `performance/TC019_FeedParsingBenchmarkTest.kt`
 **Adaptation**: No benchmark library (Macrobenchmark/Microbenchmark) configured. Uses manual timing with `System.nanoTime()` and 20 iterations per test.
 
 **Tests** (3):

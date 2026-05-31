@@ -57,7 +57,7 @@ export ANDROID_SERIAL=127.0.0.1:7555
 - [x] TC-016 `unit/TC016_FeedUrlParsingTest.kt` — 24/24 passed
 - [x] TC-017 `unit/TC017_SortFilterLogicTest.kt` — 23/23 passed
 - [x] TC-018 `integration/TC018_FeedItemDaoTest.kt` — compiled, pending device run
-- [x] TC-019 `performance/TC019_FeedParsingBenchmark.kt` — compiled, pending device run
+- [x] TC-019 `performance/TC019_FeedParsingBenchmarkTest.kt` — compiled, pending device run
 - [x] TC-020 `manual/TC020_DiscoveryUsabilityTest.kt` — checklist ready
 
 ## Files Created (this sprint)
