@@ -49,6 +49,8 @@ export ANDROID_SERIAL=127.0.0.1:7555
 - [x] Docs synced, no stale refs, 9 screenshots
 - [x] TC-011 `espresso/TC011_BrowseDiscoveryTest.kt` — compiled, pending device run
 - [x] TC-012 `espresso/TC012_SubscribeDiscoveryTest.kt` — compiled, pending device run
+- [x] TC-013 `espresso/TC013_UnsubscribeDeleteTest.kt` — compiled, pending device run
+- [x] TC-014 `uiautomator/TC014_ShareFeedUrlTest.kt` — compiled, pending device run
 
 ## Files Created (this sprint)
 
@@ -116,8 +118,8 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 ### Sprint 2 Task Board
 - [x] TC-011 Browse Discovery (Espresso) — compiled, pending device run
 - [x] TC-012 Subscribe from Discovery (Espresso) — compiled, pending device run
-- [ ] TC-013 Unsubscribe & Delete (Espresso)
-- [ ] TC-014 Share Feed URL (UIAutomator)
+- [x] TC-013 Unsubscribe & Delete (Espresso) — compiled, pending device run
+- [x] TC-014 Share Feed URL (UIAutomator) — compiled, pending device run
 - [ ] TC-015 Feed Refresh (UIAutomator)
 - [ ] TC-016 Feed URL Parsing (Unit)
 - [ ] TC-017 Sort & Filter Logic (Unit)
