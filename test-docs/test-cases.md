@@ -298,6 +298,7 @@
 | TC-031 | Espresso | Theme & Display Settings | Medium | Compiled | Pending device run |
 | TC-032 | Espresso | Storage & Network Preferences | Medium | Compiled | Pending device run |
 | TC-033 | UIAutomator | Runtime Permission Handling | High | Compiled | Pending device run |
+| TC-034 | UIAutomator | Notification Channel Settings | Medium | Compiled | Pending device run |
 
 ### TC-031: Theme & Display Settings
 
@@ -328,3 +329,12 @@
 - `manifest_shouldDeclareNotificationRuntimePermission` — app manifest declares `POST_NOTIFICATIONS`
 - `systemAppInfo_shouldOpenForAntennaPodPackage` — package-specific Android Settings page opens through UIAutomator
 - `systemPermissionManagement_shouldRemainInSettingsApp` — permission management flow stays in the system Settings app
+
+### TC-034: Notification Channel Settings
+
+**File**: `uiautomator/TC034_NotificationChannelSettingsTest.kt`
+
+**Tests** (3):
+- `createChannels_shouldRegisterPlaybackAndDownloadChannels` — playback, downloading, and refresh channels are registered
+- `createChannels_shouldRegisterErrorAndNewsGroups` — error and news notification channel groups are registered
+- `appNotificationSettings_shouldOpenSystemNotificationScreen` — Android app notification settings opens through UIAutomator
