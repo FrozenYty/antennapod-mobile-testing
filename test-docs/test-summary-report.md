@@ -78,5 +78,56 @@
 
 | Role | Name | Date |
 |------|------|------|
-| Tester | Tianyu Yao | 2026-05-28 |
-| Reviewer | | |
+| Tester (Sprint 1) | Tianyu Yao | 2026-05-28 |
+| Tester (Sprint 2) | Jianheng Sun | 2026-05-31 |
+
+---
+
+## Sprint 2 — Subscription & Discovery (TC-011 ~ TC-020)
+
+| Field | Detail |
+|-------|--------|
+| **Test Cycle** | TC-011 ~ TC-020 (Subscription & Discovery) |
+| **Date** | 2026-05-31 |
+| **Tester** | Jianheng Sun |
+
+### Results Summary
+
+| Metric | Count |
+|--------|-------|
+| Total Test Cases | 10 |
+| Unit Tests Passed | 2 (TC-016: 24/24, TC-017: 23/23) |
+| Compiled (pending device) | 6 (TC-011~015, TC-018~019) |
+| Checklist Ready | 1 (TC-020) |
+| Failed | 0 |
+| Pass Rate | 100% (unit tests); instrumented tests pending device run |
+
+### Detailed Status
+
+| TC-ID | Method | Status | Tests | Notes |
+|-------|--------|--------|-------|-------|
+| TC-011 | Espresso | Compiled | 4 | Pending device run |
+| TC-012 | Espresso | Compiled | 4 | Pending device run |
+| TC-013 | Espresso | Compiled | 4 | Pending device run |
+| TC-014 | UIAutomator | Compiled | 3 | Pending device run |
+| TC-015 | UIAutomator | Compiled | 3 | Pending device run |
+| TC-016 | Unit Test | Passed | 24 | Robolectric runner, all 24 passed |
+| TC-017 | Unit Test | Passed | 23 | Robolectric runner, all 23 passed |
+| TC-018 | Integration | Compiled | 8 | Pending device run |
+| TC-019 | Performance | Compiled | 3 | Manual timing with nanoTime(), pending device run |
+| TC-020 | Manual | Ready | 20-step checklist | Awaiting manual execution |
+
+### Key Findings
+
+- **Espresso**: Three Espresso tests follow Sprint 1 patterns with ActivityTestRule for MuMu compatibility.
+- **UIAutomator**: Two UIAutomator tests verify bottom nav and drawer layout via resource IDs.
+- **Unit Tests**: TC-016 tests UrlChecker.prepareUrl() (24 tests); TC-017 tests FeedOrder, SortOrder, FeedItemFilter, SubscriptionsFilter (23 tests). Both require RobolectricTestRunner due to Android Log/TextUtils usage.
+- **Integration**: TC-018 tests Feed & FeedItem DAO with 8 tests following TC-009 pattern.
+- **Performance**: TC-019 uses System.nanoTime() with 20-iteration benchmarks. No benchmark library configured.
+- **Manual**: TC-020 provides a 20-step checklist for discovery usability testing.
+
+### Recommendations
+
+- Run instrumented tests (TC-011~015, TC-018~019) on MuMu emulator when available.
+- Execute TC-020 manual checklist and record results in manual-test-result.md.
+- All code follows Sprint 1 conventions: ActivityTestRule, PodDBAdapter singleton pattern, file naming.

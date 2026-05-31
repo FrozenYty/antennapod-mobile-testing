@@ -16,19 +16,21 @@
 
 ## Right Now
 
-Batch 1 (TC-011 + TC-012) compiled successfully. Awaiting device for instrumented test run.
+Sprint 2 coding complete. All 10 TCs written and compiled. Unit tests (TC-016 24/24, TC-017 23/23) pass. Instrumented tests (6 TCs) and manual test (1 TC) pending device run.
 
 ```
-Status: ACTIVE — Sprint 2 in progress
+Status: COMPLETE — Sprint 2 coded, awaiting device for instrumented test runs
 ```
 
 ## Next Action
 
 ```bash
-# Run instrumented tests on device when available:
+# When device is available, run all instrumented tests:
 export ANDROID_SERIAL=127.0.0.1:7555
-./gradlew :app:connectedPlayDebugAndroidTest \
-    -Pandroid.testInstrumentationRunnerArguments.class=de.danoeh.antennapod.espresso.TC011_BrowseDiscoveryTest
+# Run each instrumented TC:
+./gradlew :app:connectedPlayDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=de.danoeh.antennapod.espresso.TC011_BrowseDiscoveryTest
+# ... etc for TC-012, TC-013, TC-014, TC-015, TC-018, TC-019
+# Then execute TC-020 manual checklist and record results in manual-test-result.md
 ```
 
 ---
@@ -55,6 +57,8 @@ export ANDROID_SERIAL=127.0.0.1:7555
 - [x] TC-016 `unit/TC016_FeedUrlParsingTest.kt` — 24/24 passed
 - [x] TC-017 `unit/TC017_SortFilterLogicTest.kt` — 23/23 passed
 - [x] TC-018 `integration/TC018_FeedItemDaoTest.kt` — compiled, pending device run
+- [x] TC-019 `performance/TC019_FeedParsingBenchmark.kt` — compiled, pending device run
+- [x] TC-020 `manual/TC020_DiscoveryUsabilityTest.kt` — checklist ready
 
 ## Files Created (this sprint)
 
@@ -128,8 +132,8 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 - [x] TC-016 Feed URL Parsing (Unit) — 24/24 passed
 - [x] TC-017 Sort & Filter Logic (Unit) — 23/23 passed
 - [x] TC-018 Feed & FeedItem DAO (Integration) — compiled, pending device run
-- [ ] TC-019 Feed Parsing Speed (Performance)
-- [ ] TC-020 Discovery Usability (Manual)
+- [x] TC-019 Feed Parsing Speed (Performance) — compiled, pending device run
+- [x] TC-020 Discovery Usability (Manual) — checklist ready
 
 ### Sprint 3 Task Board
 - [ ] TC-021 Play/Pause (Espresso)

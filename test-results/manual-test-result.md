@@ -50,3 +50,53 @@
 - Feed used: `https://feeds.npr.org/500005/podcast.xml` (NPR News Now)
 - More menu popup items were successfully located via `uiautomator dump` and tapped by coordinates
 - All navigation steps, rotation, back/exit, and relaunch work correctly
+
+---
+
+## Test Session Info — Jianheng Sun (Sprint 2)
+
+| Field | Detail |
+|-------|--------|
+| **Tester** | Jianheng Sun |
+| **Date** | 2026-05-31 |
+| **Device** | To be filled after execution |
+| **Build** | app-under-test/antennapod (playDebug) |
+
+### TC-020: Discovery Page Usability
+
+| TC-ID | Step | Pass/Fail | Notes |
+|-------|------|-----------|-------|
+| TC-020 | 1. Launch app from launcher | | |
+| TC-020 | 2. Verify bottom nav items | | |
+| TC-020 | 3. Tap "Home" nav item | | |
+| TC-020 | 4. Tap "Subscriptions" nav item | | |
+| TC-020 | 5. Verify subscriptions toolbar | | |
+| TC-020 | 6. Tap "More" in bottom nav | | |
+| TC-020 | 7. Tap "Add Podcast" in More menu | | |
+| TC-020 | 8. Enter a podcast RSS URL | | |
+| TC-020 | 9. Tap search/confirm button | | |
+| TC-020 | 10. Verify feed preview is displayed | | |
+| TC-020 | 11. Tap "Subscribe" button | | |
+| TC-020 | 12. Navigate back to Subscriptions | | |
+| TC-020 | 13. Tap the subscribed feed | | |
+| TC-020 | 14. Verify episode list items | | |
+| TC-020 | 15. Tap back to return to subscriptions | | |
+| TC-020 | 16. Long-press on a feed | | |
+| TC-020 | 17. Exit multi-select mode | | |
+| TC-020 | 18. Tap "Home" from subscriptions | | |
+| TC-020 | 19. Rotate device to landscape | | |
+| TC-020 | 20. Rotate back to portrait | | |
+
+## Summary
+
+| Total | Passed | Partial | Failed |
+|-------|--------|---------|--------|
+| 20 | | | |
+
+**Pass Rate: —**
+
+## Notes
+
+- To be filled after manual test execution.
+- Recommended feed URL: `https://feeds.npr.org/500005/podcast.xml` (NPR News Now)
+- Take screenshots of critical moments and save with TC-020 prefix.

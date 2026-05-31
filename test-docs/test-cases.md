@@ -168,8 +168,8 @@
 | TC-016 | Unit Test (JUnit) | Feed URL Parsing & Normalization | High | Passed | 24/24 passed |
 | TC-017 | Unit Test (JUnit) | Subscription Sort & Filter Logic | Low | Passed | 23/23 passed |
 | TC-018 | Integration (SQLite) | Feed & FeedItem DAO Query Correctness | Medium | Compiled | Pending device run |
-| TC-019 | Performance | Feed Parsing Speed Benchmark | Medium | — | — |
-| TC-020 | Manual / Exploratory | Discovery Page Usability | Low | — | — |
+| TC-019 | Performance | Feed Parsing Speed Benchmark | Medium | Compiled | Pending device run |
+| TC-020 | Manual / Exploratory | Discovery Page Usability | Low | Ready | Checklist ready for execution |
 
 ### TC-011: Browse Discovery Page
 
@@ -265,3 +265,27 @@
 - `feedItemsTable_queryWithSortOrder_shouldReturnOrderedResults`
 - `feedItemsTable_itemsByFeedId_shouldOnlyReturnThatFeedsItems`
 - `feedItemsTable_queueInsert_shouldCreateQueueEntry`
+
+### TC-019: Feed Parsing Speed Benchmark
+
+**File**: `performance/TC019_FeedParsingBenchmark.kt`
+**Adaptation**: No benchmark library (Macrobenchmark/Microbenchmark) configured. Uses manual timing with `System.nanoTime()` and 20 iterations per test.
+
+**Tests** (3):
+- `benchmark_feedInsert_shouldBeUnder100ms` — 20 feed inserts, average time check
+- `benchmark_feedQuery_shouldBeUnder50ms` — 20 feed queries, average time check
+- `benchmark_itemInsertWithFeed_shouldBeUnder200ms` — 20 item inserts with FK, average time check
+
+### TC-020: Discovery Page Usability
+
+**File**: `manual/TC020_DiscoveryUsabilityTest.kt`
+
+20-step manual checklist covering:
+- App launch and bottom navigation
+- Subscriptions tab navigation
+- More menu → Add Feed flow
+- Podcast URL entry and subscription
+- Feed detail and episode list exploration
+- Multi-select mode activation
+- Landscape/portrait rotation
+- State preservation on navigation
