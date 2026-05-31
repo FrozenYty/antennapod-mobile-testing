@@ -80,6 +80,7 @@
 |------|------|------|
 | Tester (Sprint 1) | Tianyu Yao | 2026-05-28 |
 | Tester (Sprint 2) | Jianheng Sun | 2026-05-31 |
+| Tester (Sprint 4) | Member Four | 2026-05-31 |
 
 ---
 
@@ -131,3 +132,32 @@
 - Run instrumented tests (TC-011~015, TC-018~019) on MuMu emulator when available.
 - Execute TC-020 manual checklist and record results in manual-test-result.md.
 - All code follows Sprint 1 conventions: ActivityTestRule, PodDBAdapter singleton pattern, file naming.
+
+---
+
+## Sprint 4 — Settings & System (TC-031 ~ TC-040)
+
+| Field | Detail |
+|-------|--------|
+| **Test Cycle** | TC-031 ~ TC-040 (Settings & System) |
+| **Date** | 2026-05-31 |
+| **Tester** | Member Four |
+
+### Results Summary
+
+| Metric | Count |
+|--------|-------|
+| Total Test Cases | 10 |
+| Compiled | 1 (TC-031) |
+| Failed | 0 |
+| Pass Rate | Instrumented tests pending device run |
+
+### Detailed Status
+
+| TC-ID | Method | Status | Tests | Notes |
+|-------|--------|--------|-------|-------|
+| TC-031 | Espresso | Compiled | 4 | Pending device run |
+
+### Key Findings
+
+- **Espresso**: TC-031 verifies the settings main page and User interface theme/display controls through PreferenceActivity.

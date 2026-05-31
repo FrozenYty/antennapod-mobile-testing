@@ -289,3 +289,20 @@
 - Multi-select mode activation
 - Landscape/portrait rotation
 - State preservation on navigation
+
+---
+## Member Four — Settings & System (TC-031 ~ TC-040) In Progress
+
+| TC-ID | Method | Title | Priority | Status | Notes |
+|-------|--------|-------|----------|--------|-------|
+| TC-031 | Espresso | Theme & Display Settings | Medium | Compiled | Pending device run |
+
+### TC-031: Theme & Display Settings
+
+**File**: `espresso/TC031_ThemeDisplaySettingsTest.kt`
+
+**Tests** (4):
+- `settingsMain_shouldDisplayUserInterfaceEntry` — settings main screen shows User interface entry
+- `userInterfaceSettings_shouldDisplayThemeControls` — User interface screen shows Full black theme control
+- `userInterfaceSettings_shouldDisplayEpisodeCoverControl` — display preferences include episode cover setting
+- `userInterfaceSettings_shouldDisplayBottomNavigationControl` — behavior preferences include bottom navigation setting

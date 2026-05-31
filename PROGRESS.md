@@ -9,28 +9,25 @@
 
 | Field | Value |
 |-------|-------|
-| **Working for** | Jianheng Sun (Member 2) |
-| **Module** | Subscription & Discovery |
+| **Working for** | Member Four |
+| **Module** | Settings & System |
 | **Device** | MuMu emulator (ALN-AL00, Android 12, 127.0.0.1:7555) |
 | **Last updated** | 2026-05-31 |
 
 ## Right Now
 
-Sprint 2 coding complete. All 10 TCs written and compiled. Unit tests (TC-016 24/24, TC-017 23/23) pass. Instrumented tests (6 TCs) and manual test (1 TC) pending device run.
+Sprint 4 in progress. TC-031 has been implemented and compiled.
 
 ```
-Status: COMPLETE — Sprint 2 coded, awaiting device for instrumented test runs
+Status: IN PROGRESS — Sprint 4 TC-031 compiled
 ```
 
 ## Next Action
 
 ```bash
-# When device is available, run all instrumented tests:
-export ANDROID_SERIAL=127.0.0.1:7555
-# Run each instrumented TC:
-./gradlew :app:connectedPlayDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=de.danoeh.antennapod.espresso.TC011_BrowseDiscoveryTest
-# ... etc for TC-012, TC-013, TC-014, TC-015, TC-018, TC-019
-# Then execute TC-020 manual checklist and record results in manual-test-result.md
+# Verify TC-031:
+cd app-under-test/antennapod
+./gradlew :app:compilePlayDebugAndroidTestSources
 ```
 
 ---
@@ -148,7 +145,7 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 - [ ] TC-030 Long Playback Stability (Manual)
 
 ### Sprint 4 Task Board
-- [ ] TC-031 Theme & Display (Espresso)
+- [x] TC-031 Theme & Display (Espresso) — compiled, pending device run
 - [ ] TC-032 Storage & Network Prefs (Espresso)
 - [ ] TC-033 Permission Handling (UIAutomator)
 - [ ] TC-034 Notification Channels (UIAutomator)
