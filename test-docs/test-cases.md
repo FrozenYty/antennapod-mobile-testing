@@ -301,6 +301,7 @@
 | TC-034 | UIAutomator | Notification Channel Settings | Medium | Compiled | Pending device run |
 | TC-035 | Unit Test (JUnit) | User Preferences Read / Write Logic | Medium | Passed | 8/8 passed |
 | TC-036 | Unit Test (JUnit) | Storage Path Validation & Sanitization | Medium | Passed | 5/5 passed |
+| TC-037 | Integration (SQLite) | Data Export & Import Integrity | Medium | Compiled | Pending device run |
 
 ### TC-031: Theme & Display Settings
 
@@ -367,3 +368,14 @@
 - `getDataFolder_withNullType_shouldReturnCustomRoot` — null type returns the custom root folder
 - `getDataFolder_withMissingCustomBase_shouldFallbackToDefault` — invalid custom root falls back to default storage
 - `setDataFolder_secondWritableRoot_shouldReplacePreviousRoot` — later data folder selection replaces the previous root
+
+### TC-037: Data Export & Import Integrity
+
+**File**: `integration/TC037_DataExportImportIntegrityTest.kt`
+**Adaptation**: Full database backup import requires document URIs and app restart behavior. Tests verify OPML export/import round-trip integrity by reading feed data from PodDBAdapter through DBReader, exporting with OpmlWriter, and parsing with OpmlReader.
+
+**Tests** (4):
+- `opmlRoundTrip_subscribedFeed_shouldPreserveCoreFields` — subscribed feed title, XML URL, HTML URL, and type survive OPML round-trip
+- `opmlExport_shouldSkipUnsubscribedAndArchivedFeeds` — OPML export includes only subscribed feeds
+- `dbReaderDownloadUrls_subscribedOnly_shouldExcludeArchivedAndLocalFeeds` — subscribed-only URL export excludes archived and local-folder feeds
+- `opmlRoundTrip_multipleFeeds_shouldKeepAllSubscribedUrls` — multiple subscribed feed URLs survive export/import

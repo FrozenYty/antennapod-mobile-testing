@@ -149,7 +149,7 @@
 |--------|-------|
 | Total Test Cases | 10 |
 | Unit Tests Passed | 2 (TC-035: 8/8, TC-036: 5/5) |
-| Compiled | 4 (TC-031~034) |
+| Compiled | 5 (TC-031~034, TC-037) |
 | Failed | 0 |
 | Pass Rate | 100% for executed unit tests; instrumented tests pending device run |
 
@@ -163,6 +163,7 @@
 | TC-034 | UIAutomator | Compiled | 3 | Pending device run |
 | TC-035 | Unit Test | Passed | 8 | Robolectric runner, all 8 passed |
 | TC-036 | Unit Test | Passed | 5 | Robolectric runner, all 5 passed |
+| TC-037 | Integration | Compiled | 4 | Pending device run |
 
 ### Key Findings
 
@@ -172,3 +173,4 @@
 - **UIAutomator**: TC-034 verifies notification channel creation and opens Android app notification settings.
 - **Unit Tests**: TC-035 validates UserPreferences read/write behavior for theme, playback, network, notification, default page, bottom navigation, and proxy settings.
 - **Unit Tests**: TC-036 validates storage path selection, custom root handling, typed subfolder creation, and invalid path fallback.
+- **Integration**: TC-037 validates OPML export/import round-trip integrity using DBReader, OpmlWriter, and OpmlReader.
