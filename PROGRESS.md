@@ -16,16 +16,16 @@
 
 ## Right Now
 
-Sprint 4 in progress. TC-031 through TC-034 and TC-037 through TC-039 have been implemented and compiled. TC-035 and TC-036 passed.
+Sprint 4 complete. TC-031 through TC-034 and TC-037 through TC-039 have been implemented and compiled. TC-035 and TC-036 passed. TC-040 manual accessibility checklist is ready.
 
 ```
-Status: IN PROGRESS — Sprint 4 TC-039 compiled
+Status: READY - Sprint 4 TC-031 through TC-040 implemented
 ```
 
 ## Next Action
 
 ```bash
-# Verify TC-040:
+# Optional next action: execute TC-040 manually on a device/emulator.
 cd app-under-test/antennapod
 ./gradlew :app:compilePlayDebugUnitTestSources
 ```
@@ -56,6 +56,16 @@ cd app-under-test/antennapod
 - [x] TC-018 `integration/TC018_FeedItemDaoTest.kt` — compiled, pending device run
 - [x] TC-019 `performance/TC019_FeedParsingBenchmarkTest.kt` — compiled, pending device run
 - [x] TC-020 `manual/TC020_DiscoveryUsabilityTest.kt` — checklist ready
+- [x] TC-031 `espresso/TC031_ThemeDisplaySettingsTest.kt` - compiled, pending device run
+- [x] TC-032 `espresso/TC032_StorageNetworkPreferencesTest.kt` - compiled, pending device run
+- [x] TC-033 `uiautomator/TC033_RuntimePermissionHandlingTest.kt` - compiled, pending device run
+- [x] TC-034 `uiautomator/TC034_NotificationChannelSettingsTest.kt` - compiled, pending device run
+- [x] TC-035 `unit/TC035_UserPreferencesTest.kt` - 8/8 passed
+- [x] TC-036 `unit/TC036_StoragePathValidationTest.kt` - 5/5 passed
+- [x] TC-037 `integration/TC037_DataExportImportIntegrityTest.kt` - compiled, pending device run
+- [x] TC-038 `integration/TC038_EpisodeCacheCleanupTest.kt` - compiled, pending device run
+- [x] TC-039 `performance/TC039_StartupMemoryBenchmarkTest.kt` - compiled, pending device run
+- [x] TC-040 `manual/TC040_AccessibilityEdgeCasesTest.kt` - checklist ready
 
 ## Files Created (this sprint)
 
@@ -154,4 +164,4 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 - [x] TC-037 Data Export/Import (Integration) — compiled, pending device run
 - [x] TC-038 Episode Cache Cleanup (Integration) — compiled, pending device run
 - [x] TC-039 Startup Time & Memory (Performance) — compiled, pending device run
-- [ ] TC-040 Accessibility (Manual)
+- [x] TC-040 Accessibility (Manual) - checklist ready

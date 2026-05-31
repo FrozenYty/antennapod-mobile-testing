@@ -304,6 +304,7 @@
 | TC-037 | Integration (SQLite) | Data Export & Import Integrity | Medium | Compiled | Pending device run |
 | TC-038 | Integration (SQLite) | Episode Cache Table Cleanup | Medium | Compiled | Pending device run |
 | TC-039 | Performance | App Startup Time & Memory Footprint | High | Compiled | Pending device run |
+| TC-040 | Manual / Exploratory | Accessibility & Edge Cases | Medium | Ready | Checklist ready for execution |
 
 ### TC-031: Theme & Display Settings
 
@@ -402,3 +403,16 @@
 - `benchmark_preferencesLaunch_shouldBeUnderThreeSeconds` — PreferenceActivity launch stays under 3000 ms
 - `benchmark_repeatedMainActivityLaunch_shouldAverageUnderThreeSeconds` — repeated MainActivity launch average stays under 3000 ms
 - `memory_afterMainActivityLaunch_shouldStayBelow256Mb` — used heap after startup stays under 256 MB
+
+### TC-040: Accessibility & Edge Cases
+
+**File**: `manual/TC040_AccessibilityEdgeCasesTest.kt`
+
+20-step manual checklist covering:
+- Default and large font/display size behavior
+- Bottom navigation and settings accessibility with screen reader enabled
+- User interface and Downloads preference reachability
+- Theme contrast and full black theme visibility
+- Proxy dialog labeling and dismiss behavior
+- Portrait/landscape rotation state preservation
+- Offline/network-disabled edge-case responsiveness

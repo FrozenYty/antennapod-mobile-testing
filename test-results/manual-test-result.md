@@ -100,3 +100,53 @@
 - To be filled after manual test execution.
 - Recommended feed URL: `https://feeds.npr.org/500005/podcast.xml` (NPR News Now)
 - Take screenshots of critical moments and save with TC-020 prefix.
+
+---
+
+## Test Session Info - Member Four (Sprint 4)
+
+| Field | Detail |
+|-------|--------|
+| **Tester** | Member Four |
+| **Date** | 2026-05-31 |
+| **Device** | To be filled after execution |
+| **Build** | app-under-test/antennapod (playDebug) |
+
+### TC-040: Accessibility & Edge Cases
+
+| TC-ID | Step | Pass/Fail | Notes |
+|-------|------|-----------|-------|
+| TC-040 | 1. Launch app with default text size | | |
+| TC-040 | 2. Navigate across bottom navigation items | | |
+| TC-040 | 3. Enable screen reader and focus bottom navigation | | |
+| TC-040 | 4. Open Settings | | |
+| TC-040 | 5. Open User interface settings | | |
+| TC-040 | 6. Toggle Full black theme | | |
+| TC-040 | 7. Return to Settings and open Downloads | | |
+| TC-040 | 8. Open Proxy configuration dialog | | |
+| TC-040 | 9. Rotate to landscape on Settings screen | | |
+| TC-040 | 10. Rotate back to portrait | | |
+| TC-040 | 11. Increase system font size to maximum practical value | | |
+| TC-040 | 12. Reopen Settings with large font | | |
+| TC-040 | 13. Open User interface settings with large font | | |
+| TC-040 | 14. Navigate to Downloads with large font | | |
+| TC-040 | 15. Open More menu from bottom navigation | | |
+| TC-040 | 16. Press Back from nested settings screen | | |
+| TC-040 | 17. Press Back from main settings screen | | |
+| TC-040 | 18. Test with network disabled | | |
+| TC-040 | 19. Re-enable network and relaunch app | | |
+| TC-040 | 20. Review visual contrast in light and dark themes | | |
+
+## Summary
+
+| Total | Passed | Partial | Failed |
+|-------|--------|---------|--------|
+| 20 | | | |
+
+**Pass Rate: -**
+
+## Notes
+
+- To be filled after manual test execution.
+- Record accessibility services used, font/display size settings, and Android version.
+- Save screenshots for accessibility issues or key evidence with a TC-040 prefix.
