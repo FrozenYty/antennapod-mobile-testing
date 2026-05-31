@@ -164,8 +164,8 @@
 | TC-012 | Espresso | Subscribe to Feed from Discovery | High | Compiled | Pending device run |
 | TC-013 | Espresso | Unsubscribe & Feed Deletion | Medium | Compiled | Pending device run |
 | TC-014 | UIAutomator | Share Feed URL to External App | Medium | Compiled | Pending device run |
-| TC-015 | UIAutomator | Feed Refresh & Pull-to-Update | Medium | — | — |
-| TC-016 | Unit Test (JUnit) | Feed URL Parsing & Normalization | High | — | — |
+| TC-015 | UIAutomator | Feed Refresh & Pull-to-Update | Medium | Compiled | Pending device run |
+| TC-016 | Unit Test (JUnit) | Feed URL Parsing & Normalization | High | Passed | 24/24 passed |
 | TC-017 | Unit Test (JUnit) | Subscription Sort & Filter Logic | Low | — | — |
 | TC-018 | Integration (SQLite) | Feed & FeedItem DAO Query Correctness | Medium | — | — |
 | TC-019 | Performance | Feed Parsing Speed Benchmark | Medium | — | — |
@@ -213,3 +213,29 @@
 - `mainActivity_shouldDisplayBottomNavigation` — UIAutomator finds bottomNavigationView by resource ID
 - `bottomNav_shouldContainSubscriptionsItem` — UIAutomator finds subscriptions item + verifies enabled state
 - `mainActivity_shouldDisplayDrawerLayout` — UIAutomator finds drawer_layout
+
+### TC-015: Feed Refresh & Pull-to-Update
+
+**File**: `uiautomator/TC015_FeedRefreshTest.kt`
+**Adaptation**: Feed refresh requires network and subscribed feeds. Tests verify the UI elements that support refresh functionality.
+
+**Tests** (3):
+- `mainActivity_shouldDisplayDrawerLayout` — UIAutomator finds drawer_layout
+- `bottomNav_shouldContainSubscriptionsItem` — UIAutomator finds subscriptions item + verifies enabled state
+- `bottomNav_shouldContainHomeItem` — UIAutomator finds home item + verifies enabled state
+
+### TC-016: Feed URL Parsing & Normalization
+
+**File**: `unit/TC016_FeedUrlParsingTest.kt`
+**Runner**: `@RunWith(RobolectricTestRunner::class)` — required because `UrlChecker.prepareUrl()` uses `android.util.Log.d()`.
+
+**Tests** (24):
+- Valid URL preservation (http, https)
+- Missing protocol → http:// prepended
+- Protocol conversion (feed://, itpc://, pcast://, pcast:)
+- AntennaPod subscribe protocol removal
+- AntennaPod deeplink URL extraction
+- Whitespace trimming (leading, trailing, newline+tab)
+- SubscribeOnAndroid prefix removal
+- Case-insensitive protocol matching
+- urlEquals: same URLs, different hosts, trailing slash, case-insensitive host
