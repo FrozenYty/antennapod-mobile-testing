@@ -296,6 +296,7 @@
 | TC-ID | Method | Title | Priority | Status | Notes |
 |-------|--------|-------|----------|--------|-------|
 | TC-031 | Espresso | Theme & Display Settings | Medium | Compiled | Pending device run |
+| TC-032 | Espresso | Storage & Network Preferences | Medium | Compiled | Pending device run |
 
 ### TC-031: Theme & Display Settings
 
@@ -306,3 +307,13 @@
 - `userInterfaceSettings_shouldDisplayThemeControls` — User interface screen shows Full black theme control
 - `userInterfaceSettings_shouldDisplayEpisodeCoverControl` — display preferences include episode cover setting
 - `userInterfaceSettings_shouldDisplayBottomNavigationControl` — behavior preferences include bottom navigation setting
+
+### TC-032: Storage & Network Preferences
+
+**File**: `espresso/TC032_StorageNetworkPreferencesTest.kt`
+
+**Tests** (4):
+- `settingsMain_shouldDisplayDownloadsEntry` — settings main screen shows Downloads entry
+- `downloadsSettings_shouldDisplayDataFolderPreference` — Downloads screen shows data folder preference
+- `downloadsSettings_shouldDisplayFeedRefreshPreference` — Downloads screen shows feed refresh interval preference
+- `downloadsSettings_shouldOpenProxyDialog` — Proxy preference opens its configuration dialog

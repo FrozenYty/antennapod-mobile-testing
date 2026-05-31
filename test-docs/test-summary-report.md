@@ -148,7 +148,7 @@
 | Metric | Count |
 |--------|-------|
 | Total Test Cases | 10 |
-| Compiled | 1 (TC-031) |
+| Compiled | 2 (TC-031~032) |
 | Failed | 0 |
 | Pass Rate | Instrumented tests pending device run |
 
@@ -157,7 +157,9 @@
 | TC-ID | Method | Status | Tests | Notes |
 |-------|--------|--------|-------|-------|
 | TC-031 | Espresso | Compiled | 4 | Pending device run |
+| TC-032 | Espresso | Compiled | 4 | Pending device run |
 
 ### Key Findings
 
 - **Espresso**: TC-031 verifies the settings main page and User interface theme/display controls through PreferenceActivity.
+- **Espresso**: TC-032 verifies Downloads settings, including data folder, feed refresh, and proxy entry points.

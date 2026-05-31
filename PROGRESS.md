@@ -16,10 +16,10 @@
 
 ## Right Now
 
-Sprint 4 in progress. TC-031 has been implemented and compiled.
+Sprint 4 in progress. TC-031 and TC-032 have been implemented and compiled.
 
 ```
-Status: IN PROGRESS — Sprint 4 TC-031 compiled
+Status: IN PROGRESS — Sprint 4 TC-032 compiled
 ```
 
 ## Next Action
@@ -146,7 +146,7 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 
 ### Sprint 4 Task Board
 - [x] TC-031 Theme & Display (Espresso) — compiled, pending device run
-- [ ] TC-032 Storage & Network Prefs (Espresso)
+- [x] TC-032 Storage & Network Prefs (Espresso) — compiled, pending device run
 - [ ] TC-033 Permission Handling (UIAutomator)
 - [ ] TC-034 Notification Channels (UIAutomator)
 - [ ] TC-035 User Preferences Logic (Unit)
