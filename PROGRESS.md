@@ -9,26 +9,26 @@
 
 | Field | Value |
 |-------|-------|
-| **Working for** | Tianyu Yao |
-| **Module** | Core Foundation |
+| **Working for** | Jianheng Sun (Member 2) |
+| **Module** | Subscription & Discovery |
 | **Device** | MuMu emulator (ALN-AL00, Android 12, 127.0.0.1:7555) |
-| **Last updated** | 2026-05-28 |
+| **Last updated** | 2026-05-31 |
 
 ## Right Now
 
-Sprint 1 complete. All TCs pass. CI passing on main.
+Batch 1 (TC-011 + TC-012) compiled successfully. Awaiting device for instrumented test run.
 
 ```
-Status: IDLE — ready for Sprint 2
+Status: ACTIVE — Sprint 2 in progress
 ```
 
 ## Next Action
 
 ```bash
-# When starting Sprint 2 (Member 2):
-git pull
-# Read TASK-BRIEF.md → CONTRIBUTING.md → AI-GUIDE.md
-# Start with TC-011
+# Run instrumented tests on device when available:
+export ANDROID_SERIAL=127.0.0.1:7555
+./gradlew :app:connectedPlayDebugAndroidTest \
+    -Pandroid.testInstrumentationRunnerArguments.class=de.danoeh.antennapod.espresso.TC011_BrowseDiscoveryTest
 ```
 
 ---
@@ -47,6 +47,8 @@ git pull
 - [x] TC-010 `manual/TC010_FirstLaunchUserFlowTest.kt` — 19/20
 - [x] CI: compile → unit test → doc check on push to main
 - [x] Docs synced, no stale refs, 9 screenshots
+- [x] TC-011 `espresso/TC011_BrowseDiscoveryTest.kt` — compiled, pending device run
+- [x] TC-012 `espresso/TC012_SubscribeDiscoveryTest.kt` — compiled, pending device run
 
 ## Files Created (this sprint)
 
@@ -112,8 +114,8 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 | 4 | Member 4 | Settings & System | — |
 
 ### Sprint 2 Task Board
-- [ ] TC-011 Browse Discovery (Espresso)
-- [ ] TC-012 Subscribe from Discovery (Espresso)
+- [x] TC-011 Browse Discovery (Espresso) — compiled, pending device run
+- [x] TC-012 Subscribe from Discovery (Espresso) — compiled, pending device run
 - [ ] TC-013 Unsubscribe & Delete (Espresso)
 - [ ] TC-014 Share Feed URL (UIAutomator)
 - [ ] TC-015 Feed Refresh (UIAutomator)

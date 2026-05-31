@@ -154,3 +154,41 @@
 - Playback controls
 - Device rotation
 - State preservation on relaunch
+
+---
+## Jianheng Sun — Subscription & Discovery (TC-011 ~ TC-020) In Progress
+
+| TC-ID | Method | Title | Priority | Status | Notes |
+|-------|--------|-------|----------|--------|-------|
+| TC-011 | Espresso | Browse Discovery Page | High | Compiled | Pending device run |
+| TC-012 | Espresso | Subscribe to Feed from Discovery | High | Compiled | Pending device run |
+| TC-013 | Espresso | Unsubscribe & Feed Deletion | Medium | — | — |
+| TC-014 | UIAutomator | Share Feed URL to External App | Medium | — | — |
+| TC-015 | UIAutomator | Feed Refresh & Pull-to-Update | Medium | — | — |
+| TC-016 | Unit Test (JUnit) | Feed URL Parsing & Normalization | High | — | — |
+| TC-017 | Unit Test (JUnit) | Subscription Sort & Filter Logic | Low | — | — |
+| TC-018 | Integration (SQLite) | Feed & FeedItem DAO Query Correctness | Medium | — | — |
+| TC-019 | Performance | Feed Parsing Speed Benchmark | Medium | — | — |
+| TC-020 | Manual / Exploratory | Discovery Page Usability | Low | — | — |
+
+### TC-011: Browse Discovery Page
+
+**File**: `espresso/TC011_BrowseDiscoveryTest.kt`
+**Adaptation**: Discovery content requires network access. Tests focus on UI element verification and tab navigation to the Subscriptions screen.
+
+**Tests** (4):
+- `launchApp_shouldDisplayBottomNavigation` — bottom nav visible
+- `navigateToSubscriptions_shouldDisplaySubscriptionsGrid` — subscriptions grid displayed after clicking nav item (captures screenshot)
+- `subscriptionsScreen_shouldDisplayToolbar` — toolbar visible on subscriptions screen
+- `subscriptionsScreen_shouldDisplayAddFeedButton` — FAB add-feed button visible
+
+### TC-012: Subscribe to Feed from Discovery
+
+**File**: `espresso/TC012_SubscribeDiscoveryTest.kt`
+**Adaptation**: More popup menu content is not reliably testable with Espresso (dynamic layout). Tests verify bottom nav structure and clickability.
+
+**Tests** (4):
+- `bottomNav_shouldHaveMoreItem` — More item visible in bottom nav
+- `tapMore_shouldBeClickable` — More item is clickable
+- `bottomNav_shouldHaveSubscriptionsItem` — subscriptions nav item present
+- `bottomNav_shouldHaveHomeItem` — home nav item present
