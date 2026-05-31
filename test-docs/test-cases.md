@@ -300,6 +300,7 @@
 | TC-033 | UIAutomator | Runtime Permission Handling | High | Compiled | Pending device run |
 | TC-034 | UIAutomator | Notification Channel Settings | Medium | Compiled | Pending device run |
 | TC-035 | Unit Test (JUnit) | User Preferences Read / Write Logic | Medium | Passed | 8/8 passed |
+| TC-036 | Unit Test (JUnit) | Storage Path Validation & Sanitization | Medium | Passed | 5/5 passed |
 
 ### TC-031: Theme & Display Settings
 
@@ -354,3 +355,15 @@
 - `defaultPage_setQueueFragment_shouldPersist` — default page setting persists
 - `bottomNavigation_setDisabledAndEnabled_shouldPersist` — bottom navigation toggle persists
 - `proxyConfig_setHttpProxy_shouldRoundTrip` — proxy configuration persists and reads back correctly
+
+### TC-036: Storage Path Validation & Sanitization
+
+**File**: `unit/TC036_StoragePathValidationTest.kt`
+**Runner**: `@RunWith(RobolectricTestRunner::class)` — required because UserPreferences data folder logic depends on Android Context storage APIs.
+
+**Tests** (5):
+- `getDataFolder_withoutCustomPath_shouldReturnWritableDefaultFolder` — unset custom path returns a writable default typed folder
+- `getDataFolder_withWritableCustomRoot_shouldCreateTypedSubfolder` — writable custom root creates the requested typed subfolder
+- `getDataFolder_withNullType_shouldReturnCustomRoot` — null type returns the custom root folder
+- `getDataFolder_withMissingCustomBase_shouldFallbackToDefault` — invalid custom root falls back to default storage
+- `setDataFolder_secondWritableRoot_shouldReplacePreviousRoot` — later data folder selection replaces the previous root

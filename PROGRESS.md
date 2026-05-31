@@ -16,18 +16,18 @@
 
 ## Right Now
 
-Sprint 4 in progress. TC-031 through TC-034 have been implemented and compiled. TC-035 passed.
+Sprint 4 in progress. TC-031 through TC-034 have been implemented and compiled. TC-035 and TC-036 passed.
 
 ```
-Status: IN PROGRESS — Sprint 4 TC-035 passed
+Status: IN PROGRESS — Sprint 4 TC-036 passed
 ```
 
 ## Next Action
 
 ```bash
-# Verify TC-036:
+# Verify TC-037:
 cd app-under-test/antennapod
-./gradlew :app:compilePlayDebugUnitTestSources
+./gradlew :app:compilePlayDebugAndroidTestSources
 ```
 
 ---
@@ -150,7 +150,7 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 - [x] TC-033 Permission Handling (UIAutomator) — compiled, pending device run
 - [x] TC-034 Notification Channels (UIAutomator) — compiled, pending device run
 - [x] TC-035 User Preferences Logic (Unit) — 8/8 passed
-- [ ] TC-036 Storage Path Validation (Unit)
+- [x] TC-036 Storage Path Validation (Unit) — 5/5 passed
 - [ ] TC-037 Data Export/Import (Integration)
 - [ ] TC-038 Episode Cache Cleanup (Integration)
 - [ ] TC-039 Startup Time & Memory (Performance)
