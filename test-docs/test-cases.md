@@ -303,6 +303,7 @@
 | TC-036 | Unit Test (JUnit) | Storage Path Validation & Sanitization | Medium | Passed | 5/5 passed |
 | TC-037 | Integration (SQLite) | Data Export & Import Integrity | Medium | Compiled | Pending device run |
 | TC-038 | Integration (SQLite) | Episode Cache Table Cleanup | Medium | Compiled | Pending device run |
+| TC-039 | Performance | App Startup Time & Memory Footprint | High | Compiled | Pending device run |
 
 ### TC-031: Theme & Display Settings
 
@@ -390,3 +391,14 @@
 - `clearOldDownloadLog_shouldKeepRecentRowsOnly` — old log cleanup removes entries older than seven days while keeping recent rows
 - `clearQueue_shouldRemoveQueuedEpisodeRows` — queue cleanup removes queued episode rows
 - `removeFeedItems_shouldDeleteItemMediaAndRelatedDownloadLog` — deleting feed items removes item rows, media rows, and related media download logs
+
+### TC-039: App Startup Time & Memory Footprint
+
+**File**: `performance/TC039_StartupMemoryBenchmarkTest.kt`
+**Adaptation**: No benchmark library is configured. Uses manual `System.nanoTime()` timing and Runtime memory checks.
+
+**Tests** (4):
+- `benchmark_mainActivityLaunch_shouldBeUnderFiveSeconds` — MainActivity cold launch stays under 5000 ms
+- `benchmark_preferencesLaunch_shouldBeUnderThreeSeconds` — PreferenceActivity launch stays under 3000 ms
+- `benchmark_repeatedMainActivityLaunch_shouldAverageUnderThreeSeconds` — repeated MainActivity launch average stays under 3000 ms
+- `memory_afterMainActivityLaunch_shouldStayBelow256Mb` — used heap after startup stays under 256 MB

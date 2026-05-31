@@ -149,7 +149,7 @@
 |--------|-------|
 | Total Test Cases | 10 |
 | Unit Tests Passed | 2 (TC-035: 8/8, TC-036: 5/5) |
-| Compiled | 6 (TC-031~034, TC-037~038) |
+| Compiled | 7 (TC-031~034, TC-037~039) |
 | Failed | 0 |
 | Pass Rate | 100% for executed unit tests; instrumented tests pending device run |
 
@@ -165,6 +165,7 @@
 | TC-036 | Unit Test | Passed | 5 | Robolectric runner, all 5 passed |
 | TC-037 | Integration | Compiled | 4 | Pending device run |
 | TC-038 | Integration | Compiled | 4 | Pending device run |
+| TC-039 | Performance | Compiled | 4 | Manual timing and memory checks, pending device run |
 
 ### Key Findings
 
@@ -176,3 +177,4 @@
 - **Unit Tests**: TC-036 validates storage path selection, custom root handling, typed subfolder creation, and invalid path fallback.
 - **Integration**: TC-037 validates OPML export/import round-trip integrity using DBReader, OpmlWriter, and OpmlReader.
 - **Integration**: TC-038 validates download log cleanup, queue cleanup, and feed item/media cache metadata deletion.
+- **Performance**: TC-039 measures MainActivity and PreferenceActivity startup time plus heap usage with manual timing.
