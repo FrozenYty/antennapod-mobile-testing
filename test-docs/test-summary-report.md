@@ -148,7 +148,7 @@
 | Metric | Count |
 |--------|-------|
 | Total Test Cases | 10 |
-| Compiled | 2 (TC-031~032) |
+| Compiled | 3 (TC-031~033) |
 | Failed | 0 |
 | Pass Rate | Instrumented tests pending device run |
 
@@ -158,8 +158,10 @@
 |-------|--------|--------|-------|-------|
 | TC-031 | Espresso | Compiled | 4 | Pending device run |
 | TC-032 | Espresso | Compiled | 4 | Pending device run |
+| TC-033 | UIAutomator | Compiled | 3 | Pending device run |
 
 ### Key Findings
 
 - **Espresso**: TC-031 verifies the settings main page and User interface theme/display controls through PreferenceActivity.
 - **Espresso**: TC-032 verifies Downloads settings, including data folder, feed refresh, and proxy entry points.
+- **UIAutomator**: TC-033 verifies the notification runtime permission declaration and opens Android package settings for permission management.

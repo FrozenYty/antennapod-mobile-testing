@@ -297,6 +297,7 @@
 |-------|--------|-------|----------|--------|-------|
 | TC-031 | Espresso | Theme & Display Settings | Medium | Compiled | Pending device run |
 | TC-032 | Espresso | Storage & Network Preferences | Medium | Compiled | Pending device run |
+| TC-033 | UIAutomator | Runtime Permission Handling | High | Compiled | Pending device run |
 
 ### TC-031: Theme & Display Settings
 
@@ -317,3 +318,13 @@
 - `downloadsSettings_shouldDisplayDataFolderPreference` — Downloads screen shows data folder preference
 - `downloadsSettings_shouldDisplayFeedRefreshPreference` — Downloads screen shows feed refresh interval preference
 - `downloadsSettings_shouldOpenProxyDialog` — Proxy preference opens its configuration dialog
+
+### TC-033: Runtime Permission Handling
+
+**File**: `uiautomator/TC033_RuntimePermissionHandlingTest.kt`
+**Adaptation**: Android 12 test devices do not show the Android 13 notification runtime dialog. Tests validate the manifest declaration and the system Settings entry point used to manage runtime permissions.
+
+**Tests** (3):
+- `manifest_shouldDeclareNotificationRuntimePermission` — app manifest declares `POST_NOTIFICATIONS`
+- `systemAppInfo_shouldOpenForAntennaPodPackage` — package-specific Android Settings page opens through UIAutomator
+- `systemPermissionManagement_shouldRemainInSettingsApp` — permission management flow stays in the system Settings app
