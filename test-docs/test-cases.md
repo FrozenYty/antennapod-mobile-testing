@@ -302,6 +302,7 @@
 | TC-035 | Unit Test (JUnit) | User Preferences Read / Write Logic | Medium | Passed | 8/8 passed |
 | TC-036 | Unit Test (JUnit) | Storage Path Validation & Sanitization | Medium | Passed | 5/5 passed |
 | TC-037 | Integration (SQLite) | Data Export & Import Integrity | Medium | Compiled | Pending device run |
+| TC-038 | Integration (SQLite) | Episode Cache Table Cleanup | Medium | Compiled | Pending device run |
 
 ### TC-031: Theme & Display Settings
 
@@ -379,3 +380,13 @@
 - `opmlExport_shouldSkipUnsubscribedAndArchivedFeeds` — OPML export includes only subscribed feeds
 - `dbReaderDownloadUrls_subscribedOnly_shouldExcludeArchivedAndLocalFeeds` — subscribed-only URL export excludes archived and local-folder feeds
 - `opmlRoundTrip_multipleFeeds_shouldKeepAllSubscribedUrls` — multiple subscribed feed URLs survive export/import
+
+### TC-038: Episode Cache Table Cleanup
+
+**File**: `integration/TC038_EpisodeCacheCleanupTest.kt`
+
+**Tests** (4):
+- `clearDownloadLog_shouldRemoveAllRows` — complete download log cleanup removes all rows
+- `clearOldDownloadLog_shouldKeepRecentRowsOnly` — old log cleanup removes entries older than seven days while keeping recent rows
+- `clearQueue_shouldRemoveQueuedEpisodeRows` — queue cleanup removes queued episode rows
+- `removeFeedItems_shouldDeleteItemMediaAndRelatedDownloadLog` — deleting feed items removes item rows, media rows, and related media download logs
