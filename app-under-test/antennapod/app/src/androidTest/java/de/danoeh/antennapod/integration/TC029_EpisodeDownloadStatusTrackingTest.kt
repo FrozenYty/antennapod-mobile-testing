@@ -47,7 +47,7 @@ class TC029_EpisodeDownloadStatusTrackingTest {
             put(PodDBAdapter.KEY_SUCCESSFUL, 1)
             put(PodDBAdapter.KEY_COMPLETION_DATE, completionTime)
             put(PodDBAdapter.KEY_DOWNLOADSTATUS_TITLE, "Test Episode Download")
-            put(PodDBAdapter.KEY_MEDIAFILE_URL, "https://test.example/ep1.mp3")
+            put(PodDBAdapter.KEY_DOWNLOAD_URL, "https://test.example/ep1.mp3")
         }
         adapter.insertTestData(PodDBAdapter.TABLE_NAME_DOWNLOAD_LOG, values)
 

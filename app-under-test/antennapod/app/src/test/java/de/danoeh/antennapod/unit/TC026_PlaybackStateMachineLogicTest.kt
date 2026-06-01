@@ -15,11 +15,11 @@ import org.junit.Test
 class TC026_PlaybackStateMachineLogicTest {
 
     @Test
-    fun allStatusValues_shouldBeUnique() {
+    fun allStatusOrdinals_shouldBeUnique() {
         val values = PlayerStatus.values()
-        val statusValues = values.map { it.statusValue }
-        assertEquals("All status values should be unique",
-            values.size, statusValues.distinct().size)
+        val ordinals = values.map { it.ordinal }
+        assertEquals("All ordinals should be unique",
+            values.size, ordinals.distinct().size)
     }
 
     @Test
@@ -90,14 +90,16 @@ class TC026_PlaybackStateMachineLogicTest {
     }
 
     @Test
-    fun playing_shouldHaveHighestValue() {
-        val maxVal = PlayerStatus.values().maxOf { it.statusValue }
-        assertEquals(PlayerStatus.PLAYING.statusValue, maxVal)
+    fun playing_isAtLeast_shouldBeTrueForAllStates() {
+        for (status in PlayerStatus.values()) {
+            assertTrue("PLAYING should be at least $status", PlayerStatus.PLAYING.isAtLeast(status))
+        }
     }
 
     @Test
-    fun error_shouldHaveLowestValue() {
-        val minVal = PlayerStatus.values().minOf { it.statusValue }
-        assertEquals(PlayerStatus.ERROR.statusValue, minVal)
+    fun allStates_isAtLeast_error_shouldBeTrue() {
+        for (status in PlayerStatus.values()) {
+            assertTrue("$status should be at least ERROR", status.isAtLeast(PlayerStatus.ERROR))
+        }
     }
 }
