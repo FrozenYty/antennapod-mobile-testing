@@ -9,7 +9,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Working for** | Member 3 (Yuanbing Wang) |
+| **Working for** | Yuanbing Wang |
 | **Module** | Playback & Downloads |
 | **Device** | MuMu emulator (ALN-AL00, Android 12, 127.0.0.1:7555) |
 | **Last updated** | 2026-06-01 |
@@ -154,7 +154,7 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 |--------|--------|--------|--------|
 | 1 | Tianyu Yao | Core Foundation | Done |
 | 2 | Member 2 | Subscription & Discovery | — |
-| 3 | Member 3 (Yuanbing Wang) | Playback & Downloads | Done |
+| 3 | Yuanbing Wang | Playback & Downloads | Done |
 | 4 | Member 4 | Settings & System | — |
 
 ### Sprint 2 Task Board

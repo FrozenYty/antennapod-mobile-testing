@@ -8,7 +8,7 @@
 | Member | Module | TC Range |
 |--------|--------|-----------|
 | **Member 2** | Subscription & Discovery | TC-011 ~ TC-020 |
-| **Member 3** | Playback & Downloads | TC-021 ~ TC-030 |
+| **Yuanbing Wang** | Playback & Downloads | TC-021 ~ TC-030 |
 | **Member 4** | Settings & System | TC-031 ~ TC-040 |
 
 Full details in `test-docs/test-case-plan.md`. Your TC list is **suggested** — you can adjust
