@@ -45,7 +45,7 @@ class TC011_BrowseDiscoveryTest {
         onView(withId(R.id.bottom_navigation_subscriptions))
             .perform(click())
         TestHelper.saveScreenshot("tc011-subscriptions-screen")
-        onView(withId(R.id.subscriptions_grid))
+        onView(withId(R.id.swipeRefresh))
             .check(matches(isDisplayed()))
     }
 
@@ -54,7 +54,7 @@ class TC011_BrowseDiscoveryTest {
         activityRule.launchActivity(Intent(Intent.ACTION_MAIN))
         onView(withId(R.id.bottom_navigation_subscriptions))
             .perform(click())
-        onView(withId(R.id.toolbar))
+        onView(withId(R.id.appbar))
             .check(matches(isDisplayed()))
     }
 

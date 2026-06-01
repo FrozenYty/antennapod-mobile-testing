@@ -9,27 +9,73 @@
 
 | Field | Value |
 |-------|-------|
-| **Working for** | Yuanbing Wang |
+| **Working for** | Yuanbing Wang (Member 3) |
 | **Module** | Playback & Downloads |
 | **Device** | MuMu emulator (ALN-AL00, Android 12, 127.0.0.1:7555) |
+| **GitHub** | user: chemflowers, email: chemflowers@outlook.com |
+| **JDK** | `D:/jdk21/jdk-21.0.11` (set JAVA_HOME before running Gradle) |
+| **Git user** | name: chemflowers, email: chemflowers@outlook.com |
 | **Last updated** | 2026-06-01 |
 
 ## Right Now
 
-Sprint 3 complete. TC-021 through TC-030 have been implemented. TC-026 (11/11) and TC-027 (11/11) unit tests passed. TC-021~025, TC-028~029 compiled and pending device run. TC-030 manual checklist ready.
+Sprint 2 (Jianheng Sun): **ALL TESTS PASS — 29/29 instrumented + 47/47 unit.** Manual TC-020 executed.
+Sprint 3 (Yuanbing Wang): TC-021~030 implemented. TC-026 (11/11) and TC-027 (11/11) unit tests passed. TC-021~025, TC-028~029 compiled pending device run. TC-030 manual checklist ready.
 
 ```
-Status: READY - Sprint 3 TC-021 through TC-030 implemented
+Status: Sprint 2 DONE. Sprint 3 READY — pending device for instrumented test runs.
+```
+
+## Next Session Quick Start
+
+```bash
+# 1. Pull latest
+git pull
+
+# 2. Set env
+export JAVA_HOME="D:/jdk21/jdk-21.0.11"
+
+# 3. If Gradle won't download, switch wrapper to local file:
+# Edit gradle/wrapper/gradle-wrapper.properties:
+#   distributionUrl=file\:/D:/Downloads/gradle-8.13-bin.zip
+# (REVERT before commit!)
+
+# 4. Connect device and get serial:
+adb devices
+
+# 5. Disable animations
+adb shell settings put global window_animation_scale 0.0
+adb shell settings put global transition_animation_scale 0.0
+adb shell settings put global animator_duration_scale 0.0
+
+# 6. Run instrumented tests (replace with actual serial)
+export ANDROID_SERIAL=127.0.0.1:7555
+./gradlew :app:connectedPlayDebugAndroidTest \
+    -Pandroid.testInstrumentationRunnerArguments.class=de.danoeh.antennapod.espresso.TC021_PlayPauseControlsTest
+
+# 7. Compile before commit
+./gradlew :app:compilePlayDebugAndroidTestSources    # instrumented
+./gradlew :app:compilePlayDebugUnitTestSources        # unit
+
+# 8. Run unit tests before commit
+./gradlew :app:testPlayDebugUnitTest --tests "de.danoeh.antennapod.unit.*"
 ```
 
 ## Next Action
 
 ```bash
-# Optional next action: execute TC-030 manually on a device/emulator.
-# Compile instrumented tests:
-cd app-under-test/antennapod
-./gradlew :app:compilePlayDebugAndroidTestSources
-./gradlew :app:compilePlayDebugUnitTestSources
+# Sprint 3 instrumented tests to run (need device):
+# TC-021: de.danoeh.antennapod.espresso.TC021_PlayPauseControlsTest
+# TC-022: de.danoeh.antennapod.espresso.TC022_PlaybackSpeedAdjustmentTest
+# TC-023: de.danoeh.antennapod.espresso.TC023_DownloadEpisodeForOfflinePlaybackTest
+# TC-024: de.danoeh.antennapod.uiautomator.TC024_AudioFocusPlaybackNotificationTest
+# TC-025: de.danoeh.antennapod.uiautomator.TC025_BackgroundPlaybackContinuityTest
+# TC-028: de.danoeh.antennapod.integration.TC028_FeedMediaDaoReadWriteIntegrityTest
+# TC-029: de.danoeh.antennapod.integration.TC029_EpisodeDownloadStatusTrackingTest
+# TC-030: Manual checklist — execute and record in test-results/manual-test-result.md
+
+# Or run all instrumented tests at once:
+./gradlew :app:connectedPlayDebugAndroidTest
 ```
 
 ---
@@ -47,27 +93,17 @@ cd app-under-test/antennapod
 - [x] TC-009 `integration/TC009_PodDBAdapterSchemaTest.kt` — 8/8
 - [x] TC-010 `manual/TC010_FirstLaunchUserFlowTest.kt` — 19/20
 - [x] CI: compile → unit test → doc check on push to main
-- [x] Docs synced, no stale refs, 9 screenshots
-- [x] TC-011 `espresso/TC011_BrowseDiscoveryTest.kt` — compiled, pending device run
-- [x] TC-012 `espresso/TC012_SubscribeDiscoveryTest.kt` — compiled, pending device run
-- [x] TC-013 `espresso/TC013_UnsubscribeDeleteTest.kt` — compiled, pending device run
-- [x] TC-014 `uiautomator/TC014_ShareFeedUrlTest.kt` — compiled, pending device run
-- [x] TC-015 `uiautomator/TC015_FeedRefreshTest.kt` — compiled, pending device run
+- [x] Docs synced, no stale refs, 13 screenshots
+- [x] TC-011 `espresso/TC011_BrowseDiscoveryTest.kt` — 4/4 passed (fixed toolbar→appbar, grid→swipeRefresh)
+- [x] TC-012 `espresso/TC012_SubscribeDiscoveryTest.kt` — 4/4 passed
+- [x] TC-013 `espresso/TC013_UnsubscribeDeleteTest.kt` — 4/4 passed
+- [x] TC-014 `uiautomator/TC014_ShareFeedUrlTest.kt` — 3/3 passed
+- [x] TC-015 `uiautomator/TC015_FeedRefreshTest.kt` — 3/3 passed
 - [x] TC-016 `unit/TC016_FeedUrlParsingTest.kt` — 24/24 passed
 - [x] TC-017 `unit/TC017_SortFilterLogicTest.kt` — 23/23 passed
-- [x] TC-018 `integration/TC018_FeedItemDaoTest.kt` — compiled, pending device run
-- [x] TC-019 `performance/TC019_FeedParsingBenchmarkTest.kt` — compiled, pending device run
-- [x] TC-020 `manual/TC020_DiscoveryUsabilityTest.kt` — checklist ready
-- [x] TC-031 `espresso/TC031_ThemeDisplaySettingsTest.kt` - compiled, pending device run
-- [x] TC-032 `espresso/TC032_StorageNetworkPreferencesTest.kt` - compiled, pending device run
-- [x] TC-033 `uiautomator/TC033_RuntimePermissionHandlingTest.kt` - compiled, pending device run
-- [x] TC-034 `uiautomator/TC034_NotificationChannelSettingsTest.kt` - compiled, pending device run
-- [x] TC-035 `unit/TC035_UserPreferencesTest.kt` - 8/8 passed
-- [x] TC-036 `unit/TC036_StoragePathValidationTest.kt` - 5/5 passed
-- [x] TC-037 `integration/TC037_DataExportImportIntegrityTest.kt` - compiled, pending device run
-- [x] TC-038 `integration/TC038_EpisodeCacheCleanupTest.kt` - compiled, pending device run
-- [x] TC-039 `performance/TC039_StartupMemoryBenchmarkTest.kt` - compiled, pending device run
-- [x] TC-040 `manual/TC040_AccessibilityEdgeCasesTest.kt` - checklist ready
+- [x] TC-018 `integration/TC018_FeedItemDaoTest.kt` — 8/8 passed
+- [x] TC-019 `performance/TC019_FeedParsingBenchmarkTest.kt` — 3/3 passed
+- [x] TC-020 `manual/TC020_DiscoveryUsabilityTest.kt` — 16/16 executable pass, 4 N/A, 4 screenshots
 - [x] TC-021 `espresso/TC021_PlayPauseControlsTest.kt` - compiled, pending device run
 - [x] TC-022 `espresso/TC022_PlaybackSpeedAdjustmentTest.kt` - compiled, pending device run
 - [x] TC-023 `espresso/TC023_DownloadEpisodeForOfflinePlaybackTest.kt` - compiled, pending device run
@@ -78,11 +114,22 @@ cd app-under-test/antennapod
 - [x] TC-028 `integration/TC028_FeedMediaDaoReadWriteIntegrityTest.kt` - compiled, pending device run
 - [x] TC-029 `integration/TC029_EpisodeDownloadStatusTrackingTest.kt` - compiled, pending device run
 - [x] TC-030 `manual/TC030_LongPlaybackStabilityTest.kt` - checklist ready
+- [x] TC-031 `espresso/TC031_ThemeDisplaySettingsTest.kt` - compiled, pending device run
+- [x] TC-032 `espresso/TC032_StorageNetworkPreferencesTest.kt` - compiled, pending device run
+- [x] TC-033 `uiautomator/TC033_RuntimePermissionHandlingTest.kt` - compiled, pending device run
+- [x] TC-034 `uiautomator/TC034_NotificationChannelSettingsTest.kt` - compiled, pending device run
+- [x] TC-035 `unit/TC035_UserPreferencesTest.kt` - 8/8 passed
+- [x] TC-036 `unit/TC036_StoragePathValidationTest.kt` - 5/5 passed
+- [x] TC-037 `integration/TC037_DataExportImportIntegrityTest.kt` - compiled, pending device run
+- [x] TC-038 `integration/TC038_EpisodeCacheCleanupTest.kt` - compiled, pending device run
+- [x] TC-039 `performance/TC039_StartupMemoryBenchmarkTest.kt` - compiled, pending device run
+- [x] TC-040 `manual/TC040_AccessibilityEdgeCasesTest.kt` - checklist ready
 
-## Files Created (Sprint 3)
+## Files Created
 
+### Sprint 1 (Tianyu Yao)
 ```
-TestHelper.kt
+utils/TestHelper.kt
 espresso/TC001_AppLaunchTest.kt
 espresso/TC002_SubscribePodcastTest.kt
 espresso/TC003_PlayEpisodeTest.kt
@@ -95,8 +142,21 @@ integration/TC009_PodDBAdapterSchemaTest.kt
 manual/TC010_FirstLaunchUserFlowTest.kt
 ```
 
-## Files Created (Sprint 3)
+### Sprint 2 (Jianheng Sun)
+```
+espresso/TC011_BrowseDiscoveryTest.kt
+espresso/TC012_SubscribeDiscoveryTest.kt
+espresso/TC013_UnsubscribeDeleteTest.kt
+uiautomator/TC014_ShareFeedUrlTest.kt
+uiautomator/TC015_FeedRefreshTest.kt
+unit/TC016_FeedUrlParsingTest.kt
+unit/TC017_SortFilterLogicTest.kt
+integration/TC018_FeedItemDaoTest.kt
+performance/TC019_FeedParsingBenchmarkTest.kt
+manual/TC020_DiscoveryUsabilityTest.kt
+```
 
+### Sprint 3 (Yuanbing Wang)
 ```
 espresso/TC021_PlayPauseControlsTest.kt
 espresso/TC022_PlaybackSpeedAdjustmentTest.kt
@@ -108,6 +168,20 @@ unit/TC027_DownloadQueuePriorityLogicTest.kt
 integration/TC028_FeedMediaDaoReadWriteIntegrityTest.kt
 integration/TC029_EpisodeDownloadStatusTrackingTest.kt
 manual/TC030_LongPlaybackStabilityTest.kt
+```
+
+### Sprint 4 (Member 4)
+```
+espresso/TC031_ThemeDisplaySettingsTest.kt
+espresso/TC032_StorageNetworkPreferencesTest.kt
+uiautomator/TC033_RuntimePermissionHandlingTest.kt
+uiautomator/TC034_NotificationChannelSettingsTest.kt
+unit/TC035_UserPreferencesTest.kt
+unit/TC036_StoragePathValidationTest.kt
+integration/TC037_DataExportImportIntegrityTest.kt
+integration/TC038_EpisodeCacheCleanupTest.kt
+performance/TC039_StartupMemoryBenchmarkTest.kt
+manual/TC040_AccessibilityEdgeCasesTest.kt
 ```
 
 ## Blockers & Decisions
@@ -124,6 +198,16 @@ manual/TC030_LongPlaybackStabilityTest.kt
 | 05-28 | `PodDBAdapter(context)` constructor doesn't exist → use `init(context)` + `getInstance()` |
 | 05-28 | `SortOrder` is enum, not constructable → use `SortOrder.DATE_NEW_OLD` |
 | 05-28 | Feed cursor column is `feed_id` (SELECT_KEY_FEED_ID), not `id` (KEY_ID) |
+| 05-31 | `UrlChecker` uses `android.util.Log.d()` → unit test needs `@RunWith(RobolectricTestRunner::class)` |
+| 05-31 | `SortOrder.fromCodeString()` and `SubscriptionsFilter` use `TextUtils` → unit test needs Robolectric |
+| 05-31 | `FeedOrder.fromOrdinal(id)` uses `id` field, not Java `ordinal()` — values are non-sequential |
+| 05-31 | CI naming check requires `TC<NNN>_*Test.kt` — missing `Test` suffix causes CI failure |
+| 05-31 | CI Gradle download timeout 10s too short → increased to 120s in gradle-wrapper.properties |
+| 05-31 | Local network can't reach services.gradle.org → use `file\:/D:/Downloads/gradle-8.13-bin.zip` locally, REVERT before commit |
+| 05-31 | JDK 21 required, available at `D:/jdk21/jdk-21.0.11` — `export JAVA_HOME` before running Gradle |
+| 05-31 | GitHub push: `git config user.name "chemflowers"`, `git config user.email "chemflowers@outlook.com"` |
+| 06-01 | TC-011/013: `R.id.toolbar` ambiguous (2 toolbars in hierarchy) → use `R.id.appbar` (unique to subscriptions fragment) |
+| 06-01 | TC-011/013: `subscriptions_grid` has empty globalVisibleRect when no feeds → use `R.id.swipeRefresh` instead |
 
 ## Command Cheatsheet
 
@@ -153,42 +237,42 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 | Sprint | Member | Module | Status |
 |--------|--------|--------|--------|
 | 1 | Tianyu Yao | Core Foundation | Done |
-| 2 | Member 2 | Subscription & Discovery | — |
-| 3 | Yuanbing Wang | Playback & Downloads | Done |
-| 4 | Member 4 | Settings & System | — |
+| 2 | Jianheng Sun | Subscription & Discovery | Done — 29/29 instrumented + 47/47 unit + manual executed |
+| 3 | Yuanbing Wang | Playback & Downloads | Coded, pending device run |
+| 4 | Member 4 | Settings & System | Coded, pending device run |
 
 ### Sprint 2 Task Board
-- [x] TC-011 Browse Discovery (Espresso) — compiled, pending device run
-- [x] TC-012 Subscribe from Discovery (Espresso) — compiled, pending device run
-- [x] TC-013 Unsubscribe & Delete (Espresso) — compiled, pending device run
-- [x] TC-014 Share Feed URL (UIAutomator) — compiled, pending device run
-- [x] TC-015 Feed Refresh (UIAutomator) — compiled, pending device run
+- [x] TC-011 Browse Discovery (Espresso) — 4/4 passed (fixed toolbar→appbar, grid→swipeRefresh)
+- [x] TC-012 Subscribe from Discovery (Espresso) — 4/4 passed
+- [x] TC-013 Unsubscribe & Delete (Espresso) — 4/4 passed
+- [x] TC-014 Share Feed URL (UIAutomator) — 3/3 passed
+- [x] TC-015 Feed Refresh (UIAutomator) — 3/3 passed
 - [x] TC-016 Feed URL Parsing (Unit) — 24/24 passed
 - [x] TC-017 Sort & Filter Logic (Unit) — 23/23 passed
-- [x] TC-018 Feed & FeedItem DAO (Integration) — compiled, pending device run
-- [x] TC-019 Feed Parsing Speed (Performance) — compiled, pending device run
-- [x] TC-020 Discovery Usability (Manual) — checklist ready
+- [x] TC-018 Feed & FeedItem DAO (Integration) — 8/8 passed
+- [x] TC-019 Feed Parsing Speed (Performance) — 3/3 passed (insert <100ms, query <50ms)
+- [x] TC-020 Discovery Usability (Manual) — 16/16 executable steps pass, 4 N/A, 4 screenshots
 
 ### Sprint 3 Task Board
-- [x] TC-021 Play/Pause (Espresso) — compiled, pending device run
-- [x] TC-022 Playback Speed (Espresso) — compiled, pending device run
-- [x] TC-023 Download Episode (Espresso) — compiled, pending device run
-- [x] TC-024 Audio Focus (UIAutomator) — compiled, pending device run
-- [x] TC-025 Background Playback (UIAutomator) — compiled, pending device run
+- [ ] TC-021 Play/Pause (Espresso) — compiled, pending device run
+- [ ] TC-022 Playback Speed (Espresso) — compiled, pending device run
+- [ ] TC-023 Download Episode (Espresso) — compiled, pending device run
+- [ ] TC-024 Audio Focus (UIAutomator) — compiled, pending device run
+- [ ] TC-025 Background Playback (UIAutomator) — compiled, pending device run
 - [x] TC-026 Playback State Machine (Unit) — 11/11 passed
 - [x] TC-027 Download Queue Priority (Unit) — 11/11 passed
-- [x] TC-028 FeedMedia DAO (Integration) — compiled, pending device run
-- [x] TC-029 Download Status Tracking (Integration) — compiled, pending device run
-- [x] TC-030 Long Playback Stability (Manual) — checklist ready
+- [ ] TC-028 FeedMedia DAO (Integration) — compiled, pending device run
+- [ ] TC-029 Download Status Tracking (Integration) — compiled, pending device run
+- [ ] TC-030 Long Playback Stability (Manual) — checklist ready
 
 ### Sprint 4 Task Board
-- [x] TC-031 Theme & Display (Espresso) — compiled, pending device run
-- [x] TC-032 Storage & Network Prefs (Espresso) — compiled, pending device run
-- [x] TC-033 Permission Handling (UIAutomator) — compiled, pending device run
-- [x] TC-034 Notification Channels (UIAutomator) — compiled, pending device run
+- [ ] TC-031 Theme & Display (Espresso) — compiled, pending device run
+- [ ] TC-032 Storage & Network Prefs (Espresso) — compiled, pending device run
+- [ ] TC-033 Permission Handling (UIAutomator) — compiled, pending device run
+- [ ] TC-034 Notification Channels (UIAutomator) — compiled, pending device run
 - [x] TC-035 User Preferences Logic (Unit) — 8/8 passed
 - [x] TC-036 Storage Path Validation (Unit) — 5/5 passed
-- [x] TC-037 Data Export/Import (Integration) — compiled, pending device run
-- [x] TC-038 Episode Cache Cleanup (Integration) — compiled, pending device run
-- [x] TC-039 Startup Time & Memory (Performance) — compiled, pending device run
-- [x] TC-040 Accessibility (Manual) - checklist ready
+- [ ] TC-037 Data Export/Import (Integration) — compiled, pending device run
+- [ ] TC-038 Episode Cache Cleanup (Integration) — compiled, pending device run
+- [ ] TC-039 Startup Time & Memory (Performance) — compiled, pending device run
+- [ ] TC-040 Accessibility (Manual) — checklist ready

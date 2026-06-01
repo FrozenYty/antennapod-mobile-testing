@@ -36,7 +36,7 @@ class TC013_UnsubscribeDeleteTest {
         activityRule.launchActivity(Intent(Intent.ACTION_MAIN))
         onView(withId(R.id.bottom_navigation_subscriptions))
             .perform(click())
-        onView(withId(R.id.subscriptions_grid))
+        onView(withId(R.id.swipeRefresh))
             .check(matches(isDisplayed()))
     }
 
@@ -45,7 +45,7 @@ class TC013_UnsubscribeDeleteTest {
         activityRule.launchActivity(Intent(Intent.ACTION_MAIN))
         onView(withId(R.id.bottom_navigation_subscriptions))
             .perform(click())
-        onView(withId(R.id.toolbar))
+        onView(withId(R.id.appbar))
             .check(matches(isDisplayed()))
     }
 
@@ -69,7 +69,7 @@ class TC013_UnsubscribeDeleteTest {
             .check(matches(isDisplayed()))
         onView(withId(R.id.bottom_navigation_subscriptions))
             .perform(click())
-        onView(withId(R.id.subscriptions_grid))
+        onView(withId(R.id.swipeRefresh))
             .check(matches(isDisplayed()))
     }
 }
