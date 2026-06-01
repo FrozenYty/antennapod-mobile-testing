@@ -103,6 +103,59 @@
 
 ---
 
+## Test Session Info — Yuanbing Wang (Sprint 3)
+
+| Field | Detail |
+|-------|--------|
+| **Tester** | Yuanbing Wang |
+| **Date** | 2026-06-01 |
+| **Device** | To be filled after execution |
+| **Build** | app-under-test/antennapod (playDebug) |
+
+### TC-030: Long Playback Stability
+
+| TC-ID | Step | Pass/Fail | Notes |
+|-------|------|-----------|-------|
+| TC-030 | 1. Navigate to a downloaded episode | | |
+| TC-030 | 2. Tap "Play" to start playback | | |
+| TC-030 | 3. Let playback run for 5+ minutes | | |
+| TC-030 | 4. Open full player via mini-player tap | | |
+| TC-030 | 5. Seek forward to ~50% | | |
+| TC-030 | 6. Seek backward via skip-back button | | |
+| TC-030 | 7. Press Home (background the app) | | |
+| TC-030 | 8. Pause via notification controls | | |
+| TC-030 | 9. Resume via notification controls | | |
+| TC-030 | 10. Return to app via notification tap | | |
+| TC-030 | 11. Change playback speed to 1.5x | | |
+| TC-030 | 12. Change playback speed back to 1.0x | | |
+| TC-030 | 13. Plug in wired headphones | | |
+| TC-030 | 14. Unplug headphones | | |
+| TC-030 | 15. Connect Bluetooth audio device | | |
+| TC-030 | 16. Disconnect Bluetooth device | | |
+| TC-030 | 17. Set sleep timer | | |
+| TC-030 | 18. Simulate incoming phone call | | |
+| TC-030 | 19. Lock screen during playback | | |
+| TC-030 | 20. Unlock and verify position after 10+ min | | |
+
+## Summary
+
+| Total | Passed | Partial | Failed |
+|-------|--------|---------|--------|
+| 20 | | | |
+
+**Pass Rate: —**
+
+## Notes
+
+- To be filled after manual test execution.
+- Use a downloaded episode (not streaming) for consistent results.
+- For Bluetooth tests (steps 15-16), ensure a Bluetooth audio device is paired.
+- For call simulation (step 18), use `adb shell am start -a android.intent.action.CALL -d tel:1234567890` or MuMu's phone call simulation.
+- Monitor logcat: `adb logcat -d | grep -E "PlaybackService|MediaPlayer|AudioTrack" | tail -30`
+- Take screenshots of critical moments and save with TC-030 prefix.
+
+---
+
 ## Test Session Info - Member Four (Sprint 4)
 
 | Field | Detail |

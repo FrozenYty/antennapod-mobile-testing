@@ -80,6 +80,7 @@
 |------|------|------|
 | Tester (Sprint 1) | Tianyu Yao | 2026-05-28 |
 | Tester (Sprint 2) | Jianheng Sun | 2026-05-31 |
+| Tester (Sprint 3) | Yuanbing Wang | 2026-06-01 |
 | Tester (Sprint 4) | Member Four | 2026-05-31 |
 
 ---
@@ -132,6 +133,56 @@
 - Run instrumented tests (TC-011~015, TC-018~019) on MuMu emulator when available.
 - Execute TC-020 manual checklist and record results in manual-test-result.md.
 - All code follows Sprint 1 conventions: ActivityTestRule, PodDBAdapter singleton pattern, file naming.
+
+---
+
+## Sprint 3 — Playback & Downloads (TC-021 ~ TC-030)
+
+| Field | Detail |
+|-------|--------|
+| **Test Cycle** | TC-021 ~ TC-030 (Playback & Downloads) |
+| **Date** | 2026-06-01 |
+| **Tester** | Yuanbing Wang |
+
+### Results Summary
+
+| Metric | Count |
+|--------|-------|
+| Total Test Cases | 10 |
+| Unit Tests Passed | 2 (TC-026: 11/11, TC-027: 11/11) |
+| Compiled (pending device) | 7 (TC-021~025, TC-028~029) |
+| Checklist Ready | 1 (TC-030) |
+| Failed | 0 |
+| Pass Rate | 100% (unit tests); instrumented tests pending device run |
+
+### Detailed Status
+
+| TC-ID | Method | Status | Tests | Notes |
+|-------|--------|--------|-------|-------|
+| TC-021 | Espresso | Compiled | 4 | Pending device run |
+| TC-022 | Espresso | Compiled | 4 | Pending device run |
+| TC-023 | Espresso | Compiled | 4 | Pending device run |
+| TC-024 | UIAutomator | Compiled | 3 | Pending device run |
+| TC-025 | UIAutomator | Compiled | 3 | Pending device run |
+| TC-026 | Unit Test | Passed | 11 | Pure JUnit, all 11 passed |
+| TC-027 | Unit Test | Passed | 11 | Pure JUnit, all 11 passed |
+| TC-028 | Integration | Compiled | 6 | Pending device run |
+| TC-029 | Integration | Compiled | 7 | Pending device run |
+| TC-030 | Manual | Ready | 20-step checklist | Awaiting manual execution |
+
+### Key Findings
+
+- **Espresso**: Three Espresso tests (TC-021~023) verify bottom navigation structure and tab accessibility. Adapted to verify UI structure since playback requires media content.
+- **UIAutomator**: Two UIAutomator tests (TC-024~025) verify bottom navigation items and Home button behavior. TC-025 validates background/foreground lifecycle by pressing Home and detecting the launcher.
+- **Unit Tests**: TC-026 validates PlayerStatus enum — isAtLeast() hierarchy, valueOf() round-trips, 10 states, PLAYING=highest, ERROR=lowest. TC-027 validates FeedMedia model — download state transitions, local file availability, equals/hashCode, duration/size, MIME type parsing, position tracking. Both pure JUnit, no Android dependency.
+- **Integration**: TC-028 (6 tests) validates FeedMedia CRUD via PodDBAdapter with Feeds→FeedItems→FeedMedia hierarchy. TC-029 (7 tests) validates download log entries, queue+media references, file URL persistence, and clear operations. Both follow TC-009 ContentValues + insertTestData() pattern.
+- **Manual**: TC-030 provides a 20-step checklist for long playback stability covering extended playback, seeking, background/notification controls, speed changes, headphone/Bluetooth peripheral events, sleep timer, call interruption, and screen lock.
+
+### Recommendations
+
+- Run instrumented tests (TC-021~025, TC-028~029) on MuMu emulator when available.
+- Execute TC-030 manual checklist and record results in manual-test-result.md.
+- All code follows Sprint 1 conventions: ActivityTestRule for instrumented tests, PodDBAdapter singleton pattern for integration tests, file naming convention.
 
 ---
 

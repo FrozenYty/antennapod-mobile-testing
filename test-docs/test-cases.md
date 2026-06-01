@@ -291,6 +291,154 @@
 - State preservation on navigation
 
 ---
+## Yuanbing Wang — Playback & Downloads (TC-021 ~ TC-030)
+
+| TC-ID | Method | Title | Priority | Status | Notes |
+|-------|--------|-------|----------|--------|-------|
+| TC-021 | Espresso | Play / Pause Controls | High | Compiled | Pending device run |
+| TC-022 | Espresso | Playback Speed Adjustment | Medium | Compiled | Pending device run |
+| TC-023 | Espresso | Download Episode for Offline Playback | High | Compiled | Pending device run |
+| TC-024 | UIAutomator | Audio Focus & Playback Notification | High | Compiled | Pending device run |
+| TC-025 | UIAutomator | Background Playback Continuity | Medium | Compiled | Pending device run |
+| TC-026 | Unit Test (JUnit) | Playback State Machine Logic | High | Passed | 11/11 passed |
+| TC-027 | Unit Test (JUnit) | Download Queue Priority Logic | Medium | Passed | 11/11 passed |
+| TC-028 | Integration (SQLite) | FeedMedia DAO Read / Write Integrity | Medium | Compiled | Pending device run |
+| TC-029 | Integration (SQLite) | Episode Download Status Tracking | Medium | Compiled | Pending device run |
+| TC-030 | Manual / Exploratory | Long Playback Stability | Medium | Ready | Checklist ready for execution |
+
+### TC-021: Play / Pause Controls
+
+**File**: `espresso/TC021_PlayPauseControlsTest.kt`
+**Adaptation**: Playback controls require active media content. Tests verify bottom navigation structure and queue/episodes tab accessibility.
+
+**Tests** (4):
+- `launchApp_shouldDisplayBottomNavigation` — bottom nav visible
+- `bottomNav_shouldHaveQueueItem` — queue nav item present
+- `bottomNav_shouldHaveEpisodesItem` — episodes nav item present
+- `navigateToQueue_shouldDisplayQueueScreen` — queue screen accessible
+
+### TC-022: Playback Speed Adjustment
+
+**File**: `espresso/TC022_PlaybackSpeedAdjustmentTest.kt`
+**Adaptation**: Speed adjustment requires an actively playing episode. Tests verify bottom nav presence and tab navigation.
+
+**Tests** (4):
+- `launchApp_shouldDisplayBottomNavigation` — bottom nav visible
+- `bottomNav_shouldHaveHomeItem` — home nav item present
+- `navigateToQueue_shouldDisplayContentArea` — queue screen accessible
+- `navigateBetweenQueueAndHome_shouldWork` — tab switching works
+
+### TC-023: Download Episode for Offline Playback
+
+**File**: `espresso/TC023_DownloadEpisodeForOfflinePlaybackTest.kt`
+**Adaptation**: Download requires network and subscribed feeds. Tests verify episodes and inbox tab accessibility.
+
+**Tests** (4):
+- `launchApp_shouldDisplayBottomNavigation` — bottom nav visible
+- `bottomNav_shouldHaveEpisodesItem` — episodes nav item present
+- `navigateToEpisodes_shouldDisplayContent` — episodes screen accessible
+- `bottomNav_shouldHaveInboxItem` — inbox nav item present
+
+### TC-024: Audio Focus & Playback Notification
+
+**File**: `uiautomator/TC024_AudioFocusPlaybackNotificationTest.kt`
+**Adaptation**: Audio focus testing requires multiple audio apps. Tests use UIAutomator to verify bottom nav and queue/episodes items.
+
+**Tests** (3):
+- `mainActivity_shouldDisplayBottomNavigation` — UIAutomator finds bottomNavigationView
+- `bottomNav_shouldContainQueueItem` — queue item found + enabled
+- `bottomNav_shouldContainEpisodesItem` — episodes item found + enabled
+
+### TC-025: Background Playback Continuity
+
+**File**: `uiautomator/TC025_BackgroundPlaybackContinuityTest.kt`
+**Adaptation**: Actual playback continuity requires active media content. Tests validate app background/foreground lifecycle: Home button press returns to launcher, bottom nav items verified via UIAutomator.
+
+**Tests** (3):
+- `mainActivity_shouldDisplayBottomNavigation` — UIAutomator finds bottomNavigationView
+- `pressHome_shouldReturnToLauncher` — Home button → launcher visible
+- `bottomNav_shouldContainHomeItem` — home item found + enabled
+
+### TC-026: Playback State Machine Logic
+
+**File**: `unit/TC026_PlaybackStateMachineLogicTest.kt`
+**Runner**: Pure JUnit (no Android dependency).
+
+**Tests** (11):
+- `allStatusValues_shouldBeUnique` — statusValue uniqueness
+- `playing_isAtLeast_shouldBeTrueForAllLowerStates` — PLAYING >= all others
+- `stopped_isAtLeast_shouldBeTrueForStoppedAndBelow` — STOPPED hierarchy
+- `paused_isAtLeast_shouldBeTrueForPausedAndBelow` — PAUSED hierarchy
+- `initialized_isAtLeast_shouldBeAboveErrorAndIndeterminate` — INITIALIZED hierarchy
+- `error_isAtLeast_shouldOnlySupersedeIndeterminate` — ERROR hierarchy
+- `isAtLeast_withNull_shouldReturnTrue` — null safety
+- `valueOf_shouldRoundTrip` — name/valueOf round-trip
+- `playerStatus_shouldHaveTenStates` — 10 states total
+- `playing_shouldHaveHighestValue` — PLAYING = max value
+- `error_shouldHaveLowestValue` — ERROR = min value
+
+### TC-027: Download Queue Priority Logic
+
+**File**: `unit/TC027_DownloadQueuePriorityLogicTest.kt`
+**Runner**: Pure JUnit (no Android dependency).
+
+**Tests** (11):
+- `newlyCreatedMedia_shouldNotBeDownloaded` — default state
+- `setDownloaded_shouldMarkAsDownloadedWithTimestamp` — download flag
+- `setDownloadedFalse_shouldClearDownloadStatus` — download clear
+- `mediaWithLocalFile_shouldBeAvailableOffline` — local availability
+- `mediaWithoutLocalFile_shouldNotBeAvailableOffline` — no local file
+- `setLocalFileUrlNull_shouldClearDownloadDate` — URL clear resets date
+- `feedMedia_differentIds_shouldNotBeEqual` — inequality
+- `feedMedia_sameId_shouldBeEqual` — equality
+- `durationAndSize_shouldBeSettable` — property setters
+- `mediaType_shouldBeParsedFromMimeType` — MIME type parsing
+- `position_shouldTrackPlaybackProgress` — position tracking
+
+### TC-028: FeedMedia DAO Read / Write Integrity
+
+**File**: `integration/TC028_FeedMediaDaoReadWriteIntegrityTest.kt`
+**Pattern**: Follows TC-009 — PodDBAdapter singleton, ContentValues, insertTestData().
+
+**Tests** (6):
+- `feedMediaTable_insertBasic_shouldGenerateId` — basic insert
+- `feedMediaTable_insertWithAllFields_shouldRetrieveCorrectly` — full fields
+- `feedMediaTable_multipleInsert_shouldHaveUniqueIds` — unique IDs
+- `feedMedia_shouldBeLinkedToFeedItem` — FK relationship
+- `feedMedia_withDownloadLog_shouldTrackCompletion` — download log
+- `feedMedia_playbackPosition_shouldBeStorageInMediaTable` — position storage
+
+### TC-029: Episode Download Status Tracking
+
+**File**: `integration/TC029_EpisodeDownloadStatusTrackingTest.kt`
+**Pattern**: Follows TC-009 — PodDBAdapter singleton, ContentValues, insertTestData().
+
+**Tests** (7):
+- `downloadLog_insertSuccessful_shouldPersist` — successful download log
+- `downloadLog_insertFailed_shouldPersist` — failed download log
+- `downloadLog_multipleEntries_shouldBeInOrder` — ordered entries
+- `queueEntry_withFeedMedia_shouldIncludeMediaReference` — queue + media
+- `feedMedia_withLocalFileUrl_shouldPersistInDatabase` — file URL persistence
+- `clearDownloadLog_shouldRemoveAllEntries` — clear log
+- `clearQueue_shouldRemoveQueuedEntries` — clear queue
+
+### TC-030: Long Playback Stability
+
+**File**: `manual/TC030_LongPlaybackStabilityTest.kt`
+
+20-step manual checklist covering:
+- Extended playback duration (5+ minutes)
+- Seek forward/backward within episode
+- Background playback with notification controls
+- Playback speed changes (1.0x ↔ 1.5x)
+- Wired headphone plug/unplug during playback
+- Bluetooth audio connection/disconnection
+- Sleep timer activation
+- Phone call interruption and resumption
+- Screen lock/unlock during playback
+- Position preservation after extended session
+
+---
 ## Member Four — Settings & System (TC-031 ~ TC-040) In Progress
 
 | TC-ID | Method | Title | Priority | Status | Notes |

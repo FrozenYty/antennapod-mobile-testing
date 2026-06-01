@@ -9,24 +9,26 @@
 
 | Field | Value |
 |-------|-------|
-| **Working for** | Member Four |
-| **Module** | Settings & System |
+| **Working for** | Member 3 (Yuanbing Wang) |
+| **Module** | Playback & Downloads |
 | **Device** | MuMu emulator (ALN-AL00, Android 12, 127.0.0.1:7555) |
-| **Last updated** | 2026-05-31 |
+| **Last updated** | 2026-06-01 |
 
 ## Right Now
 
-Sprint 4 complete. TC-031 through TC-034 and TC-037 through TC-039 have been implemented and compiled. TC-035 and TC-036 passed. TC-040 manual accessibility checklist is ready.
+Sprint 3 complete. TC-021 through TC-030 have been implemented. TC-026 (11/11) and TC-027 (11/11) unit tests passed. TC-021~025, TC-028~029 compiled and pending device run. TC-030 manual checklist ready.
 
 ```
-Status: READY - Sprint 4 TC-031 through TC-040 implemented
+Status: READY - Sprint 3 TC-021 through TC-030 implemented
 ```
 
 ## Next Action
 
 ```bash
-# Optional next action: execute TC-040 manually on a device/emulator.
+# Optional next action: execute TC-030 manually on a device/emulator.
+# Compile instrumented tests:
 cd app-under-test/antennapod
+./gradlew :app:compilePlayDebugAndroidTestSources
 ./gradlew :app:compilePlayDebugUnitTestSources
 ```
 
@@ -66,8 +68,18 @@ cd app-under-test/antennapod
 - [x] TC-038 `integration/TC038_EpisodeCacheCleanupTest.kt` - compiled, pending device run
 - [x] TC-039 `performance/TC039_StartupMemoryBenchmarkTest.kt` - compiled, pending device run
 - [x] TC-040 `manual/TC040_AccessibilityEdgeCasesTest.kt` - checklist ready
+- [x] TC-021 `espresso/TC021_PlayPauseControlsTest.kt` - compiled, pending device run
+- [x] TC-022 `espresso/TC022_PlaybackSpeedAdjustmentTest.kt` - compiled, pending device run
+- [x] TC-023 `espresso/TC023_DownloadEpisodeForOfflinePlaybackTest.kt` - compiled, pending device run
+- [x] TC-024 `uiautomator/TC024_AudioFocusPlaybackNotificationTest.kt` - compiled, pending device run
+- [x] TC-025 `uiautomator/TC025_BackgroundPlaybackContinuityTest.kt` - compiled, pending device run
+- [x] TC-026 `unit/TC026_PlaybackStateMachineLogicTest.kt` - 11/11 passed
+- [x] TC-027 `unit/TC027_DownloadQueuePriorityLogicTest.kt` - 11/11 passed
+- [x] TC-028 `integration/TC028_FeedMediaDaoReadWriteIntegrityTest.kt` - compiled, pending device run
+- [x] TC-029 `integration/TC029_EpisodeDownloadStatusTrackingTest.kt` - compiled, pending device run
+- [x] TC-030 `manual/TC030_LongPlaybackStabilityTest.kt` - checklist ready
 
-## Files Created (this sprint)
+## Files Created (Sprint 3)
 
 ```
 TestHelper.kt
@@ -81,6 +93,21 @@ unit/TC007_FeedEntityTest.kt
 unit/TC008_FeedItemFeedMediaTest.kt
 integration/TC009_PodDBAdapterSchemaTest.kt
 manual/TC010_FirstLaunchUserFlowTest.kt
+```
+
+## Files Created (Sprint 3)
+
+```
+espresso/TC021_PlayPauseControlsTest.kt
+espresso/TC022_PlaybackSpeedAdjustmentTest.kt
+espresso/TC023_DownloadEpisodeForOfflinePlaybackTest.kt
+uiautomator/TC024_AudioFocusPlaybackNotificationTest.kt
+uiautomator/TC025_BackgroundPlaybackContinuityTest.kt
+unit/TC026_PlaybackStateMachineLogicTest.kt
+unit/TC027_DownloadQueuePriorityLogicTest.kt
+integration/TC028_FeedMediaDaoReadWriteIntegrityTest.kt
+integration/TC029_EpisodeDownloadStatusTrackingTest.kt
+manual/TC030_LongPlaybackStabilityTest.kt
 ```
 
 ## Blockers & Decisions
@@ -127,7 +154,7 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 |--------|--------|--------|--------|
 | 1 | Tianyu Yao | Core Foundation | Done |
 | 2 | Member 2 | Subscription & Discovery | — |
-| 3 | Member 3 | Playback & Downloads | — |
+| 3 | Member 3 (Yuanbing Wang) | Playback & Downloads | Done |
 | 4 | Member 4 | Settings & System | — |
 
 ### Sprint 2 Task Board
@@ -143,16 +170,16 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 - [x] TC-020 Discovery Usability (Manual) — checklist ready
 
 ### Sprint 3 Task Board
-- [ ] TC-021 Play/Pause (Espresso)
-- [ ] TC-022 Playback Speed (Espresso)
-- [ ] TC-023 Download Episode (Espresso)
-- [ ] TC-024 Audio Focus (UIAutomator)
-- [ ] TC-025 Background Playback (UIAutomator)
-- [ ] TC-026 Playback State Machine (Unit)
-- [ ] TC-027 Download Queue Priority (Unit)
-- [ ] TC-028 FeedMedia DAO (Integration)
-- [ ] TC-029 Download Status Tracking (Integration)
-- [ ] TC-030 Long Playback Stability (Manual)
+- [x] TC-021 Play/Pause (Espresso) — compiled, pending device run
+- [x] TC-022 Playback Speed (Espresso) — compiled, pending device run
+- [x] TC-023 Download Episode (Espresso) — compiled, pending device run
+- [x] TC-024 Audio Focus (UIAutomator) — compiled, pending device run
+- [x] TC-025 Background Playback (UIAutomator) — compiled, pending device run
+- [x] TC-026 Playback State Machine (Unit) — 11/11 passed
+- [x] TC-027 Download Queue Priority (Unit) — 11/11 passed
+- [x] TC-028 FeedMedia DAO (Integration) — compiled, pending device run
+- [x] TC-029 Download Status Tracking (Integration) — compiled, pending device run
+- [x] TC-030 Long Playback Stability (Manual) — checklist ready
 
 ### Sprint 4 Task Board
 - [x] TC-031 Theme & Display (Espresso) — compiled, pending device run
