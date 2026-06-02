@@ -243,7 +243,7 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 | 1 | Tianyu Yao | Core Foundation | Done |
 | 2 | Jianheng Sun | Subscription & Discovery | Done — 29/29 instrumented + 47/47 unit + manual executed |
 | 3 | Yuanbing Wang | Playback & Downloads | 19/19 instrumented pass (API 37). Espresso blocked. |
-| 4 | Member 4 | Settings & System | Coded, pending device run |
+| 4 | Member 4 | Settings & System | Coded, pending device run; TC-040 manual table filled as Not Run |
 
 ### Sprint 2 Task Board
 - [x] TC-011 Browse Discovery (Espresso) — 4/4 passed (fixed toolbar→appbar, grid→swipeRefresh)
@@ -279,4 +279,4 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 - [ ] TC-037 Data Export/Import (Integration) — compiled, pending device run
 - [ ] TC-038 Episode Cache Cleanup (Integration) — compiled, pending device run
 - [ ] TC-039 Startup Time & Memory (Performance) — compiled, pending device run
-- [ ] TC-040 Accessibility (Manual) — checklist ready
+- [ ] TC-040 Accessibility (Manual) — checklist ready, result table filled as Not Run

@@ -196,6 +196,7 @@
 | Unit Tests Passed | 2 (TC-035: 8/8, TC-036: 5/5) |
 | Compiled | 7 (TC-031~034, TC-037~039) |
 | Checklist Ready | 1 (TC-040) |
+| Manual Not Run | 1 (TC-040: 20/20 steps not run) |
 | Failed | 0 |
 | Pass Rate | 100% for executed unit tests; instrumented tests and manual checklist pending device run |
 
@@ -212,7 +213,7 @@
 | TC-037 | Integration | Compiled | 4 | Pending device run |
 | TC-038 | Integration | Compiled | 4 | Pending device run |
 | TC-039 | Performance | Compiled | 4 | Manual timing and memory checks, pending device run |
-| TC-040 | Manual | Ready | 20-step checklist | Awaiting manual execution |
+| TC-040 | Manual | Ready | 20-step checklist | 20/20 steps recorded as Not Run; awaiting manual execution |
 
 ### Key Findings
 
@@ -225,4 +226,4 @@
 - **Integration**: TC-037 validates OPML export/import round-trip integrity using DBReader, OpmlWriter, and OpmlReader.
 - **Integration**: TC-038 validates download log cleanup, queue cleanup, and feed item/media cache metadata deletion.
 - **Performance**: TC-039 measures MainActivity and PreferenceActivity startup time plus heap usage with manual timing.
-- **Manual**: TC-040 provides a 20-step checklist for accessibility, large text, TalkBack/screen reader behavior, rotation, network-disabled behavior, and theme contrast.
+- **Manual**: TC-040 provides a 20-step checklist for accessibility, large text, TalkBack/screen reader behavior, rotation, network-disabled behavior, and theme contrast. Result table is filled as Not Run until the checklist is executed.

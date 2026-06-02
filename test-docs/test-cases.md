@@ -438,7 +438,7 @@
 - Position preservation after extended session
 
 ---
-## Member Four — Settings & System (TC-031 ~ TC-040) In Progress
+## Member Four — Settings & System (TC-031 ~ TC-040) Implemented
 
 | TC-ID | Method | Title | Priority | Status | Notes |
 |-------|--------|-------|----------|--------|-------|
@@ -451,7 +451,7 @@
 | TC-037 | Integration (SQLite) | Data Export & Import Integrity | Medium | Compiled | Pending device run |
 | TC-038 | Integration (SQLite) | Episode Cache Table Cleanup | Medium | Compiled | Pending device run |
 | TC-039 | Performance | App Startup Time & Memory Footprint | High | Compiled | Pending device run |
-| TC-040 | Manual / Exploratory | Accessibility & Edge Cases | Medium | Ready | Checklist ready for execution |
+| TC-040 | Manual / Exploratory | Accessibility & Edge Cases | Medium | Ready | Checklist ready; manual result table filled as Not Run |
 
 ### TC-031: Theme & Display Settings
 

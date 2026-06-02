@@ -165,45 +165,46 @@
 | Field | Detail |
 |-------|--------|
 | **Tester** | Member Four |
-| **Date** | 2026-05-31 |
-| **Device** | To be filled after execution |
+| **Date** | 2026-06-02 |
+| **Device** | Not executed yet (checklist prepared only) |
 | **Build** | app-under-test/antennapod (playDebug) |
 
 ### TC-040: Accessibility & Edge Cases
 
 | TC-ID | Step | Pass/Fail | Notes |
 |-------|------|-----------|-------|
-| TC-040 | 1. Launch app with default text size | | |
-| TC-040 | 2. Navigate across bottom navigation items | | |
-| TC-040 | 3. Enable screen reader and focus bottom navigation | | |
-| TC-040 | 4. Open Settings | | |
-| TC-040 | 5. Open User interface settings | | |
-| TC-040 | 6. Toggle Full black theme | | |
-| TC-040 | 7. Return to Settings and open Downloads | | |
-| TC-040 | 8. Open Proxy configuration dialog | | |
-| TC-040 | 9. Rotate to landscape on Settings screen | | |
-| TC-040 | 10. Rotate back to portrait | | |
-| TC-040 | 11. Increase system font size to maximum practical value | | |
-| TC-040 | 12. Reopen Settings with large font | | |
-| TC-040 | 13. Open User interface settings with large font | | |
-| TC-040 | 14. Navigate to Downloads with large font | | |
-| TC-040 | 15. Open More menu from bottom navigation | | |
-| TC-040 | 16. Press Back from nested settings screen | | |
-| TC-040 | 17. Press Back from main settings screen | | |
-| TC-040 | 18. Test with network disabled | | |
-| TC-040 | 19. Re-enable network and relaunch app | | |
-| TC-040 | 20. Review visual contrast in light and dark themes | | |
+| TC-040 | 1. Launch app with default text size | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 2. Navigate across bottom navigation items | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 3. Enable screen reader and focus bottom navigation | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 4. Open Settings | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 5. Open User interface settings | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 6. Toggle Full black theme | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 7. Return to Settings and open Downloads | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 8. Open Proxy configuration dialog | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 9. Rotate to landscape on Settings screen | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 10. Rotate back to portrait | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 11. Increase system font size to maximum practical value | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 12. Reopen Settings with large font | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 13. Open User interface settings with large font | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 14. Navigate to Downloads with large font | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 15. Open More menu from bottom navigation | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 16. Press Back from nested settings screen | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 17. Press Back from main settings screen | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 18. Test with network disabled | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 19. Re-enable network and relaunch app | Not Run | Awaiting manual execution on device/emulator |
+| TC-040 | 20. Review visual contrast in light and dark themes | Not Run | Awaiting manual execution on device/emulator |
 
 ## Summary
 
-| Total | Passed | Partial | Failed |
-|-------|--------|---------|--------|
-| 20 | | | |
+| Total | Passed | Partial | Failed | Not Run |
+|-------|--------|---------|--------|---------|
+| 20 | 0 | 0 | 0 | 20 |
 
-**Pass Rate: -**
+**Pass Rate: Not applicable (manual checklist not executed)**
 
 ## Notes
 
-- To be filled after manual test execution.
+- Checklist prepared by Member Four; manual execution is still pending.
+- No TC-040 screenshots were captured because no manual steps were executed.
 - Record accessibility services used, font/display size settings, and Android version.
 - Save screenshots for accessibility issues or key evidence with a TC-040 prefix.
