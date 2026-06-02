@@ -442,10 +442,10 @@
 
 | TC-ID | Method | Title | Priority | Status | Notes |
 |-------|--------|-------|----------|--------|-------|
-| TC-031 | Espresso | Theme & Display Settings | Medium | Compiled | Pending device run |
-| TC-032 | Espresso | Storage & Network Preferences | Medium | Compiled | Pending device run |
-| TC-033 | UIAutomator | Runtime Permission Handling | High | Compiled | Pending device run |
-| TC-034 | UIAutomator | Notification Channel Settings | Medium | Compiled | Pending device run |
+| TC-031 | Espresso | Theme & Display Settings | Medium | Compiled | Pending device run; screenshots captured |
+| TC-032 | Espresso | Storage & Network Preferences | Medium | Compiled | Pending device run; screenshots captured |
+| TC-033 | UIAutomator | Runtime Permission Handling | High | Compiled | Pending device run; screenshot captured |
+| TC-034 | UIAutomator | Notification Channel Settings | Medium | Compiled | Pending device run; screenshot captured |
 | TC-035 | Unit Test (JUnit) | User Preferences Read / Write Logic | Medium | Passed | 8/8 passed |
 | TC-036 | Unit Test (JUnit) | Storage Path Validation & Sanitization | Medium | Passed | 5/5 passed |
 | TC-037 | Integration (SQLite) | Data Export & Import Integrity | Medium | Compiled | Pending device run |

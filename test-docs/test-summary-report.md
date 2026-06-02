@@ -197,6 +197,7 @@
 | Compiled | 7 (TC-031~034, TC-037~039) |
 | Checklist Ready | 1 (TC-040) |
 | Manual Not Run | 1 (TC-040: 20/20 steps not run) |
+| Screenshots Captured | 6 (TC-031~034 evidence) |
 | Failed | 0 |
 | Pass Rate | 100% for executed unit tests; instrumented tests and manual checklist pending device run |
 
@@ -204,10 +205,10 @@
 
 | TC-ID | Method | Status | Tests | Notes |
 |-------|--------|--------|-------|-------|
-| TC-031 | Espresso | Compiled | 4 | Pending device run |
-| TC-032 | Espresso | Compiled | 4 | Pending device run |
-| TC-033 | UIAutomator | Compiled | 3 | Pending device run |
-| TC-034 | UIAutomator | Compiled | 3 | Pending device run |
+| TC-031 | Espresso | Compiled | 4 | Pending device run; screenshots: tc031-settings-main, tc031-user-interface-settings |
+| TC-032 | Espresso | Compiled | 4 | Pending device run; screenshots: tc032-downloads-settings, tc032-proxy-dialog |
+| TC-033 | UIAutomator | Compiled | 3 | Pending device run; screenshot: tc033-system-app-info-permissions |
+| TC-034 | UIAutomator | Compiled | 3 | Pending device run; screenshot: tc034-system-notification-settings |
 | TC-035 | Unit Test | Passed | 8 | Robolectric runner, all 8 passed |
 | TC-036 | Unit Test | Passed | 5 | Robolectric runner, all 5 passed |
 | TC-037 | Integration | Compiled | 4 | Pending device run |
@@ -227,3 +228,4 @@
 - **Integration**: TC-038 validates download log cleanup, queue cleanup, and feed item/media cache metadata deletion.
 - **Performance**: TC-039 measures MainActivity and PreferenceActivity startup time plus heap usage with manual timing.
 - **Manual**: TC-040 provides a 20-step checklist for accessibility, large text, TalkBack/screen reader behavior, rotation, network-disabled behavior, and theme contrast. Result table is filled as Not Run until the checklist is executed.
+- **Screenshots**: Six unique Settings & System evidence screenshots were captured on Small_Phone AVD (API 37): settings main, user interface theme controls, downloads preferences, proxy dialog, Android app info permissions entry, and Android notification settings.

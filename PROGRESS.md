@@ -93,7 +93,7 @@ export ANDROID_SERIAL=127.0.0.1:7555
 - [x] TC-009 `integration/TC009_PodDBAdapterSchemaTest.kt` — 8/8
 - [x] TC-010 `manual/TC010_FirstLaunchUserFlowTest.kt` — 19/20
 - [x] CI: compile → unit test → doc check on push to main
-- [x] Docs synced, no stale refs, 13 screenshots
+- [x] Docs synced, no stale refs, 19 screenshots
 - [x] TC-011 `espresso/TC011_BrowseDiscoveryTest.kt` — 4/4 passed (fixed toolbar→appbar, grid→swipeRefresh)
 - [x] TC-012 `espresso/TC012_SubscribeDiscoveryTest.kt` — 4/4 passed
 - [x] TC-013 `espresso/TC013_UnsubscribeDeleteTest.kt` — 4/4 passed
@@ -243,7 +243,7 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 | 1 | Tianyu Yao | Core Foundation | Done |
 | 2 | Jianheng Sun | Subscription & Discovery | Done — 29/29 instrumented + 47/47 unit + manual executed |
 | 3 | Yuanbing Wang | Playback & Downloads | 19/19 instrumented pass (API 37). Espresso blocked. |
-| 4 | Xintao Wang | Settings & System | Coded, pending device run; TC-040 manual table filled as Not Run |
+| 4 | Xintao Wang | Settings & System | Coded, pending device run; TC-031~034 evidence screenshots captured; TC-040 manual table filled as Not Run |
 
 ### Sprint 2 Task Board
 - [x] TC-011 Browse Discovery (Espresso) — 4/4 passed (fixed toolbar→appbar, grid→swipeRefresh)
@@ -270,10 +270,10 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 - [x] TC-030 Long Playback Stability (Manual) — checklist ready
 
 ### Sprint 4 Task Board
-- [ ] TC-031 Theme & Display (Espresso) — compiled, pending device run
-- [ ] TC-032 Storage & Network Prefs (Espresso) — compiled, pending device run
-- [ ] TC-033 Permission Handling (UIAutomator) — compiled, pending device run
-- [ ] TC-034 Notification Channels (UIAutomator) — compiled, pending device run
+- [ ] TC-031 Theme & Display (Espresso) — compiled, pending device run, screenshots captured
+- [ ] TC-032 Storage & Network Prefs (Espresso) — compiled, pending device run, screenshots captured
+- [ ] TC-033 Permission Handling (UIAutomator) — compiled, pending device run, screenshot captured
+- [ ] TC-034 Notification Channels (UIAutomator) — compiled, pending device run, screenshot captured
 - [x] TC-035 User Preferences Logic (Unit) — 8/8 passed
 - [x] TC-036 Storage Path Validation (Unit) — 5/5 passed
 - [ ] TC-037 Data Export/Import (Integration) — compiled, pending device run
