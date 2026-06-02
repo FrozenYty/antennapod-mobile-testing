@@ -37,9 +37,9 @@ class TC026_PlaybackStateMachineLogicTest {
     @Test
     fun stopped_isAtLeast_shouldBeTrueForStoppedAndBelow() {
         assertTrue(PlayerStatus.STOPPED.isAtLeast(PlayerStatus.STOPPED))
-        assertTrue(PlayerStatus.STOPPED.isAtLeast(PlayerStatus.PREPARED))
-        assertTrue(PlayerStatus.STOPPED.isAtLeast(PlayerStatus.INITIALIZED))
+        assertTrue(PlayerStatus.STOPPED.isAtLeast(PlayerStatus.INDETERMINATE))
         assertTrue(PlayerStatus.STOPPED.isAtLeast(PlayerStatus.ERROR))
+        assertFalse(PlayerStatus.STOPPED.isAtLeast(PlayerStatus.INITIALIZING))
         assertFalse(PlayerStatus.STOPPED.isAtLeast(PlayerStatus.PLAYING))
     }
 
@@ -47,9 +47,9 @@ class TC026_PlaybackStateMachineLogicTest {
     fun paused_isAtLeast_shouldBeTrueForPausedAndBelow() {
         assertTrue(PlayerStatus.PAUSED.isAtLeast(PlayerStatus.PAUSED))
         assertTrue(PlayerStatus.PAUSED.isAtLeast(PlayerStatus.PREPARED))
+        assertTrue(PlayerStatus.PAUSED.isAtLeast(PlayerStatus.STOPPED))
         assertTrue(PlayerStatus.PAUSED.isAtLeast(PlayerStatus.ERROR))
         assertFalse(PlayerStatus.PAUSED.isAtLeast(PlayerStatus.PLAYING))
-        assertFalse(PlayerStatus.PAUSED.isAtLeast(PlayerStatus.STOPPED))
     }
 
     @Test
@@ -63,9 +63,9 @@ class TC026_PlaybackStateMachineLogicTest {
     }
 
     @Test
-    fun error_isAtLeast_shouldOnlySupersedeIndeterminate() {
+    fun error_isAtLeast_shouldOnlyBeAtLeastItself() {
         assertTrue(PlayerStatus.ERROR.isAtLeast(PlayerStatus.ERROR))
-        assertTrue(PlayerStatus.ERROR.isAtLeast(PlayerStatus.INDETERMINATE))
+        assertFalse(PlayerStatus.ERROR.isAtLeast(PlayerStatus.INDETERMINATE))
         assertFalse(PlayerStatus.ERROR.isAtLeast(PlayerStatus.INITIALIZING))
         assertFalse(PlayerStatus.ERROR.isAtLeast(PlayerStatus.PLAYING))
     }

@@ -301,7 +301,7 @@
 | TC-024 | UIAutomator | Audio Focus & Playback Notification | High | Compiled | Pending device run |
 | TC-025 | UIAutomator | Background Playback Continuity | Medium | Compiled | Pending device run |
 | TC-026 | Unit Test (JUnit) | Playback State Machine Logic | High | Passed | 11/11 passed |
-| TC-027 | Unit Test (JUnit) | Download Queue Priority Logic | Medium | Passed | 11/11 passed |
+| TC-027 | Unit Test (JUnit) | Download Queue Priority Logic | Medium | Passed | 10/10 passed |
 | TC-028 | Integration (SQLite) | FeedMedia DAO Read / Write Integrity | Medium | Compiled | Pending device run |
 | TC-029 | Integration (SQLite) | Episode Download Status Tracking | Medium | Compiled | Pending device run |
 | TC-030 | Manual / Exploratory | Long Playback Stability | Medium | Ready | Checklist ready for execution |
@@ -382,7 +382,7 @@
 **File**: `unit/TC027_DownloadQueuePriorityLogicTest.kt`
 **Runner**: Pure JUnit (no Android dependency).
 
-**Tests** (11):
+**Tests** (10):
 - `newlyCreatedMedia_shouldNotBeDownloaded` — default state
 - `setDownloaded_shouldMarkAsDownloadedWithTimestamp` — download flag
 - `setDownloadedFalse_shouldClearDownloadStatus` — download clear
@@ -392,7 +392,6 @@
 - `feedMedia_differentIds_shouldNotBeEqual` — inequality
 - `feedMedia_sameId_shouldBeEqual` — equality
 - `durationAndSize_shouldBeSettable` — property setters
-- `mediaType_shouldBeParsedFromMimeType` — MIME type parsing
 - `position_shouldTrackPlaybackProgress` — position tracking
 
 ### TC-028: FeedMedia DAO Read / Write Integrity

@@ -20,7 +20,7 @@
 ## Right Now
 
 Sprint 2 (Jianheng Sun): **ALL TESTS PASS — 29/29 instrumented + 47/47 unit.** Manual TC-020 executed.
-Sprint 3 (Yuanbing Wang): TC-021~030 implemented. TC-026 (11/11) and TC-027 (11/11) unit tests passed. TC-021~025, TC-028~029 compiled pending device run. TC-030 manual checklist ready.
+Sprint 3 (Yuanbing Wang): TC-021~030 implemented. TC-026 (11/11) and TC-027 (10/10) unit tests passed. TC-021~025, TC-028~029 compiled pending device run. TC-030 manual checklist ready.
 
 ```
 Status: Sprint 2 DONE. Sprint 3 READY — pending device for instrumented test runs.
@@ -110,7 +110,7 @@ export ANDROID_SERIAL=127.0.0.1:7555
 - [x] TC-024 `uiautomator/TC024_AudioFocusPlaybackNotificationTest.kt` - compiled, pending device run
 - [x] TC-025 `uiautomator/TC025_BackgroundPlaybackContinuityTest.kt` - compiled, pending device run
 - [x] TC-026 `unit/TC026_PlaybackStateMachineLogicTest.kt` - 11/11 passed
-- [x] TC-027 `unit/TC027_DownloadQueuePriorityLogicTest.kt` - 11/11 passed
+- [x] TC-027 `unit/TC027_DownloadQueuePriorityLogicTest.kt` - 10/10 passed
 - [x] TC-028 `integration/TC028_FeedMediaDaoReadWriteIntegrityTest.kt` - compiled, pending device run
 - [x] TC-029 `integration/TC029_EpisodeDownloadStatusTrackingTest.kt` - compiled, pending device run
 - [x] TC-030 `manual/TC030_LongPlaybackStabilityTest.kt` - checklist ready
@@ -260,10 +260,10 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 - [ ] TC-024 Audio Focus (UIAutomator) — compiled, pending device run
 - [ ] TC-025 Background Playback (UIAutomator) — compiled, pending device run
 - [x] TC-026 Playback State Machine (Unit) — 11/11 passed
-- [x] TC-027 Download Queue Priority (Unit) — 11/11 passed
-- [ ] TC-028 FeedMedia DAO (Integration) — compiled, pending device run
-- [ ] TC-029 Download Status Tracking (Integration) — compiled, pending device run
-- [ ] TC-030 Long Playback Stability (Manual) — checklist ready
+- [x] TC-027 Download Queue Priority (Unit) — 10/10 passed
+- [x] TC-028 FeedMedia DAO (Integration) — compiled, pending device run
+- [x] TC-029 Download Status Tracking (Integration) — compiled, pending device run
+- [x] TC-030 Long Playback Stability (Manual) — checklist ready
 
 ### Sprint 4 Task Board
 - [ ] TC-031 Theme & Display (Espresso) — compiled, pending device run

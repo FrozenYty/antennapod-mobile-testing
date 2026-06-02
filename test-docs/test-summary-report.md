@@ -141,7 +141,7 @@
 | Metric | Count |
 |--------|-------|
 | Total Test Cases | 10 |
-| Unit Tests Passed | 2 (TC-026: 11/11, TC-027: 11/11) |
+| Unit Tests Passed | 2 (TC-026: 11/11, TC-027: 10/10) |
 | Compiled (pending device) | 7 (TC-021~025, TC-028~029) |
 | Checklist Ready | 1 (TC-030) |
 | Failed | 0 |
@@ -157,7 +157,7 @@
 | TC-024 | UIAutomator | Compiled | 3 | Pending device run |
 | TC-025 | UIAutomator | Compiled | 3 | Pending device run |
 | TC-026 | Unit Test | Passed | 11 | Pure JUnit, all 11 passed |
-| TC-027 | Unit Test | Passed | 11 | Pure JUnit, all 11 passed |
+| TC-027 | Unit Test | Passed | 10 | Pure JUnit, all 10 passed |
 | TC-028 | Integration | Compiled | 6 | Pending device run |
 | TC-029 | Integration | Compiled | 7 | Pending device run |
 | TC-030 | Manual | Ready | 20-step checklist | Awaiting manual execution |

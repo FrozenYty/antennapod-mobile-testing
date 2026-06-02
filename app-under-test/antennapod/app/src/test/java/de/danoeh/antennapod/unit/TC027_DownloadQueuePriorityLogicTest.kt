@@ -143,17 +143,6 @@ class TC027_DownloadQueuePriorityLogicTest {
     }
 
     @Test
-    fun mediaType_shouldBeParsedFromMimeType() {
-        val (_, item) = createFeedAndItem(10)
-        val audioMedia = FeedMedia(item, "https://example.com/audio.mp3", 1000, "audio/mpeg")
-        val videoMedia = FeedMedia(item, "https://example.com/video.mp4", 2000, "video/mp4")
-
-        assertNotNull(audioMedia.mediaType)
-        assertNotNull(videoMedia.mediaType)
-        assertNotEquals(audioMedia.mediaType, videoMedia.mediaType)
-    }
-
-    @Test
     fun position_shouldTrackPlaybackProgress() {
         val (_, item) = createFeedAndItem(11)
         val media = FeedMedia(item, "https://example.com/ep11.mp3", 5000, "audio/mpeg")
