@@ -185,8 +185,8 @@
 | Field | Detail |
 |-------|--------|
 | **Test Cycle** | TC-031 ~ TC-040 (Settings & System) |
-| **Date** | 2026-05-31 |
-| **Tester** | Member Four |
+| **Date** | 2026-06-02 |
+| **Tester** | Xintao Wang |
 
 ### Results Summary
 

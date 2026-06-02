@@ -15,7 +15,7 @@
 | **GitHub** | user: chemflowers, email: chemflowers@outlook.com |
 | **JDK** | `D:/jdk21/jdk-21.0.11` (set JAVA_HOME before running Gradle) |
 | **Git user** | name: chemflowers, email: chemflowers@outlook.com |
-| **Last updated** | 2026-06-01 |
+| **Last updated** | 2026-06-02 |
 
 ## Right Now
 
@@ -170,7 +170,7 @@ integration/TC029_EpisodeDownloadStatusTrackingTest.kt
 manual/TC030_LongPlaybackStabilityTest.kt
 ```
 
-### Sprint 4 (Member 4)
+### Sprint 4 (Xintao Wang)
 ```
 espresso/TC031_ThemeDisplaySettingsTest.kt
 espresso/TC032_StorageNetworkPreferencesTest.kt
@@ -243,7 +243,7 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 | 1 | Tianyu Yao | Core Foundation | Done |
 | 2 | Jianheng Sun | Subscription & Discovery | Done — 29/29 instrumented + 47/47 unit + manual executed |
 | 3 | Yuanbing Wang | Playback & Downloads | 19/19 instrumented pass (API 37). Espresso blocked. |
-| 4 | Member 4 | Settings & System | Coded, pending device run; TC-040 manual table filled as Not Run |
+| 4 | Xintao Wang | Settings & System | Coded, pending device run; TC-040 manual table filled as Not Run |
 
 ### Sprint 2 Task Board
 - [x] TC-011 Browse Discovery (Espresso) — 4/4 passed (fixed toolbar→appbar, grid→swipeRefresh)

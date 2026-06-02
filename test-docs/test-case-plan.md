@@ -32,7 +32,7 @@ This project uses complementary testing methods. Mix and match per test case as 
 | **Tianyu Yao** (Lead) | Core Foundation | TC-001 ~ TC-010 | Finalized |
 | **Member 2** | Subscription & Discovery | TC-011 ~ TC-020 | Suggested |
 | **Yuanbing Wang** | Playback & Downloads | TC-021 ~ TC-030 | Suggested |
-| **Member 4** | Settings & System | TC-031 ~ TC-040 | Suggested |
+| **Xintao Wang** | Settings & System | TC-031 ~ TC-040 | Suggested |
 
 ---
 
@@ -87,7 +87,7 @@ This project uses complementary testing methods. Mix and match per test case as 
 
 ---
 
-## Member 4 — Settings & System (TC-031 ~ TC-040) Suggested
+## Xintao Wang — Settings & System (TC-031 ~ TC-040) Suggested
 
 | TC-ID | Method | Title | Priority |
 |-------|--------|-------|----------|

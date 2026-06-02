@@ -63,7 +63,7 @@ Uses a multi-method strategy for broad coverage:
 | Sprint 1 | Core Foundation tests (TC-001~010, Tianyu Yao) | Completed |
 | Sprint 2 | Subscription & Discovery (TC-011~020, Member 2) | Pending |
 | Sprint 3 | Playback & Downloads (TC-021~030, Yuanbing Wang) | Done |
-| Sprint 4 | Settings & System (TC-031~040, Member 4) | Pending |
+| Sprint 4 | Settings & System (TC-031~040, Xintao Wang) | Pending |
 | Sprint 5 | Bug fixes, regression, final report | Pending |
 
 ## 7. Risks

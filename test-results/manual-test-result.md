@@ -160,11 +160,11 @@
 
 ---
 
-## Test Session Info - Member Four (Sprint 4)
+## Test Session Info - Xintao Wang (Sprint 4)
 
 | Field | Detail |
 |-------|--------|
-| **Tester** | Member Four |
+| **Tester** | Xintao Wang |
 | **Date** | 2026-06-02 |
 | **Device** | Not executed yet (checklist prepared only) |
 | **Build** | app-under-test/antennapod (playDebug) |
@@ -204,7 +204,7 @@
 
 ## Notes
 
-- Checklist prepared by Member Four; manual execution is still pending.
+- Checklist prepared by Xintao Wang; manual execution is still pending.
 - No TC-040 screenshots were captured because no manual steps were executed.
 - Record accessibility services used, font/display size settings, and Android version.
 - Save screenshots for accessibility issues or key evidence with a TC-040 prefix.

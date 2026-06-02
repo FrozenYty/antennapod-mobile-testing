@@ -438,7 +438,7 @@
 - Position preservation after extended session
 
 ---
-## Member Four — Settings & System (TC-031 ~ TC-040) Implemented
+## Xintao Wang — Settings & System (TC-031 ~ TC-040) Implemented
 
 | TC-ID | Method | Title | Priority | Status | Notes |
 |-------|--------|-------|----------|--------|-------|
