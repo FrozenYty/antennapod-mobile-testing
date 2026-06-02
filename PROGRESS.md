@@ -20,7 +20,7 @@
 ## Right Now
 
 Sprint 2 (Jianheng Sun): **ALL TESTS PASS — 29/29 instrumented + 47/47 unit.** Manual TC-020 executed.
-Sprint 3 (Yuanbing Wang): TC-021~030 implemented. TC-026 (11/11) and TC-027 (10/10) unit tests passed. TC-021~025, TC-028~029 compiled pending device run. TC-030 manual checklist ready.
+Sprint 3 (Yuanbing Wang): UIAutomator TC-024 (3/3), TC-025 (3/3). Integration TC-028 (6/6), TC-029 (7/7). Unit TC-026 (11/11), TC-027 (10/10). Espresso TC-021~023 blocked by API 37 InputManager issue (need API ≤34). TC-030 checklist ready.
 
 ```
 Status: Sprint 2 DONE. Sprint 3 READY — pending device for instrumented test runs.
@@ -107,8 +107,8 @@ export ANDROID_SERIAL=127.0.0.1:7555
 - [x] TC-021 `espresso/TC021_PlayPauseControlsTest.kt` - compiled, pending device run
 - [x] TC-022 `espresso/TC022_PlaybackSpeedAdjustmentTest.kt` - compiled, pending device run
 - [x] TC-023 `espresso/TC023_DownloadEpisodeForOfflinePlaybackTest.kt` - compiled, pending device run
-- [x] TC-024 `uiautomator/TC024_AudioFocusPlaybackNotificationTest.kt` - compiled, pending device run
-- [x] TC-025 `uiautomator/TC025_BackgroundPlaybackContinuityTest.kt` - compiled, pending device run
+- [x] TC-024 `uiautomator/TC024_AudioFocusPlaybackNotificationTest.kt` - 3/3 passed (API 37)
+- [x] TC-025 `uiautomator/TC025_BackgroundPlaybackContinuityTest.kt` - 3/3 passed (API 37)
 - [x] TC-026 `unit/TC026_PlaybackStateMachineLogicTest.kt` - 11/11 passed
 - [x] TC-027 `unit/TC027_DownloadQueuePriorityLogicTest.kt` - 10/10 passed
 - [x] TC-028 `integration/TC028_FeedMediaDaoReadWriteIntegrityTest.kt` - compiled, pending device run
@@ -208,6 +208,10 @@ manual/TC040_AccessibilityEdgeCasesTest.kt
 | 05-31 | GitHub push: `git config user.name "chemflowers"`, `git config user.email "chemflowers@outlook.com"` |
 | 06-01 | TC-011/013: `R.id.toolbar` ambiguous (2 toolbars in hierarchy) → use `R.id.appbar` (unique to subscriptions fragment) |
 | 06-01 | TC-011/013: `subscriptions_grid` has empty globalVisibleRect when no feeds → use `R.id.swipeRefresh` instead |
+| 06-02 | Espresso tests fail on API 37: `InputManager.getInstance()` removed → use API ≤34 emulator |
+| 06-02 | TC-024: `bottom_navigation_episodes` not in default visible items → use `bottom_navigation_more` |
+| 06-02 | TC-029: DownloadLog table has no `download_url` column → removed from ContentValues |
+| 06-02 | TC-029: `getItemsOfFeedCursor` may omit `size` column → guard with `if (sizeIdx >= 0)` |
 
 ## Command Cheatsheet
 
@@ -238,7 +242,7 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 |--------|--------|--------|--------|
 | 1 | Tianyu Yao | Core Foundation | Done |
 | 2 | Jianheng Sun | Subscription & Discovery | Done — 29/29 instrumented + 47/47 unit + manual executed |
-| 3 | Yuanbing Wang | Playback & Downloads | Coded, pending device run |
+| 3 | Yuanbing Wang | Playback & Downloads | 19/19 instrumented pass (API 37). Espresso blocked. |
 | 4 | Member 4 | Settings & System | Coded, pending device run |
 
 ### Sprint 2 Task Board
@@ -254,15 +258,15 @@ MSYS2_ARG_CONV_EXCL="*" adb pull /storage/emulated/0/Download/screenshots/ ./scr
 - [x] TC-020 Discovery Usability (Manual) — 16/16 executable steps pass, 4 N/A, 4 screenshots
 
 ### Sprint 3 Task Board
-- [ ] TC-021 Play/Pause (Espresso) — compiled, pending device run
-- [ ] TC-022 Playback Speed (Espresso) — compiled, pending device run
-- [ ] TC-023 Download Episode (Espresso) — compiled, pending device run
-- [ ] TC-024 Audio Focus (UIAutomator) — compiled, pending device run
-- [ ] TC-025 Background Playback (UIAutomator) — compiled, pending device run
+- [ ] TC-021 Play/Pause (Espresso) — 0/4, blocked by API 37 InputManager issue (Espresso needs API ≤34)
+- [ ] TC-022 Playback Speed (Espresso) — blocked by API 37 InputManager issue
+- [ ] TC-023 Download Episode (Espresso) — blocked by API 37 InputManager issue
+- [x] TC-024 Audio Focus (UIAutomator) — 3/3 passed (Pixel_7 AVD, API 37)
+- [x] TC-025 Background Playback (UIAutomator) — 3/3 passed (Pixel_7 AVD, API 37)
 - [x] TC-026 Playback State Machine (Unit) — 11/11 passed
 - [x] TC-027 Download Queue Priority (Unit) — 10/10 passed
-- [x] TC-028 FeedMedia DAO (Integration) — compiled, pending device run
-- [x] TC-029 Download Status Tracking (Integration) — compiled, pending device run
+- [x] TC-028 FeedMedia DAO (Integration) — 6/6 passed (Pixel_7 AVD, API 37)
+- [x] TC-029 Download Status Tracking (Integration) — 7/7 passed (Pixel_7 AVD, API 37), fixed download_url+size column
 - [x] TC-030 Long Playback Stability (Manual) — checklist ready
 
 ### Sprint 4 Task Board

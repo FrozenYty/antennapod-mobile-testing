@@ -62,13 +62,13 @@ class TC024_AudioFocusPlaybackNotificationTest {
     }
 
     @Test
-    fun bottomNav_shouldContainEpisodesItem() {
+    fun bottomNav_shouldContainMoreItem() {
         activityRule.launchActivity(Intent(Intent.ACTION_MAIN))
 
-        val episodesItem = device.findObject(
-            By.res("de.danoeh.antennapod.debug", "bottom_navigation_episodes")
+        val moreItem = device.findObject(
+            By.res("de.danoeh.antennapod.debug", "bottom_navigation_more")
         )
-        assertNotNull("Episodes item should be present in bottom nav", episodesItem)
-        assertTrue("Episodes item should be enabled", episodesItem.isEnabled)
+        assertNotNull("More item should be present in bottom nav", moreItem)
+        assertTrue("More item should be enabled", moreItem.isEnabled)
     }
 }

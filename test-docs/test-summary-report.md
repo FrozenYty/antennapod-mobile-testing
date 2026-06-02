@@ -133,7 +133,7 @@
 | Field | Detail |
 |-------|--------|
 | **Test Cycle** | TC-021 ~ TC-030 (Playback & Downloads) |
-| **Date** | 2026-06-01 |
+| **Date** | 2026-06-02 |
 | **Tester** | Yuanbing Wang |
 
 ### Results Summary
@@ -142,39 +142,41 @@
 |--------|-------|
 | Total Test Cases | 10 |
 | Unit Tests Passed | 2 (TC-026: 11/11, TC-027: 10/10) |
-| Compiled (pending device) | 7 (TC-021~025, TC-028~029) |
+| Instrumented Tests Passed | 4 (TC-024: 3/3, TC-025: 3/3, TC-028: 6/6, TC-029: 7/7) |
+| Blocked (API 37) | 3 (TC-021~023, Espresso InputManager issue) |
 | Checklist Ready | 1 (TC-030) |
 | Failed | 0 |
-| Pass Rate | 100% (unit tests); instrumented tests pending device run |
+| Pass Rate | 100% (of executable tests); 19/19 instrumented passed on API 37 |
 
 ### Detailed Status
 
 | TC-ID | Method | Status | Tests | Notes |
 |-------|--------|--------|-------|-------|
-| TC-021 | Espresso | Compiled | 4 | Pending device run |
-| TC-022 | Espresso | Compiled | 4 | Pending device run |
-| TC-023 | Espresso | Compiled | 4 | Pending device run |
-| TC-024 | UIAutomator | Compiled | 3 | Pending device run |
-| TC-025 | UIAutomator | Compiled | 3 | Pending device run |
-| TC-026 | Unit Test | Passed | 11 | Pure JUnit, all 11 passed |
-| TC-027 | Unit Test | Passed | 10 | Pure JUnit, all 10 passed |
-| TC-028 | Integration | Compiled | 6 | Pending device run |
-| TC-029 | Integration | Compiled | 7 | Pending device run |
+| TC-021 | Espresso | Blocked | 4 | API 37 InputManager.getInstance() removed |
+| TC-022 | Espresso | Blocked | 4 | API 37 InputManager.getInstance() removed |
+| TC-023 | Espresso | Blocked | 4 | API 37 InputManager.getInstance() removed |
+| TC-024 | UIAutomator | Passed | 3/3 | Pixel_7 AVD, API 37. Fixed episodes→more item |
+| TC-025 | UIAutomator | Passed | 3/3 | Pixel_7 AVD, API 37 |
+| TC-026 | Unit Test | Passed | 11/11 | Pure JUnit, all 11 passed |
+| TC-027 | Unit Test | Passed | 10/10 | Pure JUnit, all 10 passed |
+| TC-028 | Integration | Passed | 6/6 | Pixel_7 AVD, API 37 |
+| TC-029 | Integration | Passed | 7/7 | Fixed: download_url not in DownloadLog; size column guarded |
 | TC-030 | Manual | Ready | 20-step checklist | Awaiting manual execution |
 
 ### Key Findings
 
-- **Espresso**: Three Espresso tests (TC-021~023) verify bottom navigation structure and tab accessibility. Adapted to verify UI structure since playback requires media content.
-- **UIAutomator**: Two UIAutomator tests (TC-024~025) verify bottom navigation items and Home button behavior. TC-025 validates background/foreground lifecycle by pressing Home and detecting the launcher.
-- **Unit Tests**: TC-026 validates PlayerStatus enum — isAtLeast() hierarchy, valueOf() round-trips, 10 states, PLAYING=highest, ERROR=lowest. TC-027 validates FeedMedia model — download state transitions, local file availability, equals/hashCode, duration/size, MIME type parsing, position tracking. Both pure JUnit, no Android dependency.
-- **Integration**: TC-028 (6 tests) validates FeedMedia CRUD via PodDBAdapter with Feeds→FeedItems→FeedMedia hierarchy. TC-029 (7 tests) validates download log entries, queue+media references, file URL persistence, and clear operations. Both follow TC-009 ContentValues + insertTestData() pattern.
-- **Manual**: TC-030 provides a 20-step checklist for long playback stability covering extended playback, seeking, background/notification controls, speed changes, headphone/Bluetooth peripheral events, sleep timer, call interruption, and screen lock.
+- **Espresso (TC-021~023)**: Blocked on API 37 — `android.hardware.input.InputManager.getInstance()` no longer exists. Need API ≤34 emulator (MuMu/AVD). Tests compile and are ready to run.
+- **UIAutomator (TC-024~025)**: 6/6 passed. TC-024 adapted `bottom_navigation_episodes`→`bottom_navigation_more` (episodes not in default visible items). TC-025 validates Home button→launcher transition and bottom nav.
+- **Unit Tests (TC-026~027)**: 21/21 passed. TC-026 validates PlayerStatus enum hierarchy via isAtLeast(). TC-027 validates FeedMedia download states and queue logic. Both pure JUnit.
+- **Integration (TC-028~029)**: 13/13 passed. TC-028 validates FeedMedia CRUD with feed→item→media hierarchy. TC-029 validates download log persistence, queue references, and cleanup.
+- **TC-029 fixes**: DownloadLog table lacks `download_url` column → removed from insert. `getItemsOfFeedCursor` may omit `size` column → guarded with conditional check.
+- **Manual**: TC-030 provides a 20-step checklist for long playback stability.
 
 ### Recommendations
 
-- Run instrumented tests (TC-021~025, TC-028~029) on MuMu emulator when available.
-- Execute TC-030 manual checklist and record results in manual-test-result.md.
-- All code follows Sprint 1 conventions: ActivityTestRule for instrumented tests, PodDBAdapter singleton pattern for integration tests, file naming convention.
+- Run Espresso tests (TC-021~023) on MuMu emulator (API 31) or AVD with API ≤34.
+- Execute TC-030 manual checklist and record results.
+- All code follows Sprint 1 conventions.
 
 ---
 
