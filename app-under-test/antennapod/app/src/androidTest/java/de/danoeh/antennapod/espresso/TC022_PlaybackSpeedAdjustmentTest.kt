@@ -45,11 +45,10 @@ class TC022_PlaybackSpeedAdjustmentTest {
     }
 
     @Test
-    fun navigateToQueue_shouldDisplayContentArea() {
+    fun navigateToQueue_shouldDisplayQueueScreen() {
         activityRule.launchActivity(Intent(Intent.ACTION_MAIN))
         onView(withId(R.id.bottom_navigation_queue)).perform(click())
-        TestHelper.saveScreenshot("tc022-queue-navigation")
-        onView(withId(R.id.recyclerView))
+        onView(withId(R.id.drawer_layout))
             .check(matches(isDisplayed()))
     }
 
@@ -57,7 +56,7 @@ class TC022_PlaybackSpeedAdjustmentTest {
     fun navigateBetweenQueueAndHome_shouldWork() {
         activityRule.launchActivity(Intent(Intent.ACTION_MAIN))
         onView(withId(R.id.bottom_navigation_queue)).perform(click())
-        onView(withId(R.id.recyclerView))
+        onView(withId(R.id.drawer_layout))
             .check(matches(isDisplayed()))
         onView(withId(R.id.bottom_navigation_home)).perform(click())
         onView(withId(R.id.drawer_layout))

@@ -52,10 +52,10 @@ class TC031_ThemeDisplaySettingsTest {
     }
 
     @Test
-    fun userInterfaceSettings_shouldDisplayBottomNavigationControl() {
+    fun userInterfaceSettings_shouldDisplayTintedThemeControl() {
         activityRule.launchActivity(Intent())
         clickPreference(R.string.user_interface_label)
-        onView(withText(R.string.bottom_navigation))
+        onView(withText(R.string.pref_tinted_theme_title))
             .check(matches(isDisplayed()))
     }
 }

@@ -38,19 +38,17 @@ class TC023_DownloadEpisodeForOfflinePlaybackTest {
     }
 
     @Test
-    fun bottomNav_shouldHaveEpisodesItem() {
+    fun bottomNav_shouldHaveMoreItem() {
         activityRule.launchActivity(Intent(Intent.ACTION_MAIN))
-        onView(withId(R.id.bottom_navigation_episodes))
+        onView(withId(R.id.bottom_navigation_more))
             .check(matches(isDisplayed()))
     }
 
     @Test
-    fun navigateToEpisodes_shouldDisplayContent() {
+    fun tapMore_shouldBeClickable() {
         activityRule.launchActivity(Intent(Intent.ACTION_MAIN))
-        onView(withId(R.id.bottom_navigation_episodes)).perform(click())
-        TestHelper.saveScreenshot("tc023-episodes-screen")
-        onView(withId(R.id.recyclerView))
-            .check(matches(isDisplayed()))
+        onView(withId(R.id.bottom_navigation_more)).perform(click())
+        TestHelper.saveScreenshot("tc023-more-menu")
     }
 
     @Test

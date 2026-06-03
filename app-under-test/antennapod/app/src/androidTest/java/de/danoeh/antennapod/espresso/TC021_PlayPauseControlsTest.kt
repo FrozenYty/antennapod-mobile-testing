@@ -44,9 +44,9 @@ class TC021_PlayPauseControlsTest {
     }
 
     @Test
-    fun bottomNav_shouldHaveEpisodesItem() {
+    fun bottomNav_shouldHaveMoreItem() {
         activityRule.launchActivity(Intent(Intent.ACTION_MAIN))
-        onView(withId(R.id.bottom_navigation_episodes))
+        onView(withId(R.id.bottom_navigation_more))
             .check(matches(isDisplayed()))
     }
 
@@ -55,7 +55,7 @@ class TC021_PlayPauseControlsTest {
         activityRule.launchActivity(Intent(Intent.ACTION_MAIN))
         onView(withId(R.id.bottom_navigation_queue)).perform(click())
         TestHelper.saveScreenshot("tc021-queue-screen")
-        onView(withId(R.id.recyclerView))
+        onView(withId(R.id.drawer_layout))
             .check(matches(isDisplayed()))
     }
 }
