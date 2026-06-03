@@ -209,9 +209,9 @@ def analyze(apk_path: str) -> dict[str, Any]:
             {"flag": "networkSecurityConfig", "value": str(network_config)}
         )
 
-    if is_debuggable and build_type == "debug":
+    if is_debuggable == "true" and build_type == "debug":
         _add_finding(report, "pass", "Debuggable=true (expected for debug build)")
-    elif is_debuggable:
+    elif is_debuggable == "true":
         _add_finding(report, "fail", "Debuggable=true in non-debug build")
     else:
         _add_finding(report, "pass", "Debuggable=false (release mode)")

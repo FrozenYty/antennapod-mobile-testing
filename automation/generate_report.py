@@ -545,7 +545,7 @@ def generate_report(apk_path: str) -> str:
     w()
 
     # ── 7. Findings & Recommendations ──
-    w("## 7. Call Graph Analysis
+    w("""## 7. Call Graph Analysis
 
 Call graph extracted from APK bytecode using Androguard's `Analysis.get_call_graph()`.
 Visualizations in `test-docs/callgraphs/`.
@@ -554,43 +554,22 @@ Visualizations in `test-docs/callgraphs/`.
 |--------|-------|
 | Method nodes (non-isolated) | 218,754 |
 | Call edges | 518,778 |
-| Inter-class edges | 168,541 |
-| Package-level edges | 235 |
 | Total classes in APK | 35,148 |
-
-### Top Callers (most outgoing calls)
-
-| Rank | Class | Outgoing Calls |
-|------|-------|---------------|
-| 1 | `ArraysKt` (Kotlin stdlib) | 7,626 |
-| 2 | `UArraysKt` (Kotlin stdlib) | 4,207 |
-| 3 | `CollectionsKt` (Kotlin stdlib) | 1,634 |
-| 4 | `StringsKt` (Kotlin stdlib) | 1,150 |
-| 5 | `Flowable` (RxJava) | 1,060 |
-
-### Top Callees (most called)
-
-| Rank | Class | Incoming Calls |
-|------|-------|---------------|
-| 1 | `StringBuilder` | 22,329 |
-| 2 | `Object` | 19,288 |
-| 3 | `Intrinsics` (Kotlin) | 13,772 |
-| 4 | `Composer` (Compose runtime) | 8,326 |
-| 5 | `ComposerKt` (Compose runtime) | 7,159 |
-
-> **Key Insight**: High dependency on Kotlin stdlib and Jetpack Compose runtime.
-> RxJava (`Flowable`) is the primary async framework. Library code dominates call
-> frequency — expected for a mature open-source app.
 
 ### Visualizations
 
 | Image | Description |
 |-------|-------------|
-| ![methods](callgraphs/callgraph-methods.png) | Method call network (top 60 classes) |
-| ![packages](callgraphs/callgraph-package.png) | Package interaction graph |
+| ![heatmap](callgraphs/callgraph-heatmap.png) | Package interaction heatmap |
+| ![classes](callgraphs/callgraph-classes.png) | Top 20 class call matrix |
 | ![stats](callgraphs/callgraph-stats.png) | Top 15 callers / top 15 callees |
+| ![coverage](callgraphs/test-coverage.png) | Test method distribution |
+| ![dex](callgraphs/dex-composition.png) | DEX file composition |
+| ![exposure](callgraphs/component-exposure.png) | Android component exposure |
 
-## 8. Findings & Recommendations")
+> Run `python automation/callgraph.py` to regenerate all visualizations.
+
+## 8. Findings & Recommendations""")
     w()
     findings = _generate_findings(apk, coverage, results)
     if findings:

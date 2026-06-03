@@ -1,6 +1,6 @@
 # AntennaPod Mobile Testing — Static Analysis Report
 
-**Generated**: 2026-06-03 21:43  
+**Generated**: 2026-06-04 01:34  
 **Tool**: Androguard 4.1.4 + custom analysis  
 **APK**: `app-under-test/antennapod/app/build/outputs/apk/play/debug/app-play-debug.apk`
 
@@ -150,7 +150,31 @@
 | Yuanbing Wang | 4 |
 | Xintao Wang | 6 |
 
-## 7. Findings & Recommendations
+## 7. Call Graph Analysis
+
+Call graph extracted from APK bytecode using Androguard's `Analysis.get_call_graph()`.
+Visualizations in `test-docs/callgraphs/`.
+
+| Metric | Value |
+|--------|-------|
+| Method nodes (non-isolated) | 218,754 |
+| Call edges | 518,778 |
+| Total classes in APK | 35,148 |
+
+### Visualizations
+
+| Image | Description |
+|-------|-------------|
+| ![heatmap](callgraphs/callgraph-heatmap.png) | Package interaction heatmap |
+| ![classes](callgraphs/callgraph-classes.png) | Top 20 class call matrix |
+| ![stats](callgraphs/callgraph-stats.png) | Top 15 callers / top 15 callees |
+| ![coverage](callgraphs/test-coverage.png) | Test method distribution |
+| ![dex](callgraphs/dex-composition.png) | DEX file composition |
+| ![exposure](callgraphs/component-exposure.png) | Android component exposure |
+
+> Run `python automation/callgraph.py` to regenerate all visualizations.
+
+## 8. Findings & Recommendations
 
 | # | Severity | Category | Finding |
 |---|----------|----------|---------|

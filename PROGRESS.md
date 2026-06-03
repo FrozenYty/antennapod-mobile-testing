@@ -13,7 +13,6 @@
 | **Module** | All |
 | **Device** | MuMu emulator (ALN-AL00, Android 12, 127.0.0.1:7555) |
 | **Last updated** | 2026-06-04 |
-| **Last updated** | 2026-06-02 |
 
 ## Right Now
 

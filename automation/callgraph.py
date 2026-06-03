@@ -478,7 +478,6 @@ def generate_cfg_samples(apk_path: str, output_dir: Path):
     # Also highlight a few as "exemplar"
     pngs = sorted(cfg_dir.glob("*.png"))
     print(f"  CFG samples generated: {count} images in {cfg_dir}")
-    print(f"  CFG samples generated: {count} images in {cfg_dir}")
     if pngs:
         print(f"  Exemplars: {', '.join(p.name for p in pngs[:4])} ...")
 
@@ -503,10 +502,11 @@ def draw_dex_composition(apk_path: str, output_dir: Path):
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
 
-    # Left: horizontal bar — DEX method count
+    # Left: horizontal bar — DEX method count (same palette as donut)
+    dex_palette = ["#9673A6", "#6C8EBF", "#82B366", "#D79B00", "#B85450", "#999999"]
     names = [f"DEX #{d['idx']}" for d in sorted_dex]
     counts = [d["methods"] for d in sorted_dex]
-    colors = ["#9673A6" if i == 0 else "#BDBDBD" for i in range(len(names))]
+    colors = [dex_palette[i % len(dex_palette)] for i in range(len(names))]
     ax1.barh(range(len(names)), counts, color=colors, edgecolor="black", linewidth=0.5)
     ax1.set_yticks(range(len(names)))
     ax1.set_yticklabels(names, fontsize=8)
@@ -522,10 +522,10 @@ def draw_dex_composition(apk_path: str, output_dir: Path):
     other_small = sum(d["classes"] for d in sorted_dex[3:])
     sizes = [d["classes"] for d in top3] + [other_small]
     labels = [f"DEX #{d['idx']}" for d in top3] + [f"Others\n({len(sorted_dex)-3} DEX)"]
-    palette = ["#9673A6", "#6C8EBF", "#82B366", "#BDBDBD"]
+    donut_colors = dex_palette[:3] + ["#BDBDBD"]
 
     wedges, texts, autotexts = ax2.pie(
-        sizes, labels=labels, colors=palette, startangle=90,
+        sizes, labels=labels, colors=donut_colors, startangle=90,
         autopct="%1.0f%%", pctdistance=0.82, labeldistance=1.12,
         wedgeprops=dict(width=0.4, edgecolor="white", linewidth=1.5))
     for at in autotexts:
