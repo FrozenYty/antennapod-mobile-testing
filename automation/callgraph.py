@@ -191,15 +191,17 @@ def draw_package_heatmap(data: dict, output_dir: Path):
                         fontsize=5, color=color, fontweight="bold")
 
     plt.colorbar(im, ax=ax, shrink=0.8, label="Call count")
+    ax.spines[["top", "right"]].set_visible(False)
     plt.title(f"Package Interaction Heatmap — AntennaPod v{data['version']}\n"
               f"Top {n} packages | {sum(sum(row) for row in matrix)} total cross-package calls",
               fontsize=12, fontweight="bold")
     plt.tight_layout()
 
-    out = output_dir / "callgraph-heatmap.png"
-    plt.savefig(out, dpi=150, bbox_inches="tight")
+    for fmt in ["pdf", "png"]:
+        out = output_dir / f"callgraph-heatmap.{fmt}"
+        plt.savefig(out, dpi=600 if fmt == "png" else None, bbox_inches="tight")
     plt.close()
-    print(f"  Heatmap saved: {out}")
+    print(f"  Heatmap saved: callgraph-heatmap.pdf/png")
 
 
 def draw_class_chord(data: dict, output_dir: Path, top_n: int = 20):
@@ -250,23 +252,26 @@ def draw_class_chord(data: dict, output_dir: Path, top_n: int = 20):
     sorted_names = [names[i] for i in sorted_idx]
     sorted_totals = [totals[i] for i in sorted_idx]
 
-    colors = plt.cm.Blues([0.3 + 0.7 * i / n for i in range(n)])
-    ax2.barh(range(n), sorted_totals, color=colors, edgecolor="navy", linewidth=0.5)
+    # Highlight top-3 with emphasis color, rest gray
+    bar_colors = ["#9673A6" if i >= n - 3 else "#BDBDBD" for i in range(n)]
+    ax2.barh(range(n), sorted_totals, color=bar_colors, edgecolor="black", linewidth=0.5)
     ax2.set_yticks(range(n))
     ax2.set_yticklabels(sorted_names, fontsize=6)
     ax2.set_xlabel("Total call volume")
     ax2.set_title("Ranked by\ncall volume")
     ax2.invert_yaxis()
+    ax2.spines[["top", "right"]].set_visible(False)
 
     fig.suptitle(f"Class-Level Call Relationships — AntennaPod v{data['version']}\n"
                  f"{n} classes, {sum(sum(row) for row in matrix)} inter-class calls",
                  fontsize=13, fontweight="bold")
     plt.tight_layout()
 
-    out = output_dir / "callgraph-classes.png"
-    plt.savefig(out, dpi=150, bbox_inches="tight")
+    for fmt in ["pdf", "png"]:
+        out = output_dir / f"callgraph-classes.{fmt}"
+        plt.savefig(out, dpi=600 if fmt == "png" else None, bbox_inches="tight")
     plt.close()
-    print(f"  Class matrix saved: {out}")
+    print(f"  Class matrix saved: callgraph-classes.pdf/png")
 
 def draw_top_callers_chart(data: dict, output_dir: Path):
     """Bar chart of top caller/callee classes."""
@@ -277,30 +282,39 @@ def draw_top_callers_chart(data: dict, output_dir: Path):
     n1, n2 = len(top_callers), len(top_callees)
 
     names1 = [_shorten_class(n) for n, _ in top_callers]
-    colors1 = plt.cm.Blues([0.3 + 0.7 * i / n1 for i in range(n1)])
-    ax1.barh(range(n1), [v for _, v in top_callers], color=colors1, edgecolor="navy")
+    colors1 = ["#9673A6" if i == 0 else "#BDBDBD" for i in range(n1)]
+    ax1.barh(range(n1), [v for _, v in top_callers], color=colors1, edgecolor="black",
+             linewidth=0.5)
     ax1.set_yticks(range(n1))
     ax1.set_yticklabels(names1, fontsize=7)
     ax1.set_xlabel("Outgoing calls")
     ax1.set_title("Top 15 Callers")
     ax1.invert_yaxis()
+    ax1.spines[["top", "right"]].set_visible(False)
+    for i, (_, v) in enumerate(top_callers):
+        ax1.text(v + max(v * 0.01, 10), i, f"{v:,}", va="center", fontsize=6)
 
     names2 = [_shorten_class(n) for n, _ in top_callees]
-    colors2 = plt.cm.Oranges([0.3 + 0.7 * i / n2 for i in range(n2)])
-    ax2.barh(range(n2), [v for _, v in top_callees], color=colors2, edgecolor="darkred")
+    colors2 = ["#9673A6" if i == 0 else "#BDBDBD" for i in range(n2)]
+    ax2.barh(range(n2), [v for _, v in top_callees], color=colors2, edgecolor="black",
+             linewidth=0.5)
     ax2.set_yticks(range(n2))
     ax2.set_yticklabels(names2, fontsize=7)
     ax2.set_xlabel("Incoming calls")
     ax2.set_title("Top 15 Callees")
     ax2.invert_yaxis()
+    ax2.spines[["top", "right"]].set_visible(False)
+    for i, (_, v) in enumerate(top_callees):
+        ax2.text(v + max(v * 0.01, 10), i, f"{v:,}", va="center", fontsize=6)
 
     fig.suptitle(f"Call Graph Statistics — {data['package']} v{data['version']}",
                  fontsize=13, fontweight="bold")
     plt.tight_layout()
-    out = output_dir / "callgraph-stats.png"
-    plt.savefig(out, dpi=150, bbox_inches="tight")
+    for fmt in ["pdf", "png"]:
+        out = output_dir / f"callgraph-stats.{fmt}"
+        plt.savefig(out, dpi=600 if fmt == "png" else None, bbox_inches="tight")
     plt.close()
-    print(f"  Stats chart saved: {out}")
+    print(f"  Stats chart saved: callgraph-stats.pdf/png")
 
 
 def _pkg_short(pkg: str) -> str:
