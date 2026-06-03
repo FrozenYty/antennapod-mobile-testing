@@ -212,7 +212,7 @@ def analyze_test_coverage() -> dict[str, Any]:
                 lines = section.strip().split("\n")
                 tcs = []
                 for line in lines:
-                    if line.startswith("| TC-"):
+                    if line.startswith("| TC-") and not line.startswith("| TC-ID"):
                         parts = _strip_md_table_row(line)
                         if len(parts) >= 4:
                             tcs.append({
