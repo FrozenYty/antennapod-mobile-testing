@@ -7,6 +7,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
 import de.danoeh.antennapod.activity.MainActivity
+import de.danoeh.antennapod.utils.TestHelper
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -57,6 +58,8 @@ class TC025_BackgroundPlaybackContinuityTest {
 
         device.pressHome()
         device.waitForIdle()
+
+        TestHelper.saveScreenshot("tc025-launcher-after-home")
 
         val launcherVisible = device.wait(
             Until.hasObject(By.pkg("com.android.launcher3").depth(0)),

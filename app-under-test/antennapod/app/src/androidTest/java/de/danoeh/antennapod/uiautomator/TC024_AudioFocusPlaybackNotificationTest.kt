@@ -7,6 +7,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
 import de.danoeh.antennapod.activity.MainActivity
+import de.danoeh.antennapod.utils.TestHelper
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -48,6 +49,7 @@ class TC024_AudioFocusPlaybackNotificationTest {
             5000
         )
         assertNotNull("Bottom navigation should be visible via UIAutomator", bottomNav)
+        TestHelper.saveScreenshot("tc024-main-activity")
     }
 
     @Test
