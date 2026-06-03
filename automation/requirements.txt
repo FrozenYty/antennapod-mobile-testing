@@ -1,0 +1,4 @@
+# Python dependencies for AntennaPod static analysis
+# Install: pip install -r automation/requirements.txt
+
+androguard>=4.1.0

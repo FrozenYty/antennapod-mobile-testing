@@ -20,6 +20,7 @@ This project uses complementary testing methods. Mix and match per test case as 
 | **Integration Test** | SQLite / PodDBAdapter | Data layer: DB schema, DAO queries, data integrity |
 | **Manual / Exploratory** | Checklist + device | UX & usability: visual feel, audio quality, accessibility |
 | **Performance** | Benchmark / manual timing | Metrics: startup time, parsing speed, memory footprint |
+| **Static Analysis** | Androguard (Python) | APK manifest: permissions audit, component exposure, security flags |
 
 ---
 

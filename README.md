@@ -73,8 +73,9 @@ This project uses multiple complementary testing approaches:
 | Integration Tests | SQLite / ContentProvider | Data layer |
 | Manual | Structured checklist | UX & accessibility |
 | Performance | Benchmark / timer | Speed & memory |
+| Static Analysis | Androguard (Python) | Permissions, components, security flags |
 
-See `AI-GUIDE.md` for test writing patterns. See `test-docs/test-case-plan.md` for TC assignments.
+See `AI-GUIDE.md` for test writing patterns. See `test-docs/test-case-plan.md` for TC assignments. See `automation/README.md` for static analysis usage.
 
 ## App Under Test
 

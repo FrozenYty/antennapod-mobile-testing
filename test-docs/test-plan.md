@@ -45,6 +45,7 @@ Uses a multi-method strategy for broad coverage:
 | **Integration Tests** | Data layer: PodDBAdapter schema, DAO queries, data integrity |
 | **Manual / Exploratory** | UX evaluation: visual feel, audio quality, accessibility |
 | **Performance** | Metrics: startup time, feed parsing speed, memory footprint |
+| **Static Analysis** | APK manifest: permissions, components, security flags (Androguard) |
 
 ## 5. Test Environment
 
