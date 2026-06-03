@@ -477,8 +477,187 @@ def generate_cfg_samples(apk_path: str, output_dir: Path):
     # Also highlight a few as "exemplar"
     pngs = sorted(cfg_dir.glob("*.png"))
     print(f"  CFG samples generated: {count} images in {cfg_dir}")
+    print(f"  CFG samples generated: {count} images in {cfg_dir}")
     if pngs:
         print(f"  Exemplars: {', '.join(p.name for p in pngs[:4])} ...")
+
+
+def draw_dex_composition(apk_path: str, output_dir: Path):
+    """DEX file size treemap & method count distribution."""
+    from androguard.misc import AnalyzeAPK as _AnalyzeAPK
+    a, d_list, dx = _AnalyzeAPK(apk_path)
+
+    dex_data = []
+    for i, d in enumerate(d_list):
+        dex_data.append({
+            "idx": i,
+            "classes": len(d.get_classes()),
+            "methods": len(d.get_methods()),
+            "strings": len(d.get_strings()),
+        })
+
+    # Top DEX by method count (filter those with >1000 methods)
+    dex_significant = [d for d in dex_data if d["methods"] > 1000]
+    sorted_dex = sorted(dex_significant, key=lambda x: -x["methods"])
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+    # Left: horizontal bar — DEX method count
+    names = [f"DEX #{d['idx']}" for d in sorted_dex]
+    counts = [d["methods"] for d in sorted_dex]
+    colors = ["#9673A6" if i == 0 else "#BDBDBD" for i in range(len(names))]
+    ax1.barh(range(len(names)), counts, color=colors, edgecolor="black", linewidth=0.5)
+    ax1.set_yticks(range(len(names)))
+    ax1.set_yticklabels(names, fontsize=8)
+    ax1.set_xlabel("Method count")
+    ax1.set_title(f"Major DEX Files ({len(sorted_dex)} with >1000 methods)")
+    ax1.invert_yaxis()
+    ax1.spines[["top", "right"]].set_visible(False)
+    for i, v in enumerate(counts):
+        ax1.text(v + 500, i, f"{v:,}", va="center", fontsize=7)
+
+    # Right: donut — class distribution (top 5 + others)
+    top5 = sorted_dex[:5]
+    other_classes = sum(d["classes"] for d in sorted_dex[5:])
+    sizes = [d["classes"] for d in top5] + [other_classes]
+    labels = [f"DEX #{d['idx']}" for d in top5] + ["Others"]
+    palette = ["#9673A6", "#6C8EBF", "#82B366", "#D79B00", "#B85450", "#BDBDBD"]
+
+    wedges, texts, autotexts = ax2.pie(
+        sizes, labels=labels, colors=palette, startangle=90,
+        autopct="%1.0f%%", pctdistance=0.78,
+        wedgeprops=dict(width=0.4, edgecolor="white", linewidth=1.5))
+    for at in autotexts:
+        at.set_color("black"); at.set_fontsize(8)
+    ax2.text(0, 0, f"{sum(sizes):,}\nclasses", ha="center", va="center",
+             fontsize=12, fontweight="bold")
+    ax2.set_aspect("equal")
+    ax2.set_title("Class Distribution (Major DEX Only)")
+
+    fig.suptitle(f"DEX Composition — AntennaPod v{a.get_androidversion_name()}",
+                 fontsize=13, fontweight="bold")
+    plt.tight_layout()
+    for fmt in ["pdf", "png"]:
+        out = output_dir / f"dex-composition.{fmt}"
+        plt.savefig(out, dpi=600 if fmt == "png" else None, bbox_inches="tight")
+    plt.close()
+    print(f"  DEX composition saved: dex-composition.pdf/png")
+
+
+def draw_test_coverage(output_dir: Path):
+    """Donut chart of test method distribution across 40 TCs."""
+    methods = ["Espresso", "UIAutomator", "Unit Test",
+               "Integration", "Manual", "Performance"]
+    counts = [13, 7, 8, 6, 4, 2]
+    palette = ["#9673A6", "#6C8EBF", "#82B366",
+               "#D79B00", "#B85450", "#BDBDBD"]
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+    # Left: donut
+    wedges, texts, autotexts = ax1.pie(
+        counts, labels=methods, colors=palette, startangle=90,
+        autopct="%1.0f%%", pctdistance=0.78, labeldistance=1.08,
+        wedgeprops=dict(width=0.4, edgecolor="white", linewidth=1.5))
+    for at in autotexts:
+        at.set_color("black"); at.set_fontsize(9)
+    ax1.text(0, 0, f"{sum(counts)}\nTCs", ha="center", va="center",
+             fontsize=14, fontweight="bold")
+    ax1.set_aspect("equal")
+    ax1.set_title("Test Method Distribution")
+
+    # Right: stacked bar by sprint
+    sprints = ["Sprint 1\n(Core)", "Sprint 2\n(Subscription)", "Sprint 3\n(Playback)", "Sprint 4\n(Settings)"]
+    sprint_data = {
+        "Espresso":    [5, 3, 3, 2],
+        "UIAutomator": [1, 2, 2, 2],
+        "Unit Test":   [2, 2, 2, 2],
+        "Integration": [1, 1, 2, 2],
+        "Manual":      [1, 1, 1, 1],
+        "Performance": [0, 1, 0, 1],
+    }
+
+    x = range(len(sprints))
+    bottom = [0] * len(sprints)
+    for method, color in zip(methods, palette):
+        values = sprint_data[method]
+        ax2.bar(x, values, bottom=bottom, label=method, color=color,
+                edgecolor="black", linewidth=0.5)
+        bottom = [b + v for b, v in zip(bottom, values)]
+
+    ax2.set_xticks(x)
+    ax2.set_xticklabels(sprints, fontsize=9)
+    ax2.set_ylabel("Test Cases")
+    ax2.set_title("Test Coverage by Sprint")
+    ax2.legend(frameon=False, loc="upper left", ncol=2, fontsize=8)
+    ax2.spines[["top", "right"]].set_visible(False)
+    ax2.set_ylim(0, 12)
+
+    fig.suptitle("Test Coverage Analysis — 40 TCs Across 4 Sprints",
+                 fontsize=13, fontweight="bold")
+    plt.tight_layout()
+    for fmt in ["pdf", "png"]:
+        out = output_dir / f"test-coverage.{fmt}"
+        plt.savefig(out, dpi=600 if fmt == "png" else None, bbox_inches="tight")
+    plt.close()
+    print(f"  Test coverage saved: test-coverage.pdf/png")
+
+
+def draw_component_exposure(apk_path: str, output_dir: Path):
+    """Bar chart of Android components and their exposure status."""
+    from androguard.misc import AnalyzeAPK as _AnalyzeAPK
+    a, d_list, dx = _AnalyzeAPK(apk_path)
+
+    comps = {
+        "Activity": a.get_activities(),
+        "Service": a.get_services(),
+        "Receiver": a.get_receivers(),
+        "Provider": a.get_providers(),
+    }
+
+    data = []
+    for ctype, names in comps.items():
+        exported = 0
+        for name in names:
+            try:
+                filters = a.get_intent_filters(ctype.lower(), name)
+                if filters:
+                    exported += 1
+            except Exception:
+                pass
+        data.append((ctype, len(names), exported))
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+    types = [d[0] for d in data]
+    total = [d[1] for d in data]
+    exposed = [d[2] for d in data]
+    internal = [t - e for t, e in zip(total, exposed)]
+
+    x = range(len(types))
+    ax.bar(x, internal, color="#BDBDBD", edgecolor="black", linewidth=0.5,
+           label="Internal (no intent-filter)")
+    ax.bar(x, exposed, bottom=internal, color="#9673A6", edgecolor="black",
+           linewidth=0.5, label="Exposed (has intent-filter)")
+    ax.set_xticks(x)
+    ax.set_xticklabels(types, fontsize=11)
+    ax.set_ylabel("Count")
+    ax.set_title(f"Android Component Exposure — {a.get_package()}\n"
+                 f"{sum(total)} total components | v{a.get_androidversion_name()}",
+                 fontsize=12, fontweight="bold")
+    ax.legend(frameon=False, loc="upper left", fontsize=10)
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.set_ylim(0, max(total) * 1.25)
+
+    # Annotate
+    for i, (t, e) in enumerate(zip(total, exposed)):
+        ax.text(i, t + 0.5, str(t), ha="center", fontsize=10, fontweight="bold")
+
+    plt.tight_layout()
+    for fmt in ["pdf", "png"]:
+        out = output_dir / f"component-exposure.{fmt}"
+        plt.savefig(out, dpi=600 if fmt == "png" else None, bbox_inches="tight")
+    plt.close()
+    print(f"  Component exposure saved: component-exposure.pdf/png")
 
 
 # ── CLI ───────────────────────────────────────────────────────────────
@@ -523,6 +702,9 @@ def main():
     draw_class_chord(data, output_dir, top_n=max(15, args.top_n // 2))
     export_call_graph_gml(output_dir, args.apk)
     generate_cfg_samples(args.apk, output_dir)
+    draw_dex_composition(args.apk, output_dir)
+    draw_test_coverage(output_dir)
+    draw_component_exposure(args.apk, output_dir)
 
     # Print summary stats
     print(f"\n=== Summary ===")
