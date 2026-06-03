@@ -20,3 +20,4 @@ Thumbs.db
 *.log
 
 # Test artifacts (screenshots are test evidence — commit intentionally)
+*.pyc

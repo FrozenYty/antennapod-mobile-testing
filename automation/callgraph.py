@@ -346,7 +346,8 @@ def export_call_graph_gml(output_dir: Path, apk_path: str):
 
     out = output_dir / "callgraph-antennapod.gml"
     nx.write_gml(cg, str(out), stringizer=str)
-    print(f"  GML exported: {out} ({cg.number_of_nodes():,} nodes, "
+    rel_gml = os.path.relpath(str(out), PROJECT_ROOT)
+    print(f"  GML exported: {rel_gml} ({cg.number_of_nodes():,} nodes, "
           f"{cg.number_of_edges():,} edges)")
     print(f"  Open in Gephi: File → Open → {out.name}")
     print(f"  → Use 'Force Atlas 2' layout, then 'Preview' for PPT-quality")
@@ -684,9 +685,12 @@ def main():
     output_dir = Path(args.output)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    rel_apk = str(Path(os.path.relpath(args.apk, PROJECT_ROOT)))
+    rel_out = str(Path(os.path.relpath(str(output_dir), PROJECT_ROOT)))
+
     print(f"Call Graph Analysis — {datetime.now().strftime('%Y-%m-%d %H:%M')}")
-    print(f"  APK: {args.apk}")
-    print(f"  Output: {output_dir}")
+    print(f"  APK: {rel_apk}")
+    print(f"  Output: {rel_out}")
 
     data = analyze_call_graph(args.apk)
 
@@ -720,7 +724,7 @@ def main():
     for name, count in data["top_callees"][:5]:
         print(f"    {_shorten_class(name)} ({count} incoming)")
 
-    print(f"\n  Images saved to: {output_dir}")
+    print(f"\n  Images saved to: {rel_out}")
     for f in sorted(output_dir.glob("*.png")):
         print(f"    {f.name} ({f.stat().st_size // 1024} KB)")
 

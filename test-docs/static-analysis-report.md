@@ -2,7 +2,7 @@
 
 **Generated**: 2026-06-03 21:43  
 **Tool**: Androguard 4.1.4 + custom analysis  
-**APK**: `D:\MYPROJS\Android_Studio_Files\antennapod-mobile-testing\app-under-test\antennapod\app\build\outputs\apk\play\debug\app-play-debug.apk`
+**APK**: `app-under-test/antennapod/app/build/outputs/apk/play/debug/app-play-debug.apk`
 
 ---
 ## 1. Project Overview

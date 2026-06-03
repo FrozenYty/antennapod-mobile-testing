@@ -1,6 +1,6 @@
 # Task Brief — AntennaPod Mobile Testing
 
-**To**: Members 2, 3, 4
+**To**: Jianheng Sun, Yuanbing Wang, Xintao Wang
 **From**: Tianyu Yao (Team Lead)
 
 ## Your Assignment

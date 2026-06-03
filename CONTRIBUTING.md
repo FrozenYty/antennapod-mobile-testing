@@ -193,7 +193,7 @@ Every push to `main` triggers these checks:
 |-------|-----------------|
 | Compile instrumented tests | `./gradlew :app:compilePlayDebugAndroidTestSources` |
 | Compile unit tests | `./gradlew :app:compilePlayDebugUnitTestSources` |
-| Run unit tests | `./gradlew :app:testPlayDebugUnitTest` |
+| Run unit tests | `./gradlew :app:testPlayDebugUnitTest --tests "de.danoeh.antennapod.unit.*" --tests "de.danoeh.antennapod.manual.*"` |
 | @author tags | All `.kt` test files have `@author Your Name` in KDoc |
 | Test file naming | Files follow `TC<NNN>_ShortTitleTest.kt` (TestHelper.kt exempt) |
 

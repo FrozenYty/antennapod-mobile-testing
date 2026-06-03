@@ -18,7 +18,7 @@
 | TC-007 | Unit Test (JUnit) | Feed Entity Field Validation | High | Passed | 17/17 passed |
 | TC-008 | Unit Test (JUnit) | FeedItem & FeedMedia Entity Validation | High | Passed | 34/34 passed |
 | TC-009 | Integration (SQLite) | PodDBAdapter Schema & Table Creation | Medium | Passed | MuMu emulator, 8/8 passed |
-| TC-010 | Manual / Exploratory | First-Launch User Flow | Medium | Manual | Checklist ready, awaiting execution |
+| TC-010 | Manual / Exploratory | First-Launch User Flow | Medium | Passed | 19/20 passed (MuMu), 1 stream error (Spotify CDN) |
 
 ### TC-001: App Launch & Main Screen
 
@@ -291,13 +291,13 @@
 - State preservation on navigation
 
 ---
-## Yuanbing Wang — Playback & Downloads (TC-021 ~ TC-030)
+## Yuanbing Wang — Playback & Downloads (TC-021 ~ TC-030) Done
 
 | TC-ID | Method | Title | Priority | Status | Notes |
 |-------|--------|-------|----------|--------|-------|
-| TC-021 | Espresso | Play / Pause Controls | High | Compiled | Pending device run |
-| TC-022 | Espresso | Playback Speed Adjustment | Medium | Compiled | Pending device run |
-| TC-023 | Espresso | Download Episode for Offline Playback | High | Compiled | Pending device run |
+| TC-021 | Espresso | Play / Pause Controls | High | Passed | 4/4 passed (MuMu), fixed episodes→more, recyclerView→drawer_layout |
+| TC-022 | Espresso | Playback Speed Adjustment | Medium | Passed | 4/4 passed (MuMu), fixed recyclerView→drawer_layout |
+| TC-023 | Espresso | Download Episode for Offline Playback | High | Passed | 4/4 passed (MuMu), fixed episodes→more |
 | TC-021 | Espresso | Play / Pause Controls | High | Passed | 4/4 passed (MuMu), fixed episodes→more, recyclerView→drawer_layout |
 | TC-022 | Espresso | Playback Speed Adjustment | Medium | Passed | 4/4 passed (MuMu), fixed recyclerView→drawer_layout |
 | TC-023 | Espresso | Download Episode for Offline Playback | High | Passed | 4/4 passed (MuMu), fixed episodes→more |

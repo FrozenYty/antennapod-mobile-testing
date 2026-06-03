@@ -5,9 +5,9 @@
 | Field | Detail |
 |-------|--------|
 | **Project** | AntennaPod Mobile Testing |
-| **Test Cycle** | TC-001 ~ TC-010 (Core Foundation) |
-| **Date** | 2026-05-28 |
-| **Tester** | Tianyu Yao |
+| **Test Cycle** | TC-001 ~ TC-040 (All Sprints) |
+| **Date** | 2026-05-28 ~ 2026-06-03 |
+| **Testers** | Tianyu Yao, Jianheng Sun, Yuanbing Wang, Xintao Wang |
 
 ## Results Summary
 

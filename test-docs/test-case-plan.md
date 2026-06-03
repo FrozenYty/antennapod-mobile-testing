@@ -4,7 +4,7 @@
 > When adding new members or test cases, use the next available TC-IDs and update the assignment table.
 > See `AI-GUIDE.md` for setup, conventions, and patterns.
 >
-> **Members 2/3/4**: Your TC plans below are suggested starting points. If a TC doesn't fit your
+> **Team Members**: Your TC plans below are suggested starting points. If a TC doesn't fit your
 > implementation or you find a better testing angle, discuss with the team lead and adjust.
 > The module and method distribution are the only constraints — individual titles are flexible.
 
@@ -152,7 +152,7 @@ app-under-test/antennapod/app/src/
 
 ## How to Extend This Plan
 
-- **Modifying a suggested TC**: Members 2/3/4 can change titles, swap priorities, or redesign
+- **Modifying a suggested TC**: Team members can change titles, swap priorities, or redesign
   TC content as long as the testing method and module scope stay consistent. Discuss changes
   with the team lead and update this document.
 - **Adding a member**: Insert a new section with the next available TC-ID block. No need to renumber.

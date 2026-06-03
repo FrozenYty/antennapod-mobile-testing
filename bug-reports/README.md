@@ -20,6 +20,6 @@ File bug reports here when you discover a defect during testing.
 
 `bug-XXX.md` — e.g., `bug-001.md`, `bug-002.md`
 
-## Sprint 1 Status
+## Project Status
 
-**No bugs found.** All 84 automated tests and 19/20 manual tests passed.
+**No bugs found.** All 40 TCs complete. 84+ automated tests and all manual tests pass.

@@ -364,7 +364,7 @@ def generate_report(apk_path: str) -> str:
     w()
     w(f"**Generated**: {now}  ")
     w(f"**Tool**: Androguard {_get_androguard_version()} + custom analysis  ")
-    w(f"**APK**: `{apk_path}`")
+    w(f"**APK**: `app-under-test/antennapod/app/build/outputs/apk/play/debug/app-play-debug.apk`")
     w()
     w("---")
 
@@ -729,8 +729,10 @@ def main():
     args = parser.parse_args()
 
     print(f"Generating report...")
-    print(f"  APK: {args.apk}")
-    print(f"  Output: {args.output}")
+    rel_apk = str(Path(args.apk).relative_to(PROJECT_ROOT)) if PROJECT_ROOT in Path(args.apk).parents else args.apk
+    rel_out = str(Path(args.output).relative_to(PROJECT_ROOT)) if PROJECT_ROOT in Path(args.output).parents else args.output
+    print(f"  APK: {rel_apk}")
+    print(f"  Output: {rel_out}")
 
     report = generate_report(args.apk)
 
