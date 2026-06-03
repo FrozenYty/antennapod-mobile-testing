@@ -61,6 +61,30 @@ python automation/static_analysis.py --apk path/to/app.apk
 - **[WARN]** — Unusual permission that may need justification
 - **[FAIL]** — High-risk permission (contacts, location, camera, etc.)
 
+## Comprehensive Report Generator
+
+Generates a full static analysis report covering all project dimensions.
+
+```bash
+# Generate report (saves to Claude_Code_Files/static-analysis-report.md)
+python automation/generate_report.py
+
+# Custom output path
+python automation/generate_report.py --output reports/my-report.md
+```
+
+### Report Sections
+
+| Section | Content |
+|---------|---------|
+| Project Overview | App version, SDK, TC count, screenshots |
+| Test Method Distribution | Coverage by method (Espresso/UIAutomator/Unit/Integration/Manual/Performance) |
+| Test Results Summary | Per-sprint pass/partial/N/A counts |
+| APK Manifest Analysis | Permissions, components, security flags (Androguard) |
+| Code Structure | Test file inventory by directory |
+| Screenshot Inventory | Per-file size, ownership, sprint attribution |
+| Findings & Recommendations | Risk assessment and action items |
+
 ## Manual Commands
 
 ### Compile
