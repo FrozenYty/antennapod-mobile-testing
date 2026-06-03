@@ -521,14 +521,16 @@ def draw_dex_composition(apk_path: str, output_dir: Path):
     for i, v in enumerate(counts):
         ax1.text(v + 500, i, f"{v:,}", va="center", fontsize=7)
 
-    # Right: donut — same color per DEX id
-    sizes = [d["classes"] for d in sorted_dex]
-    labels = [f"DEX #{d['idx']}" for d in sorted_dex]
-    donut_colors = [dex_color[d["idx"]] for d in sorted_dex]
+    # Right: donut — top 3 + Others, same colors from unified map
+    top3 = sorted_dex[:3]
+    other_small = sum(d["classes"] for d in sorted_dex[3:])
+    sizes = [d["classes"] for d in top3] + [other_small]
+    labels = [f"DEX #{d['idx']}" for d in top3] + [f"Others\n({len(sorted_dex)-3} DEX)"]
+    donut_colors = [dex_color[d["idx"]] for d in top3] + ["#BDBDBD"]
 
     wedges, texts, autotexts = ax2.pie(
         sizes, labels=labels, colors=donut_colors, startangle=90,
-        autopct="%1.0f%%", pctdistance=0.78, labeldistance=1.12,
+        autopct="%1.0f%%", pctdistance=0.82, labeldistance=1.12,
         wedgeprops=dict(width=0.4, edgecolor="white", linewidth=1.5))
     for at in autotexts:
         at.set_color("black"); at.set_fontsize(8)
