@@ -500,14 +500,18 @@ def draw_dex_composition(apk_path: str, output_dir: Path):
     dex_significant = [d for d in dex_data if d["methods"] > 1000]
     sorted_dex = sorted(dex_significant, key=lambda x: -x["methods"])
 
+    # Unified color mapping: same DEX id → same color in both charts
+    dex_palette = ["#9673A6", "#6C8EBF", "#82B366", "#D79B00", "#B85450"]
+    dex_color = {d["idx"]: dex_palette[i % len(dex_palette)]
+                 for i, d in enumerate(sorted_dex)}
+
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
 
-    # Left: horizontal bar — DEX method count (same palette as donut)
-    dex_palette = ["#9673A6", "#6C8EBF", "#82B366", "#D79B00", "#B85450", "#999999"]
+    # Left: horizontal bar — all major DEX by method count
     names = [f"DEX #{d['idx']}" for d in sorted_dex]
     counts = [d["methods"] for d in sorted_dex]
-    colors = [dex_palette[i % len(dex_palette)] for i in range(len(names))]
-    ax1.barh(range(len(names)), counts, color=colors, edgecolor="black", linewidth=0.5)
+    bar_colors = [dex_color[d["idx"]] for d in sorted_dex]
+    ax1.barh(range(len(names)), counts, color=bar_colors, edgecolor="black", linewidth=0.5)
     ax1.set_yticks(range(len(names)))
     ax1.set_yticklabels(names, fontsize=8)
     ax1.set_xlabel("Method count")
@@ -517,23 +521,21 @@ def draw_dex_composition(apk_path: str, output_dir: Path):
     for i, v in enumerate(counts):
         ax1.text(v + 500, i, f"{v:,}", va="center", fontsize=7)
 
-    # Right: donut — top 3 + others (merge small slices to avoid overlap)
-    top3 = sorted_dex[:3]
-    other_small = sum(d["classes"] for d in sorted_dex[3:])
-    sizes = [d["classes"] for d in top3] + [other_small]
-    labels = [f"DEX #{d['idx']}" for d in top3] + [f"Others\n({len(sorted_dex)-3} DEX)"]
-    donut_colors = dex_palette[:3] + ["#BDBDBD"]
+    # Right: donut — same color per DEX id
+    sizes = [d["classes"] for d in sorted_dex]
+    labels = [f"DEX #{d['idx']}" for d in sorted_dex]
+    donut_colors = [dex_color[d["idx"]] for d in sorted_dex]
 
     wedges, texts, autotexts = ax2.pie(
         sizes, labels=labels, colors=donut_colors, startangle=90,
-        autopct="%1.0f%%", pctdistance=0.82, labeldistance=1.12,
+        autopct="%1.0f%%", pctdistance=0.78, labeldistance=1.12,
         wedgeprops=dict(width=0.4, edgecolor="white", linewidth=1.5))
     for at in autotexts:
         at.set_color("black"); at.set_fontsize(8)
     ax2.text(0, 0, f"{sum(sizes):,}\nclasses", ha="center", va="center",
              fontsize=12, fontweight="bold")
     ax2.set_aspect("equal")
-    ax2.set_title("Class Distribution (Major DEX Only)")
+    ax2.set_title(f"Class Distribution ({len(sorted_dex)} Major DEX)")
 
     fig.suptitle(f"DEX Composition — AntennaPod v{a.get_androidversion_name()}",
                  fontsize=13, fontweight="bold")
