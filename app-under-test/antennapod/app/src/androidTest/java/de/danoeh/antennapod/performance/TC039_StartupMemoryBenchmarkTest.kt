@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
  * Measures startup and memory characteristics with manual timing because no
  * benchmark library is configured in this project.
  *
- * @author Member Four
+ * @author Xintao Wang
  */
 @RunWith(AndroidJUnit4::class)
 class TC039_StartupMemoryBenchmarkTest {

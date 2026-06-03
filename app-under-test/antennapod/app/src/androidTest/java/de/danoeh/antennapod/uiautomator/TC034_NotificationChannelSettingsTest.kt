@@ -26,7 +26,7 @@ import org.junit.runner.RunWith
  * Verifies that AntennaPod creates the expected notification channels and
  * exposes the app notification settings screen through Android Settings.
  *
- * @author Member Four
+ * @author Xintao Wang
  */
 @RunWith(AndroidJUnit4::class)
 class TC034_NotificationChannelSettingsTest {

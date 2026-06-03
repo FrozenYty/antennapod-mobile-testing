@@ -156,20 +156,20 @@
 - State preservation on relaunch
 
 ---
-## Jianheng Sun — Subscription & Discovery (TC-011 ~ TC-020) In Progress
+## Jianheng Sun — Subscription & Discovery (TC-011 ~ TC-020) Done
 
 | TC-ID | Method | Title | Priority | Status | Notes |
 |-------|--------|-------|----------|--------|-------|
-| TC-011 | Espresso | Browse Discovery Page | High | Compiled | Pending device run |
-| TC-012 | Espresso | Subscribe to Feed from Discovery | High | Compiled | Pending device run |
-| TC-013 | Espresso | Unsubscribe & Feed Deletion | Medium | Compiled | Pending device run |
-| TC-014 | UIAutomator | Share Feed URL to External App | Medium | Compiled | Pending device run |
-| TC-015 | UIAutomator | Feed Refresh & Pull-to-Update | Medium | Compiled | Pending device run |
+| TC-011 | Espresso | Browse Discovery Page | High | Passed | 4/4 passed, fixed toolbar→appbar, grid→swipeRefresh |
+| TC-012 | Espresso | Subscribe to Feed from Discovery | High | Passed | 4/4 passed |
+| TC-013 | Espresso | Unsubscribe & Feed Deletion | Medium | Passed | 4/4 passed |
+| TC-014 | UIAutomator | Share Feed URL to External App | Medium | Passed | 3/3 passed |
+| TC-015 | UIAutomator | Feed Refresh & Pull-to-Update | Medium | Passed | 3/3 passed |
 | TC-016 | Unit Test (JUnit) | Feed URL Parsing & Normalization | High | Passed | 24/24 passed |
 | TC-017 | Unit Test (JUnit) | Subscription Sort & Filter Logic | Low | Passed | 23/23 passed |
-| TC-018 | Integration (SQLite) | Feed & FeedItem DAO Query Correctness | Medium | Compiled | Pending device run |
-| TC-019 | Performance | Feed Parsing Speed Benchmark | Medium | Compiled | Pending device run |
-| TC-020 | Manual / Exploratory | Discovery Page Usability | Low | Ready | Checklist ready for execution |
+| TC-018 | Integration (SQLite) | Feed & FeedItem DAO Query Correctness | Medium | Passed | 8/8 passed |
+| TC-019 | Performance | Feed Parsing Speed Benchmark | Medium | Passed | 3/3 passed, insert <100ms, query <50ms, item insert <200ms |
+| TC-020 | Manual / Exploratory | Discovery Page Usability | Low | Passed | 16/16 executable pass, 4 N/A, 4 screenshots |
 
 ### TC-011: Browse Discovery Page
 
@@ -298,13 +298,16 @@
 | TC-021 | Espresso | Play / Pause Controls | High | Compiled | Pending device run |
 | TC-022 | Espresso | Playback Speed Adjustment | Medium | Compiled | Pending device run |
 | TC-023 | Espresso | Download Episode for Offline Playback | High | Compiled | Pending device run |
-| TC-024 | UIAutomator | Audio Focus & Playback Notification | High | Compiled | Pending device run |
-| TC-025 | UIAutomator | Background Playback Continuity | Medium | Compiled | Pending device run |
+| TC-021 | Espresso | Play / Pause Controls | High | Blocked | API 37 InputManager issue; compiled, ready on API ≤34 |
+| TC-022 | Espresso | Playback Speed Adjustment | Medium | Blocked | Same API 37 InputManager issue |
+| TC-023 | Espresso | Download Episode for Offline Playback | High | Blocked | Same API 37 InputManager issue |
+| TC-024 | UIAutomator | Audio Focus & Playback Notification | High | Passed | 3/3 passed (API 37), 1 screenshot |
+| TC-025 | UIAutomator | Background Playback Continuity | Medium | Passed | 3/3 passed (API 37), 1 screenshot |
 | TC-026 | Unit Test (JUnit) | Playback State Machine Logic | High | Passed | 11/11 passed |
 | TC-027 | Unit Test (JUnit) | Download Queue Priority Logic | Medium | Passed | 10/10 passed |
-| TC-028 | Integration (SQLite) | FeedMedia DAO Read / Write Integrity | Medium | Compiled | Pending device run |
-| TC-029 | Integration (SQLite) | Episode Download Status Tracking | Medium | Compiled | Pending device run |
-| TC-030 | Manual / Exploratory | Long Playback Stability | Medium | Ready | Checklist ready for execution |
+| TC-028 | Integration (SQLite) | FeedMedia DAO Read / Write Integrity | Medium | Passed | 6/6 passed (API 37) |
+| TC-029 | Integration (SQLite) | Episode Download Status Tracking | Medium | Passed | 7/7 passed (API 37) |
+| TC-030 | Manual / Exploratory | Long Playback Stability | Medium | Ready | 20-step checklist ready for execution |
 
 ### TC-021: Play / Pause Controls
 

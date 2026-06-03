@@ -6,6 +6,7 @@ import de.danoeh.antennapod.model.feed.FeedItemFilter
 import de.danoeh.antennapod.model.feed.FeedOrder
 import de.danoeh.antennapod.model.feed.SortOrder
 import de.danoeh.antennapod.model.feed.SubscriptionsFilter
+import de.danoeh.antennapod.model.feed.FeedMedia
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -153,7 +154,7 @@ class TC017_SortFilterLogicTest {
     fun feedItemFilter_hasMedia_shouldMatchItemWithMedia() {
         val feed = createTestFeed(1L)
         val item = FeedItem(1L, "HasMedia", "iid", "https://link", Date(), FeedItem.UNPLAYED, feed)
-        val media = de.danoeh.antennapod.model.feed.FeedMedia(
+        val media = FeedMedia(
             item, "https://example.com/ep.mp3", 1024, "audio/mpeg"
         )
         item.media = media

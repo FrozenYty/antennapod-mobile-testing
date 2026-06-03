@@ -6,6 +6,8 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import de.danoeh.antennapod.storage.database.PodDBAdapter
 import org.junit.After
+import de.danoeh.antennapod.model.feed.Feed
+import de.danoeh.antennapod.model.feed.FeedItemFilter
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -38,7 +40,7 @@ class TC028_FeedMediaDaoReadWriteIntegrityTest {
         PodDBAdapter.tearDownTests()
     }
 
-    private fun minimalFeed(id: Long) = de.danoeh.antennapod.model.feed.Feed(
+    private fun minimalFeed(id: Long) = Feed(
         id, "", "", "", "", "",
         "", "", "", "", "",
         "", "", 0L
@@ -75,7 +77,7 @@ class TC028_FeedMediaDaoReadWriteIntegrityTest {
 
         val cursor = adapter.getItemsOfFeedCursor(
             minimalFeed(feedId),
-            de.danoeh.antennapod.model.feed.FeedItemFilter(),
+            FeedItemFilter(),
             null, 0, Integer.MAX_VALUE
         )
         assertTrue("Item should be present after insert", cursor.moveToFirst())
@@ -101,7 +103,7 @@ class TC028_FeedMediaDaoReadWriteIntegrityTest {
 
         val cursor = adapter.getItemsOfFeedCursor(
             minimalFeed(feedId),
-            de.danoeh.antennapod.model.feed.FeedItemFilter(),
+            FeedItemFilter(),
             null, 0, Integer.MAX_VALUE
         )
         assertTrue("Items cursor should have data", cursor.moveToFirst())
@@ -128,7 +130,7 @@ class TC028_FeedMediaDaoReadWriteIntegrityTest {
 
         val cursor = adapter.getItemsOfFeedCursor(
             minimalFeed(feedId),
-            de.danoeh.antennapod.model.feed.FeedItemFilter(),
+            FeedItemFilter(),
             null, 0, Integer.MAX_VALUE
         )
         assertTrue("Feed items cursor should have data", cursor.moveToFirst())
@@ -163,7 +165,7 @@ class TC028_FeedMediaDaoReadWriteIntegrityTest {
 
         val cursor = adapter.getItemsOfFeedCursor(
             minimalFeed(feedId),
-            de.danoeh.antennapod.model.feed.FeedItemFilter(),
+            FeedItemFilter(),
             null, 0, Integer.MAX_VALUE
         )
         val mediaIds = mutableListOf<Long>()
@@ -185,7 +187,7 @@ class TC028_FeedMediaDaoReadWriteIntegrityTest {
 
         val cursor = adapter.getItemsOfFeedCursor(
             minimalFeed(feedId),
-            de.danoeh.antennapod.model.feed.FeedItemFilter(),
+            FeedItemFilter(),
             null, 0, Integer.MAX_VALUE
         )
         assertTrue("Items cursor should have data", cursor.moveToFirst())
@@ -220,7 +222,7 @@ class TC028_FeedMediaDaoReadWriteIntegrityTest {
 
         val cursor = adapter.getItemsOfFeedCursor(
             minimalFeed(feedId),
-            de.danoeh.antennapod.model.feed.FeedItemFilter(),
+            FeedItemFilter(),
             null, 0, Integer.MAX_VALUE
         )
         assertTrue(cursor.moveToFirst())

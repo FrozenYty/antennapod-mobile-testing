@@ -6,6 +6,9 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import de.danoeh.antennapod.storage.database.PodDBAdapter
 import org.junit.After
+import de.danoeh.antennapod.model.feed.Feed
+import de.danoeh.antennapod.model.feed.FeedItemFilter
+import de.danoeh.antennapod.model.feed.SortOrder
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -71,14 +74,14 @@ class TC018_FeedItemDaoTest {
         }
         adapter.insertTestData(PodDBAdapter.TABLE_NAME_FEED_ITEMS, values)
 
-        val feed = de.danoeh.antennapod.model.feed.Feed(
+        val feed = Feed(
             feedId, "", "", "", "", "",
             "", "", "", "", "",
             "", "", 0L
         )
         val cursor = adapter.getItemsOfFeedCursor(
             feed,
-            de.danoeh.antennapod.model.feed.FeedItemFilter(),
+            FeedItemFilter(),
             null, 0, Integer.MAX_VALUE
         )
         assertTrue("Should find inserted item", cursor.moveToFirst())
@@ -180,14 +183,14 @@ class TC018_FeedItemDaoTest {
         insertItem("Episode 2", feedId)
         insertItem("Episode 3", feedId)
 
-        val feed = de.danoeh.antennapod.model.feed.Feed(
+        val feed = Feed(
             feedId, "", "", "", "", "",
             "", "", "", "", "",
             "", "", 0L
         )
         val cursor = adapter.getItemsOfFeedCursor(
             feed,
-            de.danoeh.antennapod.model.feed.FeedItemFilter(),
+            FeedItemFilter(),
             null, 0, Integer.MAX_VALUE
         )
         assertTrue("Items cursor should have data", cursor.count > 0)
@@ -219,7 +222,7 @@ class TC018_FeedItemDaoTest {
         }
         adapter.insertTestData(PodDBAdapter.TABLE_NAME_FEED_ITEMS, values2)
 
-        val feed = de.danoeh.antennapod.model.feed.Feed(
+        val feed = Feed(
             feedId, "", "", "", "", "",
             "", "", "", "", "",
             "", "", 0L
@@ -228,8 +231,8 @@ class TC018_FeedItemDaoTest {
         // Query with DATE_NEW_OLD — newest should come first
         val cursor = adapter.getItemsOfFeedCursor(
             feed,
-            de.danoeh.antennapod.model.feed.FeedItemFilter(),
-            de.danoeh.antennapod.model.feed.SortOrder.DATE_NEW_OLD,
+            FeedItemFilter(),
+            SortOrder.DATE_NEW_OLD,
             0, Integer.MAX_VALUE
         )
         assertTrue("Items cursor should have data", cursor.moveToFirst())
@@ -246,14 +249,14 @@ class TC018_FeedItemDaoTest {
         insertItem("Feed1 Item", feedId1)
         insertItem("Feed2 Item", feedId2)
 
-        val feed = de.danoeh.antennapod.model.feed.Feed(
+        val feed = Feed(
             feedId1, "", "", "", "", "",
             "", "", "", "", "",
             "", "", 0L
         )
         val cursor = adapter.getItemsOfFeedCursor(
             feed,
-            de.danoeh.antennapod.model.feed.FeedItemFilter(),
+            FeedItemFilter(),
             null, 0, Integer.MAX_VALUE
         )
         var foundFeed1 = false

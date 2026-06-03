@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
  * Verifies that the settings entry points for theme and display preferences
  * are reachable and expose the expected controls.
  *
- * @author Member Four
+ * @author Xintao Wang
  */
 @RunWith(AndroidJUnit4::class)
 class TC031_ThemeDisplaySettingsTest {

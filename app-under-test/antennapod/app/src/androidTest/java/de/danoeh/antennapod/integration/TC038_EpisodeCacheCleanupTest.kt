@@ -23,7 +23,7 @@ import java.util.Date
  * Verifies database cleanup behavior for download logs, queue rows, feed
  * items, and associated FeedMedia cache metadata.
  *
- * @author Member Four
+ * @author Xintao Wang
  */
 @RunWith(AndroidJUnit4::class)
 class TC038_EpisodeCacheCleanupTest {

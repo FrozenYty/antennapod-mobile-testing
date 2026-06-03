@@ -6,6 +6,8 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import de.danoeh.antennapod.storage.database.PodDBAdapter
 import org.junit.After
+import de.danoeh.antennapod.model.feed.Feed
+import de.danoeh.antennapod.model.feed.FeedItemFilter
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -122,7 +124,7 @@ class TC029_EpisodeDownloadStatusTrackingTest {
 
         val cursor = adapter.getItemsOfFeedCursor(
             minimalFeed(feedId),
-            de.danoeh.antennapod.model.feed.FeedItemFilter(),
+            FeedItemFilter(),
             null, 0, Integer.MAX_VALUE
         )
         assertTrue("Queue items should have data", cursor.moveToFirst())
@@ -149,7 +151,7 @@ class TC029_EpisodeDownloadStatusTrackingTest {
 
         val cursor = adapter.getItemsOfFeedCursor(
             minimalFeed(feedId),
-            de.danoeh.antennapod.model.feed.FeedItemFilter(),
+            FeedItemFilter(),
             null, 0, Integer.MAX_VALUE
         )
         assertTrue("Items cursor should have data", cursor.moveToFirst())
@@ -208,7 +210,7 @@ class TC029_EpisodeDownloadStatusTrackingTest {
 
     // -- helpers --
 
-    private fun minimalFeed(id: Long) = de.danoeh.antennapod.model.feed.Feed(
+    private fun minimalFeed(id: Long) = Feed(
         id, "", "", "", "", "",
         "", "", "", "", "",
         "", "", 0L
@@ -245,7 +247,7 @@ class TC029_EpisodeDownloadStatusTrackingTest {
 
         val cursor = adapter.getItemsOfFeedCursor(
             minimalFeed(feedId),
-            de.danoeh.antennapod.model.feed.FeedItemFilter(),
+            FeedItemFilter(),
             null, 0, Integer.MAX_VALUE
         )
         assertTrue(cursor.moveToFirst())

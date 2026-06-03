@@ -26,7 +26,7 @@ import java.io.StringWriter
  * Verifies OPML export/import round-trip integrity using feed records read
  * from PodDBAdapter through DBReader.
  *
- * @author Member Four
+ * @author Xintao Wang
  */
 @RunWith(AndroidJUnit4::class)
 class TC037_DataExportImportIntegrityTest {

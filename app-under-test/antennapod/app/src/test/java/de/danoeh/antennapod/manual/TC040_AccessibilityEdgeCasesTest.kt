@@ -7,7 +7,7 @@ package de.danoeh.antennapod.manual
  * emulator after installing the playDebug build. Record pass/fail for each
  * step in `test-results/manual-test-result.md`.
  *
- * @author Member Four
+ * @author Xintao Wang
  */
 object TC040_AccessibilityEdgeCasesTest {
 

@@ -29,7 +29,7 @@ import org.junit.runner.RunWith
  * runtime dialog. The test therefore validates the manifest declaration and
  * the cross-app system settings entry point where users manage permissions.
  *
- * @author Member Four
+ * @author Xintao Wang
  */
 @RunWith(AndroidJUnit4::class)
 class TC033_RuntimePermissionHandlingTest {

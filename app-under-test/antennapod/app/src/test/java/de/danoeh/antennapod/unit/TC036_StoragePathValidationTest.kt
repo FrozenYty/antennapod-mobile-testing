@@ -23,7 +23,7 @@ import java.nio.file.Files
  * writable custom folders, type-specific subfolder creation, and invalid
  * custom path recovery.
  *
- * @author Member Four
+ * @author Xintao Wang
  */
 @RunWith(RobolectricTestRunner::class)
 class TC036_StoragePathValidationTest {

@@ -7,7 +7,7 @@
 
 | Member | Module | TC Range |
 |--------|--------|-----------|
-| **Member 2** | Subscription & Discovery | TC-011 ~ TC-020 |
+| **Jianheng Sun** | Subscription & Discovery | TC-011 ~ TC-020 |
 | **Yuanbing Wang** | Playback & Downloads | TC-021 ~ TC-030 |
 | **Xintao Wang** | Settings & System | TC-031 ~ TC-040 |
 

@@ -19,7 +19,7 @@ import java.net.Proxy
  * Validates key UserPreferences setters and getters used by Settings & System
  * screens. Each test starts with clean default SharedPreferences.
  *
- * @author Member Four
+ * @author Xintao Wang
  */
 @RunWith(RobolectricTestRunner::class)
 class TC035_UserPreferencesTest {

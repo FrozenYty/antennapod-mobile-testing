@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
  * Verifies that storage, feed refresh, mobile data, and proxy settings
  * are reachable from the Downloads preferences screen.
  *
- * @author Member Four
+ * @author Xintao Wang
  */
 @RunWith(AndroidJUnit4::class)
 class TC032_StorageNetworkPreferencesTest {

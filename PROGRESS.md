@@ -93,7 +93,7 @@ export ANDROID_SERIAL=127.0.0.1:7555
 - [x] TC-009 `integration/TC009_PodDBAdapterSchemaTest.kt` — 8/8
 - [x] TC-010 `manual/TC010_FirstLaunchUserFlowTest.kt` — 19/20
 - [x] CI: compile → unit test → doc check on push to main
-- [x] Docs synced, no stale refs, 19 screenshots
+- [x] Docs synced, no stale refs, 21 screenshots
 - [x] TC-011 `espresso/TC011_BrowseDiscoveryTest.kt` — 4/4 passed (fixed toolbar→appbar, grid→swipeRefresh)
 - [x] TC-012 `espresso/TC012_SubscribeDiscoveryTest.kt` — 4/4 passed
 - [x] TC-013 `espresso/TC013_UnsubscribeDeleteTest.kt` — 4/4 passed
@@ -111,8 +111,8 @@ export ANDROID_SERIAL=127.0.0.1:7555
 - [x] TC-025 `uiautomator/TC025_BackgroundPlaybackContinuityTest.kt` - 3/3 passed (API 37)
 - [x] TC-026 `unit/TC026_PlaybackStateMachineLogicTest.kt` - 11/11 passed
 - [x] TC-027 `unit/TC027_DownloadQueuePriorityLogicTest.kt` - 10/10 passed
-- [x] TC-028 `integration/TC028_FeedMediaDaoReadWriteIntegrityTest.kt` - compiled, pending device run
-- [x] TC-029 `integration/TC029_EpisodeDownloadStatusTrackingTest.kt` - compiled, pending device run
+- [x] TC-028 `integration/TC028_FeedMediaDaoReadWriteIntegrityTest.kt` — 6/6 passed (API 37)
+- [x] TC-029 `integration/TC029_EpisodeDownloadStatusTrackingTest.kt` — 7/7 passed (API 37)
 - [x] TC-030 `manual/TC030_LongPlaybackStabilityTest.kt` - checklist ready
 - [x] TC-031 `espresso/TC031_ThemeDisplaySettingsTest.kt` - compiled, pending device run
 - [x] TC-032 `espresso/TC032_StorageNetworkPreferencesTest.kt` - compiled, pending device run

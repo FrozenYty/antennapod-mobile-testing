@@ -80,6 +80,8 @@
 |------|------|------|
 | Tester (Sprint 1) | Tianyu Yao | 2026-05-28 |
 | Tester (Sprint 2) | Jianheng Sun | 2026-05-31 |
+| Tester (Sprint 3) | Yuanbing Wang | 2026-06-02 |
+| Tester (Sprint 4) | Xintao Wang | 2026-06-02 |
 
 ---
 
@@ -171,6 +173,7 @@
 - **Integration (TC-028~029)**: 13/13 passed. TC-028 validates FeedMedia CRUD with feed→item→media hierarchy. TC-029 validates download log persistence, queue references, and cleanup.
 - **TC-029 fixes**: DownloadLog table lacks `download_url` column → removed from insert. `getItemsOfFeedCursor` may omit `size` column → guarded with conditional check.
 - **Manual**: TC-030 provides a 20-step checklist for long playback stability.
+- **Screenshots**: 2 screenshots captured — `tc024-main-activity.png`, `tc025-launcher-after-home.png`.
 
 ### Recommendations
 

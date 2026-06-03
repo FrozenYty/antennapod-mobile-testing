@@ -30,7 +30,7 @@ This project uses complementary testing methods. Mix and match per test case as 
 | Member | Module | Current TC Range |
 |--------|--------|------------------|
 | **Tianyu Yao** (Lead) | Core Foundation | TC-001 ~ TC-010 | Finalized |
-| **Member 2** | Subscription & Discovery | TC-011 ~ TC-020 | Suggested |
+| **Jianheng Sun** | Subscription & Discovery | TC-011 ~ TC-020 | Suggested |
 | **Yuanbing Wang** | Playback & Downloads | TC-021 ~ TC-030 | Suggested |
 | **Xintao Wang** | Settings & System | TC-031 ~ TC-040 | Suggested |
 
@@ -53,7 +53,7 @@ This project uses complementary testing methods. Mix and match per test case as 
 
 ---
 
-## Member 2 — Subscription & Discovery (TC-011 ~ TC-020) Suggested
+## Jianheng Sun — Subscription & Discovery (TC-011 ~ TC-020) Suggested
 
 | TC-ID | Method | Title | Priority |
 |-------|--------|-------|----------|
@@ -113,12 +113,11 @@ This project uses complementary testing methods. Mix and match per test case as 
 | Espresso | 13 | 32.5% | ~35% |
 | UIAutomator | 7 | 17.5% | ~20% |
 | Unit Test (JUnit) | 8 | 20% | ~20% |
-| Integration (SQLite) | 8 | 20% | ~15% |
+| Integration (SQLite) | 6 | 15% | ~15% |
 | Manual / Exploratory | 4 | 10% | ~10% |
 | Performance | 2 | 5% | ~5% |
 
-Note: Integration count is higher than the original 15% target because AntennaPod's PodDBAdapter
-(raw SQLite) replaces Room DAO tests plus ContentProvider tests from the Legado plan.
+Note: Integration tests use PodDBAdapter (raw SQLite) for DAO and ContentProvider coverage.
 
 ---
 
