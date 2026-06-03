@@ -671,7 +671,7 @@ DEFAULT_APK = str(
     / "outputs" / "apk" / "play" / "debug" / "app-play-debug.apk"
 )
 
-DEFAULT_OUTPUT = str(PROJECT_ROOT / "Claude_Code_Files" / "static-analysis-report.md")
+DEFAULT_OUTPUT = str(PROJECT_ROOT / "test-docs" / "static-analysis-report.md")
 
 
 def main():

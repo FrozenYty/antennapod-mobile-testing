@@ -66,7 +66,7 @@ python automation/static_analysis.py --apk path/to/app.apk
 Generates a full static analysis report covering all project dimensions.
 
 ```bash
-# Generate report (saves to Claude_Code_Files/static-analysis-report.md)
+# Generate report (saves to test-docs/static-analysis-report.md)
 python automation/generate_report.py
 
 # Custom output path
