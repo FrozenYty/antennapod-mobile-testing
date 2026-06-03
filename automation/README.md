@@ -61,6 +61,27 @@ python automation/static_analysis.py --apk path/to/app.apk
 - **[WARN]** — Unusual permission that may need justification
 - **[FAIL]** — High-risk permission (contacts, location, camera, etc.)
 
+## Call Graph Visualization
+
+Generates call graph images from APK bytecode using Androguard's Analysis API.
+
+```bash
+python automation/callgraph.py
+# → test-docs/callgraphs/callgraph-methods.png    (method-level network)
+# → test-docs/callgraphs/callgraph-package.png    (package interactions)
+# → test-docs/callgraphs/callgraph-stats.png      (top callers/callees)
+```
+
+### Output Images
+
+| Image | Description |
+|-------|-------------|
+| `callgraph-methods.png` | Method call network for top 60 most-connected classes |
+| `callgraph-package.png` | Package-level interaction graph (edge weight ≥ 2) |
+| `callgraph-stats.png` | Bar charts: top 15 callers (outgoing) and top 15 callees (incoming) |
+
+Based on lecture L11 techniques: Androguard DEX → Analysis → create_xref() → call graph extraction.
+
 ## Comprehensive Report Generator
 
 Generates a full static analysis report covering all project dimensions.
