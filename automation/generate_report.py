@@ -2,6 +2,8 @@
 """
 Comprehensive Static Analysis Report Generator for AntennaPod.
 
+Author: Tianyu Yao
+
 Generates a full Markdown report covering:
   1. Project overview & test method distribution
   2. APK manifest analysis (permissions, components, security)
@@ -31,20 +33,6 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 def _strip_md_table_row(line: str) -> list[str]:
     """Parse a markdown table row into cells."""
     return [c.strip() for c in line.strip().strip("|").split("|")]
-
-
-def _parse_md_table(text: str) -> list[dict[str, str]]:
-    """Parse a simple markdown GFM table into list of dicts."""
-    lines = text.strip().split("\n")
-    if len(lines) < 2:
-        return []
-    headers = _strip_md_table_row(lines[0])
-    result = []
-    for line in lines[2:]:  # skip header and separator
-        cells = _strip_md_table_row(line)
-        if len(cells) == len(headers):
-            result.append(dict(zip(headers, cells)))
-    return result
 
 
 def _count_kt_files(root: Path) -> dict[str, int]:

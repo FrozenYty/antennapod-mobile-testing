@@ -29,7 +29,7 @@ antennapod-mobile-testing/
 ├── PROGRESS.md
 ├── .gitignore
 ├── .gitattributes
-├── .github/                     # CI workflow & PR template
+├── .github/                     # CI workflow
 ├── app-under-test/              # Application source code under test
 │   └── antennapod/              # AntennaPod Android source (MIT license)
 │       └── app/src/
@@ -46,11 +46,14 @@ antennapod-mobile-testing/
 │   ├── test-plan.md
 │   ├── test-case-plan.md
 │   ├── test-cases.md
+│   ├── test-summary-report.md
+│   ├── static-analysis-report.md
+│   ├── frida-vibe-coding-report.md
 │   ├── bug-report-template.md
-│   └── test-summary-report.md
+│   └── callgraphs/              # Generated call graph images & HTML reports
 ├── bug-reports/                 # Filed bug reports (bug-XXX.md)
 ├── screenshots/                 # Test evidence screenshots
-├── automation/                  # Test runner scripts & config
+├── automation/                  # Test runner scripts, static analysis, call graphs
 └── test-results/                # Test execution results
 ```
 

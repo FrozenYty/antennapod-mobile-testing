@@ -13,8 +13,8 @@
 
 | Metric | Count |
 |--------|-------|
-| Total Test Cases | 10 |
-| Passed | 10 (TC-001~010) |
+| Total Test Cases | 40 |
+| Passed | 40 (TC-001~040) |
 | Partial | 0 |
 | Failed | 0 |
 | Blocked | 0 |

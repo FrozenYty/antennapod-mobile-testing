@@ -106,6 +106,127 @@ python automation/generate_report.py --output reports/my-report.md
 | Screenshot Inventory | Per-file size, ownership, sprint attribution |
 | Findings & Recommendations | Risk assessment and action items |
 
+## Dynamic Call Graph (Frida Runtime Tracing)
+
+Captures **actual method call edges at runtime** by hooking Java methods with Frida as the app runs. Unlike `callgraph.py` (static DEX/bytecode analysis), this traces real execution paths driven by user interaction.
+
+### Prerequisites
+
+```bash
+# 1. Install Python deps
+pip install -r automation/requirements.txt
+
+# 2. Set up frida-server on the Android device
+#    Download the matching frida-server binary from:
+#    https://github.com/frida/frida/releases
+#    (e.g., frida-server-16.x.x-android-arm64.xz for ARM64 devices)
+#
+#    Push it to the device:
+adb push frida-server-16.x.x-android-arm64 /data/local/tmp/frida-server
+adb shell chmod 755 /data/local/tmp/frida-server
+
+# 3. Start frida-server (in a separate terminal, keep running):
+adb shell su -c /data/local/tmp/frida-server
+
+# 4. Verify the device is visible:
+frida-ps -U
+```
+
+### Usage
+
+```bash
+# Default: install & launch the debug APK, trace for 30s, open interactive report in browser
+python automation/frida_callgraph.py
+
+# Longer trace (90s) for deeper coverage
+python automation/frida_callgraph.py --duration 90
+
+# Attach to an already-running app (skip install/launch)
+python automation/frida_callgraph.py --attach
+
+# Specify device serial (e.g., MuMu emulator)
+python automation/frida_callgraph.py --device 127.0.0.1:7555
+
+# Trace only a specific sub-package
+python automation/frida_callgraph.py --class-filter de.danoeh.antennapod.activity
+
+# CLI-only: skip HTML report generation
+python automation/frida_callgraph.py --no-html
+
+# Don't auto-open browser (HTML still generated)
+python automation/frida_callgraph.py --no-browser
+
+# JSON-only export (skip all visualizations and HTML)
+python automation/frida_callgraph.py --no-vis --no-html
+```
+
+### Interactive HTML Report
+
+After tracing, the script generates `test-docs/callgraphs/frida-callgraph.html` and automatically opens it in your default browser. The report has **three tabs**:
+
+| Tab | Content |
+|-----|---------|
+| 🕸 **Network Graph** | Interactive vis-network — zoom, pan, drag nodes, hover for details, search bar, color-coded by sub-package, physics simulation, toggle physics on/off |
+| 📊 **Stats Charts** | Chart.js horizontal bar charts — Top 15 Callers (outgoing) + Top 15 Callees (incoming), same color scheme as static PNGs |
+| 📋 **Edge Table** | Full sortable/searchable table — caller, callee, call count. Click column headers to sort, use the filter box to search |
+
+The HTML file is fully self-contained: all data is embedded as JSON, only CDN-hosted libraries (vis-network, Chart.js) are loaded externally.
+
+### How It Works
+
+```
+┌─────────────┐    send(edges)     ┌──────────────────┐
+│ frida_hooks_cli │ ──────────────→ │  frida_callgraph  │
+│    .js          │  -o log file    │     .py           │
+│  (Android)      │                 │  (Host Python)    │
+└─────────────────┘                 └──────────────────┘
+       │                                      │
+  Hook all methods                     Parse log file
+  in de.danoeh.*                       Generate visualizations
+       │                                      │
+  Exception.getStackTrace()            ┌─────▼──────┐
+  → find caller class                  │ callgraphs/ │
+       │                               │  frida-*    │
+  console.log(JSON)                    └────────────┘
+```
+
+1. **`frida_hooks_cli.js`** — Injected into the running APK via Frida CLI:
+   - Enumerates all loaded classes matching `de.danoeh.antennapod.*`
+   - For each class, gets declared methods via Java reflection
+   - Hooks each method and captures the caller via `Exception.getStackTrace()`
+   - Batches `{caller, callee}` pairs via `console.log(JSON)` to the `-o` log file
+
+2. **`frida_callgraph.py`** — Python orchestrator:
+   - Installs & launches the APK, attaches Frida, injects the JS hook
+   - Collects edge data for the configured trace duration
+   - Aggregates into a weighted call graph (`defaultdict(int)` on caller→callee)
+   - Generates bar charts, package heatmap, top-edges chart
+   - Exports JSON for further analysis
+
+### Output
+
+| File | Description |
+|------|-------------|
+| `frida-callgraph.html` | **Interactive report** — network graph, stats charts, edge table (opens in browser automatically) |
+| `frida-callgraph.json` | Full edge list (top 500), meta stats, top callers/callees |
+| `frida-callgraph-stats.pdf/png` | Bar chart: top 15 callers (outgoing) and top 15 callees (incoming) |
+| `frida-callgraph-heatmap.pdf/png` | Package-level call density heatmap |
+| `frida-callgraph-edges.pdf/png` | Top 20 individual caller→callee edges by call count |
+
+### Comparison: Static vs Dynamic Call Graph
+
+| Aspect | `callgraph.py` (Androguard) | `frida_callgraph.py` (Frida) |
+|--------|---------------------------|------------------------------|
+| Method | Static DEX bytecode analysis | Runtime method hooking |
+| Coverage | All possible code paths | Actual executed code paths |
+| Requires device | No | Yes (Android + frida-server) |
+| Speed | Minutes (one-time analysis) | Real-time (interactive tracing) |
+| Excludes | Dead code, reflection calls | Un-executed branches, cold paths |
+| Includes | All cross-references | Only paths hit during trace session |
+| Best for | Architecture overview, security audit | User-flow call graphs, debugging |
+
+Use both together: static for completeness, dynamic for real-world execution paths.
+
 ## Manual Commands
 
 ### Compile

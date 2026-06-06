@@ -298,9 +298,6 @@
 | TC-021 | Espresso | Play / Pause Controls | High | Passed | 4/4 passed (MuMu), fixed episodes→more, recyclerView→drawer_layout |
 | TC-022 | Espresso | Playback Speed Adjustment | Medium | Passed | 4/4 passed (MuMu), fixed recyclerView→drawer_layout |
 | TC-023 | Espresso | Download Episode for Offline Playback | High | Passed | 4/4 passed (MuMu), fixed episodes→more |
-| TC-021 | Espresso | Play / Pause Controls | High | Passed | 4/4 passed (MuMu), fixed episodes→more, recyclerView→drawer_layout |
-| TC-022 | Espresso | Playback Speed Adjustment | Medium | Passed | 4/4 passed (MuMu), fixed recyclerView→drawer_layout |
-| TC-023 | Espresso | Download Episode for Offline Playback | High | Passed | 4/4 passed (MuMu), fixed episodes→more |
 | TC-024 | UIAutomator | Audio Focus & Playback Notification | High | Passed | 3/3 passed (API 37), 1 screenshot |
 | TC-025 | UIAutomator | Background Playback Continuity | Medium | Passed | 3/3 passed (API 37), 1 screenshot |
 | TC-026 | Unit Test (JUnit) | Playback State Machine Logic | High | Passed | 11/11 passed |

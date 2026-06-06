@@ -2,6 +2,8 @@
 """
 Call Graph & Static Analysis Visualization for AntennaPod APK.
 
+Author: Tianyu Yao
+
 Generates:
   1. Package-level method call graph (PNG)
   2. Top-level package interaction network (PNG)

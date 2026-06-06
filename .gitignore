@@ -21,3 +21,7 @@ Thumbs.db
 
 # Test artifacts (screenshots are test evidence — commit intentionally)
 *.pyc
+*.pyo
+__pycache__/
+*.gml
+frida_trace_output.txt

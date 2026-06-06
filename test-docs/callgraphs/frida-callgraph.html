@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frida Call Graph — de.danoeh.antennapod.debug</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #333; }
+.header { background: linear-gradient(135deg, #9673A6 0%, #6C8EBF 100%); color: white; padding: 24px 32px; }
+.header h1 { font-size: 1.5em; margin-bottom: 4px; }
+.header p { opacity: 0.85; font-size: 0.9em; }
+.stats { display: flex; flex-wrap: wrap; gap: 12px; padding: 20px 32px; background: white; border-bottom: 1px solid #e0e0e0; }
+.stat-card { flex: 1; min-width: 120px; text-align: center; padding: 12px 16px; background: #f9f9f9; border-radius: 8px; border: 1px solid #eee; }
+.stat-card .value { font-size: 1.4em; font-weight: 700; color: #9673A6; }
+.stat-card .label { font-size: 0.75em; color: #888; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+.tabs { display: flex; background: white; padding: 0 32px; border-bottom: 1px solid #e0e0e0; }
+.tab { padding: 12px 20px; cursor: pointer; font-size: 0.9em; color: #888; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.tab:hover { color: #9673A6; }
+.tab.active { color: #9673A6; border-bottom-color: #9673A6; font-weight: 600; }
+.panel { display: none; }
+.panel.active { display: block; }
+.content { max-width: 1400px; margin: 0 auto; padding: 24px 32px; }
+#network { width: 100%; height: 650px; border: 1px solid #e0e0e0; border-radius: 8px; background: white; }
+#stats-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+#stats-charts canvas { background: white; border: 1px solid #e0e0e0; border-radius: 8px; min-height: 380px; padding: 12px; }
+#stats-charts > div { min-height: 400px; }
+#search-box { margin-bottom: 12px; padding: 8px 14px; width: 100%; max-width: 400px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.9em; }
+#search-box:focus { outline: none; border-color: #9673A6; box-shadow: 0 0 0 2px rgba(150,115,166,0.15); }
+.edge-table { width: 100%; border-collapse: collapse; font-size: 0.85em; background: white; border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0; }
+.edge-table th { background: #9673A6; color: white; padding: 10px 14px; text-align: left; font-weight: 600; cursor: pointer; user-select: none; }
+.edge-table th:hover { background: #866096; }
+.edge-table td { padding: 8px 14px; border-bottom: 1px solid #f0f0f0; font-family: 'Courier New', monospace; font-size: 0.82em; }
+.edge-table tr:hover td { background: #f9f5fb; }
+.edge-table .weight { text-align: right; font-weight: 600; color: #9673A6; }
+.table-wrap { max-height: 600px; overflow-y: auto; border-radius: 8px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.legend-item { display: flex; align-items: center; gap: 4px; font-size: 0.75em; padding: 3px 8px; background: white; border-radius: 4px; border: 1px solid #eee; }
+.legend-swatch { width: 10px; height: 10px; border-radius: 50%; }
+.toolbar { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+.btn { padding: 6px 14px; border: 1px solid #ddd; border-radius: 6px; background: white; cursor: pointer; font-size: 0.82em; transition: all 0.15s; }
+.btn:hover { border-color: #9673A6; color: #9673A6; }
+.footer { text-align: center; padding: 24px; color: #aaa; font-size: 0.8em; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🔬 Frida Dynamic Call Graph</h1>
+  <p>de.danoeh.antennapod.debug · Generated 2026-06-07 01:46:09</p>
+</div>
+
+<div class="stats">
+  <div class="stat-card"><div class="value">80</div><div class="label">Total Calls</div></div>
+  <div class="stat-card"><div class="value">14</div><div class="label">Unique Edges</div></div>
+  <div class="stat-card"><div class="value">17</div><div class="label">Classes Hooked</div></div>
+  <div class="stat-card"><div class="value">93</div><div class="label">Methods Hooked</div></div>
+  <div class="stat-card"><div class="value">21</div><div class="label">Graph Nodes</div></div>
+  <div class="stat-card"><div class="value">14</div><div class="label">Graph Edges</div></div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('network')">🕸 Network Graph</div>
+  <div class="tab" onclick="switchTab('charts')">📊 Stats Charts</div>
+  <div class="tab" onclick="switchTab('table')">📋 Edge Table</div>
+</div>
+
+<div class="content">
+
+<!-- Network Panel -->
+<div id="panel-network" class="panel active">
+  <div class="toolbar">
+    <input id="search-box" type="text" placeholder="🔍 Search class (e.g. MainActivity)..." oninput="searchNode()">
+    <button class="btn" onclick="network.fit()">Fit View</button>
+    <button class="btn" onclick="network.stabilize()">Re-stabilize</button>
+    <button class="btn" onclick="togglePhysics()">⏯ Physics</button>
+  </div>
+  <div class="legend" id="legend"></div>
+  <div id="network"></div>
+</div>
+
+<!-- Charts Panel -->
+<div id="panel-charts" class="panel">
+  <div id="stats-charts">
+    <div><canvas id="chart-callers"></canvas></div>
+    <div><canvas id="chart-callees"></canvas></div>
+  </div>
+</div>
+
+<!-- Table Panel -->
+<div id="panel-table" class="panel">
+  <input id="table-search" type="text" placeholder="🔍 Filter edges..." oninput="filterTable()" style="margin-bottom:12px;padding:8px 14px;width:100%;max-width:400px;border:1px solid #ddd;border-radius:6px;font-size:0.9em;">
+  <div class="table-wrap">
+    <table class="edge-table">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">#</th>
+          <th onclick="sortTable(1)">Caller</th>
+          <th onclick="sortTable(2)">Callee</th>
+          <th onclick="sortTable(3)">Weight ▼</th>
+        </tr>
+      </thead>
+      <tbody id="edge-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">Frida Dynamic Call Graph · AntennaPod Mobile Testing · <a href="https://github.com/FrozenYty/antennapod-mobile-testing">GitHub</a></div>
+
+<script>
+const DATA = {"nodes": [{"id": 0, "label": "MainActivity.updateMainBackCallbackEnabledState", "title": "<b>de.danoeh.antennapod.activity.MainActivity.updateMainBackCallbackEnabledState</b><br>Total calls: 19", "value": 70, "group": "activity", "degree": 19, "color": "#9673A6"}, {"id": 1, "label": "UserPreferences.getDefaultPage", "title": "<b>de.danoeh.antennapod.storage.preferences.UserPreferences.getDefaultPage</b><br>Total calls: 19", "value": 70, "group": "storage", "degree": 19, "color": "#6C8EBF"}, {"id": 2, "label": "SelectableAdapter.onSelectedItemsUpdated", "title": "<b>de.danoeh.antennapod.ui.SelectableAdapter.onSelectedItemsUpdated</b><br>Total calls: 19", "value": 70, "group": "ui", "degree": 19, "color": "#82B366"}, {"id": 3, "label": "SelectableAdapter.setOnSelectModeListener", "title": "<b>de.danoeh.antennapod.ui.SelectableAdapter.setOnSelectModeListener</b><br>Total calls: 13", "value": 52, "group": "ui", "degree": 13, "color": "#82B366"}, {"id": 4, "label": "SelectableAdapter.endSelectMode", "title": "<b>de.danoeh.antennapod.ui.SelectableAdapter.endSelectMode</b><br>Total calls: 11", "value": 46, "group": "ui", "degree": 11, "color": "#82B366"}, {"id": 5, "label": "EpisodeItemListAdapter.updateItems", "title": "<b>de.danoeh.antennapod.ui.episodeslist.EpisodeItemListAdapter.updateItems</b><br>Total calls: 10", "value": 43, "group": "ui", "degree": 10, "color": "#82B366"}, {"id": 6, "label": "SubscriptionFragment.lambda_loadSubscriptionsAndTags_6", "title": "<b>de.danoeh.antennapod.ui.screen.subscriptions.SubscriptionFragment.lambda_loadSubscriptionsAndTags_6</b><br>Total calls: 10", "value": 43, "group": "ui", "degree": 10, "color": "#82B366"}, {"id": 7, "label": "UserPreferences.getFeedOrder", "title": "<b>de.danoeh.antennapod.storage.preferences.UserPreferences.getFeedOrder</b><br>Total calls: 5", "value": 29, "group": "storage", "degree": 5, "color": "#6C8EBF"}, {"id": 8, "label": "UserPreferences.getFeedCounterSetting", "title": "<b>de.danoeh.antennapod.storage.preferences.UserPreferences.getFeedCounterSetting</b><br>Total calls: 5", "value": 29, "group": "storage", "degree": 5, "color": "#6C8EBF"}, {"id": 9, "label": "QueueFragment.onCreateView", "title": "<b>de.danoeh.antennapod.ui.screen.queue.QueueFragment.onCreateView</b><br>Total calls: 5", "value": 29, "group": "ui", "degree": 5, "color": "#82B366"}, {"id": 10, "label": "QueueFragment_2.onSelectedItemsUpdated", "title": "<b>de.danoeh.antennapod.ui.screen.queue.QueueFragment_2.onSelectedItemsUpdated</b><br>Total calls: 5", "value": 29, "group": "ui", "degree": 5, "color": "#82B366"}, {"id": 11, "label": "QueueFragment.refreshInfoBar", "title": "<b>de.danoeh.antennapod.ui.screen.queue.QueueFragment.refreshInfoBar</b><br>Total calls: 5", "value": 29, "group": "ui", "degree": 5, "color": "#82B366"}, {"id": 12, "label": "SelectableAdapter.inActionMode", "title": "<b>de.danoeh.antennapod.ui.SelectableAdapter.inActionMode</b><br>Total calls: 5", "value": 29, "group": "ui", "degree": 5, "color": "#82B366"}, {"id": 13, "label": "EpisodesListFragment.onCreateView", "title": "<b>de.danoeh.antennapod.ui.episodeslist.EpisodesListFragment.onCreateView</b><br>Total calls: 4", "value": 26, "group": "ui", "degree": 4, "color": "#82B366"}, {"id": 14, "label": "QueueFragment.onDestroyView", "title": "<b>de.danoeh.antennapod.ui.screen.queue.QueueFragment.onDestroyView</b><br>Total calls: 4", "value": 26, "group": "ui", "degree": 4, "color": "#82B366"}, {"id": 15, "label": "EpisodesListFragment_1.onSelectedItemsUpdated", "title": "<b>de.danoeh.antennapod.ui.episodeslist.EpisodesListFragment_1.onSelectedItemsUpdated</b><br>Total calls: 4", "value": 26, "group": "ui", "degree": 4, "color": "#82B366"}, {"id": 16, "label": "SubscriptionFragment.onCreateView", "title": "<b>de.danoeh.antennapod.ui.screen.subscriptions.SubscriptionFragment.onCreateView</b><br>Total calls: 4", "value": 26, "group": "ui", "degree": 4, "color": "#82B366"}, {"id": 17, "label": "EpisodesListFragment.onDestroyView", "title": "<b>de.danoeh.antennapod.ui.episodeslist.EpisodesListFragment.onDestroyView</b><br>Total calls: 4", "value": 26, "group": "ui", "degree": 4, "color": "#82B366"}, {"id": 18, "label": "SubscriptionFragment.onStop", "title": "<b>de.danoeh.antennapod.ui.screen.subscriptions.SubscriptionFragment.onStop</b><br>Total calls: 3", "value": 23, "group": "ui", "degree": 3, "color": "#82B366"}, {"id": 19, "label": "DownloadsSection.loadItems", "title": "<b>de.danoeh.antennapod.ui.screen.home.sections.DownloadsSection.loadItems</b><br>Total calls: 3", "value": 23, "group": "ui", "degree": 3, "color": "#82B366"}, {"id": 20, "label": "UserPreferences.getDownloadsSortedOrder", "title": "<b>de.danoeh.antennapod.storage.preferences.UserPreferences.getDownloadsSortedOrder</b><br>Total calls: 3", "value": 23, "group": "storage", "degree": 3, "color": "#6C8EBF"}], "edges": [{"from": 0, "to": 1, "value": 19, "title": "MainActivity.updateMainBackCallbackEnabledState → UserPreferences.getDefaultPage<br>Calls: 19", "width": 9}, {"from": 5, "to": 2, "value": 10, "title": "EpisodeItemListAdapter.updateItems → SelectableAdapter.onSelectedItemsUpdated<br>Calls: 10", "width": 5}, {"from": 6, "to": 7, "value": 5, "title": "SubscriptionFragment.lambda_loadSubscriptionsAndTags_6 → UserPreferences.getFeedOrder<br>Calls: 5", "width": 3}, {"from": 6, "to": 8, "value": 5, "title": "SubscriptionFragment.lambda_loadSubscriptionsAndTags_6 → UserPreferences.getFeedCounterSetting<br>Calls: 5", "width": 3}, {"from": 9, "to": 3, "value": 5, "title": "QueueFragment.onCreateView → SelectableAdapter.setOnSelectModeListener<br>Calls: 5", "width": 3}, {"from": 10, "to": 2, "value": 5, "title": "QueueFragment_2.onSelectedItemsUpdated → SelectableAdapter.onSelectedItemsUpdated<br>Calls: 5", "width": 3}, {"from": 11, "to": 12, "value": 5, "title": "QueueFragment.refreshInfoBar → SelectableAdapter.inActionMode<br>Calls: 5", "width": 3}, {"from": 13, "to": 3, "value": 4, "title": "EpisodesListFragment.onCreateView → SelectableAdapter.setOnSelectModeListener<br>Calls: 4", "width": 2}, {"from": 14, "to": 4, "value": 4, "title": "QueueFragment.onDestroyView → SelectableAdapter.endSelectMode<br>Calls: 4", "width": 2}, {"from": 15, "to": 2, "value": 4, "title": "EpisodesListFragment_1.onSelectedItemsUpdated → SelectableAdapter.onSelectedItemsUpdated<br>Calls: 4", "width": 2}, {"from": 16, "to": 3, "value": 4, "title": "SubscriptionFragment.onCreateView → SelectableAdapter.setOnSelectModeListener<br>Calls: 4", "width": 2}, {"from": 17, "to": 4, "value": 4, "title": "EpisodesListFragment.onDestroyView → SelectableAdapter.endSelectMode<br>Calls: 4", "width": 2}, {"from": 18, "to": 4, "value": 3, "title": "SubscriptionFragment.onStop → SelectableAdapter.endSelectMode<br>Calls: 3", "width": 2}, {"from": 19, "to": 20, "value": 3, "title": "DownloadsSection.loadItems → UserPreferences.getDownloadsSortedOrder<br>Calls: 3", "width": 2}], "subpkgGroups": ["activity", "storage", "ui"], "pkgColorMap": {"activity": "#9673A6", "storage": "#6C8EBF", "ui": "#82B366"}, "callerLabels": ["MainActivity.updateMainBackCallbackEnabledState", "EpisodeItemListAdapter.updateItems", "SubscriptionFragment.lambda_loadSubscriptionsAndTags_6", "QueueFragment.onCreateView", "QueueFragment_2.onSelectedItemsUpdated", "QueueFragment.refreshInfoBar", "EpisodesListFragment.onCreateView", "QueueFragment.onDestroyView", "EpisodesListFragment_1.onSelectedItemsUpdated", "SubscriptionFragment.onCreateView", "EpisodesListFragment.onDestroyView", "SubscriptionFragment.onStop", "DownloadsSection.loadItems"], "callerValues": [19, 10, 10, 5, 5, 5, 4, 4, 4, 4, 4, 3, 3], "calleeLabels": ["UserPreferences.getDefaultPage", "SelectableAdapter.onSelectedItemsUpdated", "SelectableAdapter.setOnSelectModeListener", "SelectableAdapter.endSelectMode", "UserPreferences.getFeedOrder", "UserPreferences.getFeedCounterSetting", "SelectableAdapter.inActionMode", "UserPreferences.getDownloadsSortedOrder"], "calleeValues": [19, 19, 13, 11, 5, 5, 5, 3], "edgeTableRows": [{"caller": "de.danoeh.antennapod.activity.MainActivity.updateMainBackCallbackEnabledState", "callee": "de.danoeh.antennapod.storage.preferences.UserPreferences.getDefaultPage", "weight": 19}, {"caller": "de.danoeh.antennapod.ui.episodeslist.EpisodeItemListAdapter.updateItems", "callee": "de.danoeh.antennapod.ui.SelectableAdapter.onSelectedItemsUpdated", "weight": 10}, {"caller": "de.danoeh.antennapod.ui.screen.subscriptions.SubscriptionFragment.lambda_loadSubscriptionsAndTags_6", "callee": "de.danoeh.antennapod.storage.preferences.UserPreferences.getFeedOrder", "weight": 5}, {"caller": "de.danoeh.antennapod.ui.screen.subscriptions.SubscriptionFragment.lambda_loadSubscriptionsAndTags_6", "callee": "de.danoeh.antennapod.storage.preferences.UserPreferences.getFeedCounterSetting", "weight": 5}, {"caller": "de.danoeh.antennapod.ui.screen.queue.QueueFragment.onCreateView", "callee": "de.danoeh.antennapod.ui.SelectableAdapter.setOnSelectModeListener", "weight": 5}, {"caller": "de.danoeh.antennapod.ui.screen.queue.QueueFragment_2.onSelectedItemsUpdated", "callee": "de.danoeh.antennapod.ui.SelectableAdapter.onSelectedItemsUpdated", "weight": 5}, {"caller": "de.danoeh.antennapod.ui.screen.queue.QueueFragment.refreshInfoBar", "callee": "de.danoeh.antennapod.ui.SelectableAdapter.inActionMode", "weight": 5}, {"caller": "de.danoeh.antennapod.ui.episodeslist.EpisodesListFragment.onCreateView", "callee": "de.danoeh.antennapod.ui.SelectableAdapter.setOnSelectModeListener", "weight": 4}, {"caller": "de.danoeh.antennapod.ui.screen.queue.QueueFragment.onDestroyView", "callee": "de.danoeh.antennapod.ui.SelectableAdapter.endSelectMode", "weight": 4}, {"caller": "de.danoeh.antennapod.ui.episodeslist.EpisodesListFragment_1.onSelectedItemsUpdated", "callee": "de.danoeh.antennapod.ui.SelectableAdapter.onSelectedItemsUpdated", "weight": 4}, {"caller": "de.danoeh.antennapod.ui.screen.subscriptions.SubscriptionFragment.onCreateView", "callee": "de.danoeh.antennapod.ui.SelectableAdapter.setOnSelectModeListener", "weight": 4}, {"caller": "de.danoeh.antennapod.ui.episodeslist.EpisodesListFragment.onDestroyView", "callee": "de.danoeh.antennapod.ui.SelectableAdapter.endSelectMode", "weight": 4}, {"caller": "de.danoeh.antennapod.ui.screen.subscriptions.SubscriptionFragment.onStop", "callee": "de.danoeh.antennapod.ui.SelectableAdapter.endSelectMode", "weight": 3}, {"caller": "de.danoeh.antennapod.ui.screen.home.sections.DownloadsSection.loadItems", "callee": "de.danoeh.antennapod.storage.preferences.UserPreferences.getDownloadsSortedOrder", "weight": 3}], "meta": {"package": "de.danoeh.antennapod.debug", "classFilter": "de.danoeh.antennapod", "uniqueEdges": 14, "totalCalls": 80, "classesHooked": 17, "methodsHooked": 93, "networkNodes": 21, "networkEdges": 14, "generated": "2026-06-07 01:46:09"}};
+
+// ── Tabs ──────────────────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.tab:nth-child(${name === 'network' ? 1 : name === 'charts' ? 2 : 3})`).classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+  if (name === 'network') setTimeout(() => network.fit(), 100);
+  if (name === 'charts') setTimeout(initCharts, 50);  // deferred: canvas must be visible
+}
+
+// ── Legend ────────────────────────────────────────────────────────
+(function buildLegend() {
+  const groups = DATA.subpkgGroups;
+  const map = DATA.pkgColorMap;
+  const container = document.getElementById('legend');
+  groups.forEach(g => {
+    const item = document.createElement('span');
+    item.className = 'legend-item';
+    item.innerHTML = `<span class="legend-swatch" style="background:${map[g]}"></span>${g}`;
+    container.appendChild(item);
+  });
+})();
+
+// ── Network Graph ─────────────────────────────────────────────────
+const nodes = new vis.DataSet(DATA.nodes);
+const edges = new vis.DataSet(DATA.edges);
+const networkEl = document.getElementById('network');
+
+const network = new vis.Network(networkEl, { nodes, edges }, {
+  physics: { solver: 'barnesHut', barnesHut: { gravitationalConstant: -3000, centralGravity: 0.3, springLength: 120 } },
+  edges: { arrows: 'to', smooth: { type: 'continuous' }, color: { opacity: 0.4 } },
+  interaction: { hover: true, tooltipDelay: 150, zoomView: true, dragView: true },
+  layout: { improvedLayout: true },
+});
+
+let physicsOn = true;
+function togglePhysics() {
+  physicsOn = !physicsOn;
+  network.setOptions({ physics: physicsOn });
+  if (physicsOn) network.stabilize();
+}
+
+function searchNode() {
+  const q = document.getElementById('search-box').value.toLowerCase();
+  if (!q) { nodes.forEach(n => nodes.update({ id: n.id, opacity: 1 })); edges.forEach(e => edges.update({ id: e.id, opacity: 1 })); return; }
+  const matches = new Set();
+  nodes.forEach(n => { if (n.label.toLowerCase().includes(q)) matches.add(n.id); });
+  nodes.forEach(n => nodes.update({ id: n.id, opacity: matches.has(n.id) || matches.size === 0 ? 1 : 0.15 }));
+  edges.forEach(e => {
+    const visible = matches.has(e.from) || matches.has(e.to);
+    edges.update({ id: e.id, opacity: visible ? 1 : 0.05 });
+  });
+}
+
+// ── Charts (lazy-init on first tab switch) ─────────────────────────
+let chartsInited = false;
+function initCharts() {
+  if (chartsInited) return;
+  chartsInited = true;
+  const purple = '#9673A6', gray = '#BDBDBD', blue = '#6C8EBF';
+  const font = { family: '-apple-system, BlinkMacSystemFont, sans-serif', size: 11 };
+
+  new Chart(document.getElementById('chart-callers'), {
+    type: 'bar', indexAxis: 'y',
+    data: {
+      labels: DATA.callerLabels,
+      datasets: [{
+        data: DATA.callerValues,
+        backgroundColor: DATA.callerValues.map((_, i) => i === 0 ? purple : (i < 3 ? blue : gray)),
+        borderColor: '#333', borderWidth: 0.5,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { title: { display: true, text: 'Top 15 Callers (Outgoing)', font: { size: 14, weight: 'bold' } }, legend: { display: false } },
+      scales: { x: { title: { display: true, text: 'Outgoing calls' } }, y: { ticks: { font } } },
+    }
+  });
+
+  new Chart(document.getElementById('chart-callees'), {
+    type: 'bar', indexAxis: 'y',
+    data: {
+      labels: DATA.calleeLabels,
+      datasets: [{
+        data: DATA.calleeValues,
+        backgroundColor: DATA.calleeValues.map((_, i) => i === 0 ? purple : (i < 3 ? blue : gray)),
+        borderColor: '#333', borderWidth: 0.5,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { title: { display: true, text: 'Top 15 Callees (Incoming)', font: { size: 14, weight: 'bold' } }, legend: { display: false } },
+      scales: { x: { title: { display: true, text: 'Incoming calls' } }, y: { ticks: { font } } },
+    }
+  });
+}
+
+// ── Edge Table ────────────────────────────────────────────────────
+let sortDir = [1, 1, 1, -1]; // sort direction per column, weight desc by default
+function sortTable(col) {
+  sortDir[col] *= -1;
+  const dir = sortDir[col];
+  DATA.edgeTableRows.sort((a, b) => {
+    const keys = ['', 'caller', 'callee', 'weight'];
+    const va = col === 3 ? a[keys[col]] : a[keys[col]].toLowerCase();
+    const vb = col === 3 ? b[keys[col]] : b[keys[col]].toLowerCase();
+    return va > vb ? dir : va < vb ? -dir : 0;
+  });
+  renderTable();
+}
+
+function filterTable() {
+  renderTable();
+}
+
+function renderTable() {
+  const q = (document.getElementById('table-search')?.value || '').toLowerCase();
+  let rows = DATA.edgeTableRows;
+  if (q) rows = rows.filter(r => r.caller.toLowerCase().includes(q) || r.callee.toLowerCase().includes(q));
+  document.getElementById('edge-tbody').innerHTML = rows.map((r, i) =>
+    `<tr><td>${i + 1}</td><td>${r.caller}</td><td>${r.callee}</td><td class="weight">${r.weight.toLocaleString()}</td></tr>`
+  ).join('');
+}
+
+renderTable();
+
+// Fit network after load
+window.addEventListener('load', () => setTimeout(() => network.fit({ animation: true }), 500));
+</script>
+</body>
+</html>

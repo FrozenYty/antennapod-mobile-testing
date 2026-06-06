@@ -65,7 +65,7 @@ Uses a multi-method strategy for broad coverage:
 | Sprint 2 | Subscription & Discovery (TC-011~020, Jianheng Sun) | Done |
 | Sprint 3 | Playback & Downloads (TC-021~030, Yuanbing Wang) | Done |
 | Sprint 4 | Settings & System (TC-031~040, Xintao Wang) | Done |
-| Sprint 5 | Bug fixes, regression, final report | Done |
+| Sprint 5 | Frida dynamic call graph, bug fixes, final report | Done |
 
 ## 7. Risks
 

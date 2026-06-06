@@ -2,6 +2,8 @@
 """
 Static Analysis for AntennaPod APK using Androguard.
 
+Author: Tianyu Yao
+
 Performs manifest-based security and structure analysis without
 running the app. Check: permissions, exported components, security flags,
 and DEX structure.

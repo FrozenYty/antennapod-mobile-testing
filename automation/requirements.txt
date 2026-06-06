@@ -1,4 +1,5 @@
-# Python dependencies for AntennaPod static analysis
+# Python dependencies for AntennaPod static & dynamic analysis
 # Install: pip install -r automation/requirements.txt
 
 androguard>=4.1.0
+frida-tools>=12.0
