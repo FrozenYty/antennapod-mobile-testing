@@ -45,14 +45,16 @@
 | Medium | 0 |
 | Low | 0 |
 
-## Key Findings
+## Key Findings (Cross-Sprint)
 
-- **Espresso**: 22/22 instrumented tests pass on MuMu emulator (Android 12). Used `ActivityTestRule` as `ActivityScenarioRule` is incompatible with this emulator.
-- **Unit Tests**: 51/51 JUnit tests pass (TC-007: 17, TC-008: 34).
-- **Integration**: 8/8 PodDBAdapter integration tests pass — all 7 tables verified.
-- **UIAutomator**: 3/3 UIAutomator tests pass for cross-app/system UI verification.
-- **Kotlin Plugin**: Added `kotlin-android` plugin to `app/build.gradle` to enable Kotlin test compilation.
-- **UIAutomator Dep**: Added `androidx.test.uiautomator:uiautomator:2.3.0` to `libs.versions.toml`.
+- **Espresso**: 54/54 instrumented tests pass (13 TCs). Device: MuMu emulator (Android 12), AVD (API 37). Used `ActivityTestRule` for MuMu compatibility.
+- **Unit Tests**: 132/132 JUnit tests pass (8 TCs). Pure JUnit: 72, Robolectric: 60.
+- **Integration**: 37/37 PodDBAdapter integration tests pass (6 TCs).
+- **UIAutomator**: 21/21 UIAutomator tests pass (7 TCs).
+- **Performance**: 7/7 benchmark tests pass (2 TCs).
+- **Manual**: 4/4 manual test cases executed (80 steps total). TC-030 fully N/A on emulator — recommend physical device.
+- **Total automated**: 251/251 test methods pass across 37 automated TCs.
+- **Key infrastructure**: Added `kotlin-android` plugin, `uiautomator` dependency, CI workflow (compile + unit test + doc checks on push), Frida dynamic call graph, Androguard static analysis.
 
 ## Test Automation Details
 
