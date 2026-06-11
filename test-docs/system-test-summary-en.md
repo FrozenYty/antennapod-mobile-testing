@@ -16,7 +16,7 @@
 | Failed | **0** |
 | Pass Rate | **100%** |
 | Contributors | 4 members |
-| Sprint Span | Sprint 1 ~ Sprint 4 |
+| Sprint Span | Sprint 1 – Sprint 4 |
 
 System tests are divided into two frameworks:
 
@@ -132,8 +132,8 @@ Xintao Wang     █████████████████████�
 
 | Framework | Tests | Share | TC List |
 |-----------|-------|-------|---------|
-| Espresso (in-app UI, single-process) | 54 | 72.0% | TC-001~005, TC-011~013, TC-021~023, TC-031~032 |
-| UIAutomator (cross-app, multi-process) | 21 | 28.0% | TC-006, TC-014~015, TC-024~025, TC-033~034 |
+| Espresso (in-app UI, single-process) | 54 | 72.0% | TC-001–005, TC-011–013, TC-021–023, TC-031–032 |
+| UIAutomator (cross-app, multi-process) | 21 | 28.0% | TC-006, TC-014–015, TC-024–025, TC-033–034 |
 
 ---
 

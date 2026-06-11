@@ -16,7 +16,7 @@
 | 失败 | **0** |
 | 通过率 | **100%** |
 | 涉及成员 | 4 人 |
-| Sprint 跨度 | Sprint 1 ~ Sprint 4 |
+| Sprint 跨度 | Sprint 1 – Sprint 4 |
 
 ---
 

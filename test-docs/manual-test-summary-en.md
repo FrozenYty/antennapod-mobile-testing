@@ -19,7 +19,7 @@
 | N/A (environment limitation) | **27** |
 | Pass Rate (executable) | **98.1%** |
 | Contributors | 4 members |
-| Sprint Span | Sprint 1 ~ Sprint 4 |
+| Sprint Span | Sprint 1 – Sprint 4 |
 
 ---
 
@@ -114,7 +114,7 @@
 - Date: 2026-06-03
 - N/A (step 3): TalkBack unavailable on MuMu emulator
 - Font size tested at 130% system default
-- All view visibility validated by automated tests (TC-031~034)
+- All view visibility validated by automated tests (TC-031–034)
 - Recommendation: Physical device for TalkBack and extreme font sizes
 
 ---
@@ -199,11 +199,11 @@ test-results/
 |----------|----------|
 | Emulator limitations | MuMu lacks Bluetooth, headphone routing, phone call simulation — TC-030 entirely N/A |
 | CDN blocking | NPR feed redirects to `prfx.byspotify.com` which is unreachable from emulator — graceful error dialog confirmed |
-| Complementary automated tests | Manual TC-030 logic is validated by unit/integration tests (TC-026~029, 34/34 passing) |
+| Complementary automated tests | Manual TC-030 logic is validated by unit/integration tests (TC-026–029, 34/34 passing) |
 | Screenshot strategy | Save to `/storage/emulated/0/Download/screenshots/` to survive APK uninstall |
 | Multi-select precondition | Testing multi-select requires at least 2 subscriptions — seed data before testing |
 | TalkBack on emulator | Screen reader functionality unavailable — physical device required for accessibility audit |
-| Automated cross-validation | Steps verified by Espresso/UIAutomator TCs (TC-031~034) reduce manual regression load |
+| Automated cross-validation | Steps verified by Espresso/UIAutomator TCs (TC-031–034) reduce manual regression load |
 
 ---
 

@@ -16,7 +16,7 @@
 | Failed | **0** |
 | Pass Rate | **100%** |
 | Contributors | 4 members |
-| Sprint Span | Sprint 1 ~ Sprint 4 |
+| Sprint Span | Sprint 1 – Sprint 4 |
 
 ---
 
