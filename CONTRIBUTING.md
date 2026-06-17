@@ -159,7 +159,7 @@ bug-reports/bug-XXX.md        # XXX = next available number
 # Update these with your results:
 PROGRESS.md
 test-results/manual-test-result.md
-test-docs/test-summary-report.md
+test-docs/reports/test-summary-report.md
 ```
 
 ### Naming Conventions
@@ -212,5 +212,5 @@ If any check fails, fix the issue and push again.
 ## Questions?
 
 - How to write tests → Read `AI-GUIDE.md`
-- Which TC IDs are yours → Read `test-docs/test-case-plan.md`
+- Which TC IDs are yours → Read `test-docs/plans/test-case-plan.md`
 - How to set up the environment → Read `AI-GUIDE.md` section "Environment Setup"

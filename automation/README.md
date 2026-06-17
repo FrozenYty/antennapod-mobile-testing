@@ -87,7 +87,7 @@ Based on lecture L11 techniques: Androguard DEX → Analysis → create_xref() �
 Generates a full static analysis report covering all project dimensions.
 
 ```bash
-# Generate report (saves to test-docs/static-analysis-report.md)
+# Generate report (saves to test-docs/reports/static-analysis-report.md)
 python automation/generate_report.py
 
 # Custom output path

@@ -22,7 +22,7 @@ Before writing any code, open these files in order:
 |---|------|-----|
 | **1** | **`PROGRESS.md`** | **Current task status, what's done, what's pending. Read this first.** |
 | 2 | `CONTRIBUTING.md` | Commit format, file organization, what NOT to do |
-| 3 | `test-docs/test-case-plan.md` | Find your TC-ID range, module, and required testing methods |
+| 3 | `test-docs/plans/test-case-plan.md` | Find your TC-ID range, module, and required testing methods |
 | 4 | `test-docs/test-cases.md` | See existing TC specs for format reference |
 | 5 | `app/.../utils/TestHelper.kt` | Understand shared utilities before using them |
 | 6 | Reference examples (see patterns below) | Copy the pattern matching your testing method |
@@ -34,7 +34,7 @@ Then scan the relevant app source files for your feature.
 When you receive a TC assignment, execute these steps in order. Do NOT skip steps.
 
 ### 1. Plan
-- Read your TC range from `test-docs/test-case-plan.md`
+- Read your TC range from `test-docs/plans/test-case-plan.md`
 - Identify which testing methods you must use (Espresso / UIAutomator / Unit / Integration / Manual / Perf)
 - Read the existing TC specs in `test-docs/test-cases.md` for format reference
 
@@ -71,7 +71,7 @@ Update these files with your results. Follow the existing format — don't inven
 | `PROGRESS.md` | Update your TC status rows and remaining actions |
 | `test-docs/test-cases.md` | Append your TC specs |
 | `test-results/manual-test-result.md` | Add your rows to the Results table. Update Summary counters |
-| `test-docs/test-summary-report.md` | Add key findings for your tests. Update the counters |
+| `test-docs/reports/test-summary-report.md` | Add key findings for your tests. Update the counters |
 
 ### 6. Commit
 ```bash

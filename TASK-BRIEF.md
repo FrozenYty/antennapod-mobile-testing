@@ -11,7 +11,7 @@
 | **Yuanbing Wang** | Playback & Downloads | TC-021 ~ TC-030 |
 | **Xintao Wang** | Settings & System | TC-031 ~ TC-040 |
 
-Full details in `test-docs/test-case-plan.md`. Your TC list is **suggested** — you can adjust
+Full details in `test-docs/plans/test-case-plan.md`. Your TC list is **suggested** — you can adjust
 individual TC titles or approaches after discussing with the team lead. Module scope and
 method distribution should stay consistent.
 
@@ -20,7 +20,7 @@ method distribution should stay consistent.
 | # | File | Time |
 |---|------|------|
 | 1 | `CONTRIBUTING.md` | 5 min |
-| 2 | `test-docs/test-case-plan.md` (your section) | 5 min |
+| 2 | `test-docs/plans/test-case-plan.md` (your section) | 5 min |
 | 3 | `AI-GUIDE.md` | 10 min |
 
 ## Workflow
@@ -59,7 +59,7 @@ cd app-under-test/antennapod
 | `PROGRESS.md` | Update your TC status after each batch |
 | `test-docs/test-cases.md` | Append your TC specs (copy format from existing) |
 | `test-results/manual-test-result.md` | Add your rows, update Summary |
-| `test-docs/test-summary-report.md` | Add key findings, update counters |
+| `test-docs/reports/test-summary-report.md` | Add key findings, update counters |
 
 ### 6. Commit
 ```bash

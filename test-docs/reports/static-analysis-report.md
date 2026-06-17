@@ -165,12 +165,12 @@ Visualizations in `test-docs/callgraphs/`.
 
 | Image | Description |
 |-------|-------------|
-| ![heatmap](callgraphs/callgraph-heatmap.png) | Package interaction heatmap |
-| ![classes](callgraphs/callgraph-classes.png) | Top 20 class call matrix |
-| ![stats](callgraphs/callgraph-stats.png) | Top 15 callers / top 15 callees |
-| ![coverage](callgraphs/test-coverage.png) | Test method distribution |
-| ![dex](callgraphs/dex-composition.png) | DEX file composition |
-| ![exposure](callgraphs/component-exposure.png) | Android component exposure |
+| ![heatmap](../callgraphs/callgraph-heatmap.png) | Package interaction heatmap |
+| ![classes](../callgraphs/callgraph-classes.png) | Top 20 class call matrix |
+| ![stats](../callgraphs/callgraph-stats.png) | Top 15 callers / top 15 callees |
+| ![coverage](../callgraphs/test-coverage.png) | Test method distribution |
+| ![dex](../callgraphs/dex-composition.png) | DEX file composition |
+| ![exposure](../callgraphs/component-exposure.png) | Android component exposure |
 
 > Run `python automation/callgraph.py` to regenerate all visualizations.
 

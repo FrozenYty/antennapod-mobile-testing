@@ -11,7 +11,7 @@ This repository contains the test documentation, manual test results, bug report
 ## Getting Started
 
 1. Read [CONTRIBUTING.md](CONTRIBUTING.md) — commit rules, workflow, CI checks
-2. Read [test-docs/test-case-plan.md](test-docs/test-case-plan.md) — find your assigned TC range
+2. Read [test-docs/plans/test-case-plan.md](test-docs/plans/test-case-plan.md) — find your assigned TC range
 3. Read [AI-GUIDE.md](AI-GUIDE.md) — patterns, pitfalls, complete workflow
 4. `git pull` to get latest, then write tests, compile, run, document, commit, push to main
 
@@ -43,12 +43,12 @@ antennapod-mobile-testing/
 │               ├── unit/        # JUnit unit tests
 │               └── manual/      # Manually executed test code
 ├── test-docs/                   # Test documentation
-│   ├── test-plan.md
-│   ├── test-case-plan.md
-│   ├── test-cases.md
-│   ├── test-summary-report.md
-│   ├── static-analysis-report.md
-│   ├── frida-vibe-coding-report.md
+│   ├── plans/                   # Planning documents
+│   │   ├── test-plan.md
+│   │   └── test-case-plan.md
+│   ├── test-cases.md            # Test case specifications
+│   ├── summaries/               # Per-method test result summaries
+│   ├── reports/                 # Analysis reports & reflections
 │   ├── bug-report-template.md
 │   └── callgraphs/              # Generated call graph images & HTML reports
 ├── bug-reports/                 # Filed bug reports (bug-XXX.md)
@@ -78,7 +78,7 @@ This project uses multiple complementary testing approaches:
 | Performance | Benchmark / timer | Speed & memory |
 | Static Analysis | Androguard (Python) | Permissions, components, security flags |
 
-See `AI-GUIDE.md` for test writing patterns. See `test-docs/test-case-plan.md` for TC assignments. See `automation/README.md` for static analysis usage.
+See `AI-GUIDE.md` for test writing patterns. See `test-docs/plans/test-case-plan.md` for TC assignments. See `automation/README.md` for static analysis usage.
 
 ## App Under Test
 

@@ -9,7 +9,7 @@ I need to complete my assigned test cases for the AntennaPod mobile testing cour
 ## Context
 
 - **Project**: AntennaPod Mobile Testing — testing the AntennaPod open-source Android podcast manager (MIT license)
-- **My role**: Member [2/3/4], assigned module and TC range per `test-docs/test-case-plan.md`
+- **My role**: Member [2/3/4], assigned module and TC range per `test-docs/plans/test-case-plan.md`
 - **Language**: Everything (code, comments, docs, commits) must be in English
 
 ## Before Writing Any Code
@@ -18,7 +18,7 @@ Read these files in order:
 
 1. `CONTRIBUTING.md` — commit format `type: description + Author: Name`, file organization, what NOT to do
 2. `AI-GUIDE.md` — complete workflow (Plan → Code → Compile → Run → Document → Commit → Push), code patterns, pitfalls
-3. `test-docs/test-case-plan.md` — find my member section and exact TC list with methods
+3. `test-docs/plans/test-case-plan.md` — find my member section and exact TC list with methods
 4. `test-docs/test-cases.md` — existing TC specs (copy the table format for my new TCs)
 5. `app/.../utils/TestHelper.kt` — shared utilities
 6. The reference example for each method I need
@@ -34,7 +34,7 @@ For EACH TC in my range:
 5. **Document** — update these files:
    - `test-docs/test-cases.md` — append my TC specs
    - `test-results/manual-test-result.md` — add result rows
-   - `test-docs/test-summary-report.md` — add key findings
+   - `test-docs/reports/test-summary-report.md` — add key findings
 6. **Commit** — `git pull` first, then one commit per logical batch, format: `<type>: <description>\n\nAuthor: <Name>`
 7. **Push** — `git push` directly to main. CI compiles + runs unit tests + doc checks on push.
 
